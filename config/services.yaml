@@ -6,6 +6,12 @@
 parameters:
     locale: 'en'
 
+    twitch_private_key: 'd60amswbo3ybxguj4mzkbvv5jed5hi'
+    twitch_public_key: 'o3nb4qfewluyxokbm1qrg0mx7cpnh2'
+    twitch_redirect_url: 'http://localhost:8000/login-twitch'
+    twitch_auth_url: 'https://id.twitch.tv/'
+    twitch_channel_id : '2400710'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -27,5 +33,10 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Service\Twitch\TwitchAuthenticationService:
+        arguments:
+            $privateKey: '%twitch_private_key%'
+            $publicKey: '%twitch_public_key%'
+            $redirectUrl: '%twitch_redirect_url%'
+            $authUrl: '%twitch_auth_url%'
+            $channelId: '%twitch_channel_id%'
