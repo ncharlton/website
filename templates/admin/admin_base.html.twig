@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Admin panel!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% if app.user %}
+    <a href="{{ path('admin_user_list') }}">Users</a> &nbsp;
+    <a href="{{ path('admin_game_list') }}">Games</a>
+    <hr>
+{% endif %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+        <hr>
+    {% endfor %}
+{% endfor %}
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
+</html>
