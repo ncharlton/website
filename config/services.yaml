@@ -6,6 +6,8 @@
 parameters:
     locale: 'en'
 
+    user_activity_listener.class: App\Listener\UserActivityListener
+
     twitch_private_key: 'd60amswbo3ybxguj4mzkbvv5jed5hi'
     twitch_public_key: 'o3nb4qfewluyxokbm1qrg0mx7cpnh2'
     twitch_redirect_url: 'http://localhost:8000/login-twitch'
@@ -40,3 +42,9 @@ services:
             $redirectUrl: '%twitch_redirect_url%'
             $authUrl: '%twitch_auth_url%'
             $channelId: '%twitch_channel_id%'
+
+    user_activity_listener:
+        class: '%user_activity_listener.class%'
+        arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onCoreController }

@@ -289,4 +289,13 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
+
+    /**
+     * @return bool Whether the user is active or not
+     */
+    public function isActiveNow() {
+        $delay = new \DateTime('2 minutes ago');
+
+        return ($this->getLastActive() > $delay);
+    }
 }
