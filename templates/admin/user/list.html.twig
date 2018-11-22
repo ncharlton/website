@@ -1,0 +1,26 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<table>
+    <thead>
+        <th>#</th>
+        <th>status</th>
+        <th>username</th>
+        <th>email</th>
+        <th>registered</th>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.status }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.createdAt | date("d/m/Y") }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
