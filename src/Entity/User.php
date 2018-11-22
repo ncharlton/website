@@ -300,16 +300,14 @@ class User implements UserInterface
     }
 
     public function getStatusWritten() {
-        switch ($this->status) {
-            case 0:
-                return 'Allowed';
-                break;
-            case 1:
-                return 'Banned';
-                break;
-            case 2:
-                return 'Blocked';
-                break;
+        if ($this->status == 0) {
+            return 'Allowed';
+        }
+        if ($this->status == 1) {
+            return 'Banned';
+        }
+        if ($this->status == 2) {
+            return 'Blocked';
         }
     }
 

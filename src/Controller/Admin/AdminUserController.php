@@ -128,4 +128,33 @@ class AdminUserController extends AbstractController
             'user' => $user
         ]);
     }
+
+    /**
+     * @Route("/admin/user/{username}/unblock", name="admin_user_unblock")
+     * @ParamConverter("user", class="App\Entity\User")
+     */
+    public function unblockAction(User $user, Request $request) {
+        $form = $this->createForm('App\Form\Admin\AdminConfirmType');
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $user->setStatus(0);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                sprintf('Successfully blocked %s', $user->getUsername())
+            );
+
+            return $this->redirectToRoute('admin_user_list');
+        }
+
+        return $this->render('admin/user/unblock.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user
+        ]);
+    }
 }

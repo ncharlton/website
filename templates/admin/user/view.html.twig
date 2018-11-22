@@ -14,5 +14,6 @@
     <a href="{{ path("admin_user_edit", {"username" : user.username}) }}">Edit</a>
     <a href="{{ path('admin_user_delete', {'username' : user.username}) }}">delete</a>
     <a href="{{ path('admin_user_block', {'username' : user.username}) }}">block</a>
+    <a href="{{ path('admin_user_unblock', {'username' : user.username}) }}">unblock</a>
 
 {% endblock %}

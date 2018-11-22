@@ -7,6 +7,7 @@
 </head>
 <body>
 {% if app.user %}
+    <a href="{{ path('main_home') }}">Frontend</a>
     <a href="{{ path('admin_user_list') }}">Users</a> &nbsp;
     <a href="{{ path('admin_game_list') }}">Games</a>
     <hr>
