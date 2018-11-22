@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for clip in clips %}
+        <a href="{{ path('main_clip_view', {'slug' : clip.slug}) }}">
+            <img src="{{ clip.thumbnailUrl }}" title="{{ clip.title }}">
+        </a>
+        <br>
+    {% endfor %}
+{% endblock %}

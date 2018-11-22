@@ -5,6 +5,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -108,8 +110,14 @@ class User implements UserInterface
      */
     private $lastActive;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Clip", mappedBy="user")
+     */
+    private $clips;
+
     public function __construct()
     {
+        $this->clips = new ArrayCollection();
     }
 
     /**
@@ -255,6 +263,18 @@ class User implements UserInterface
     {
         $this->lastActive = $lastActive;
     }
+
+    /**
+     * @return Collection|Clip[]
+     */
+    public function getClips(): Collection
+    {
+        return $this->clips;
+    }
+
+    ////////////////////////////////////
+
+
 
     public function setRoles(array $roles)
     {

@@ -28,5 +28,4 @@ class AdminConfirmType extends AbstractType
     {
 
     }
-
 }
