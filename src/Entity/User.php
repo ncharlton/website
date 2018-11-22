@@ -298,4 +298,66 @@ class User implements UserInterface
 
         return ($this->getLastActive() > $delay);
     }
+
+    public function getStatusWritten() {
+        switch ($this->status) {
+            case 0:
+                return 'Allowed';
+                break;
+            case 1:
+                return 'Banned';
+                break;
+            case 2:
+                return 'Blocked';
+                break;
+        }
+    }
+
+    public function isBlocked() {
+        if($this->status == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isBanned() {
+        if($this->status == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isAllowed() {
+        if($this->status == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isSuperAdmin() {
+        if(in_array('ROLE_SUPER_ADMIN', $this->roles)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isAdmin() {
+        if(in_array('ROLE_ADMIN', $this->roles)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isMod() {
+        if(in_array('ROLE_MOD', $this->roles)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

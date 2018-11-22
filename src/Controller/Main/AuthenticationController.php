@@ -26,4 +26,12 @@ class AuthenticationController extends AbstractController
     public function twitchLoginAction() {
         return $this->render('main/authentication/twitch_login.html.twig');
     }
+
+    /**
+     * @Route("/logout", name="main_logout")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function logoutAction() {
+        return $this->redirectToRoute('main_home');
+    }
 }

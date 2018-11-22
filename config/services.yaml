@@ -43,6 +43,12 @@ services:
             $authUrl: '%twitch_auth_url%'
             $channelId: '%twitch_channel_id%'
 
+    admin_user_form:
+        class: App\Form\Admin\AdminUserType
+        arguments: ['@security.token_storage']
+        tags:
+          - { name: form.type }
+
     user_activity_listener:
         class: '%user_activity_listener.class%'
         arguments: ['@doctrine.orm.entity_manager', '@security.token_storage']

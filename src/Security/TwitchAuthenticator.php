@@ -109,7 +109,7 @@ class TwitchAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new Response($exception->getTrace() . " - " .$exception->getMessage());
+        return new RedirectResponse($this->router->generate('main_home'));
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
