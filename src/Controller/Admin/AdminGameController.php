@@ -99,7 +99,7 @@ class AdminGameController extends AbstractController
             );
         }
 
-        return $this->render('admin/game/new.html.twig', [
+        return $this->render('admin/game/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }

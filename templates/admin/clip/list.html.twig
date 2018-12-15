@@ -1,0 +1,10 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block body %}
+    {% for clip in clips %}
+        {{ clip.title }}
+        | <a href="{{ path('admin_clip_delete', {'slug' : clip.slug }) }}">Delete</a>
+        | <a href="{{ path('admin_clip_edit', {'slug' : clip.slug }) }}">Edit</a><br>
+    {% endfor %}
+{% endblock %}

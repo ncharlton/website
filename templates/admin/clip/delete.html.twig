@@ -1,0 +1,11 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}Delete - {{ clip.title }}{% endblock %}
+
+{% block body %}
+    Are you sure you want to delete {{ clip.title }}?
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Delete</button>
+    {{ form_end(form) }}
+{% endblock %}

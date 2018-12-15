@@ -8,7 +8,7 @@ namespace App\Controller\Main;
 use App\Entity\Clip;
 use App\Service\Twitch\TwitchClipService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +62,7 @@ class ClipController extends AbstractController
                     $clip->setTitle($result->title);
                 }
 
+                // convert time to DateTime
                 $date = new \DateTime();
                 $date->setTimestamp(strtotime($result->created_at));
                 $clip->setCreatedAt($date);
