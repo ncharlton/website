@@ -73,6 +73,11 @@ class Game {
     private $genre;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="game")
+     */
+    private $events;
+
+    /**
      * @return int
      */
     public function getId()

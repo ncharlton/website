@@ -1,0 +1,9 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    Are you sure you want to delete {{ news.title }}?
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Delete</button>
+    {{ form_end(form) }}
+{% endblock %}

@@ -7,7 +7,8 @@
     <thead>
         <th>#</th>
         <th>status</th>
-        <th>Active</th>
+        <td>role</td>
+        <th>active</th>
         <th>username</th>
         <th>email</th>
         <th>registered</th>
@@ -18,6 +19,7 @@
         <tr>
             <td>{{ user.id }}</td>
             <td>{{ user.statusWritten }}</td>
+            <td>{{ user.role() }}</td>
             <td>{% if user.activeNow %}Online{% endif %}</td>
             <td><a href="{{ path('admin_user_view', {'username' : user.username}) }}">{{ user.username }}</a></td>
             <td>{{ user.email }}</td>

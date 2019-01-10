@@ -115,6 +115,16 @@ class User implements UserInterface
      */
     private $clips;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\News", mappedBy="author")
+     */
+    private $news;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="user")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->clips = new ArrayCollection();
@@ -274,8 +284,6 @@ class User implements UserInterface
 
     ////////////////////////////////////
 
-
-
     public function setRoles(array $roles)
     {
         $this->roles = $roles;
@@ -376,6 +384,24 @@ class User implements UserInterface
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function role() {
+        if(in_array('ROLE_SUPER_ADMIN', $this->roles)) {
+            return 'Super admin';
+        }
+
+        if(in_array('ROLE_ADMIN', $this->roles)) {
+            return 'Admin';
+        }
+
+        if(in_array('ROLE_MOD', $this->roles)) {
+            return 'Mod';
+        }
+
+        if(in_array('ROLE_USER', $this->roles)) {
+            return 'User';
         }
     }
 }

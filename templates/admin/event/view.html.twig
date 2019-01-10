@@ -1,0 +1,7 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+{{ event.title }}
+<hr>
+{{ event.description | raw }}
+{% endblock %}

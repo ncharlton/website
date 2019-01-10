@@ -31,7 +31,8 @@ class AdminUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $choices = [
-            'mod' => 'ROLE_MOD'
+            'mod' => 'ROLE_MOD',
+            //'Super admin' => 'ROLE_SUPER_ADMIN',
         ];
 
         if($this->token->getToken()) {

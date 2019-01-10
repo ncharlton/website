@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @package App\Entity
  * @ORM\Entity
  * @ORM\Table(name="clip")
+ *
  * @UniqueEntity("twitchId")
  * @UniqueEntity("url")
  * @UniqueEntity("title")

@@ -7,6 +7,8 @@ parameters:
     twitch_auth_url: 'https://id.twitch.tv/'
     twitch_channel_id : '2400710'
 
+    youtube_data_key: 'AIzaSyCdii-VCfIqst6B1qvtIHXswXX_NaSz1QQ'
+
 services:
 
     _defaults:

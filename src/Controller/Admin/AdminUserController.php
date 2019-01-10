@@ -101,6 +101,8 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * Blocks a user, sets status to 2
+     *
      * @Route("/admin/user/{username}/block", name="admin_user_block")
      * @ParamConverter("user", class="App\Entity\User")
      */
@@ -130,6 +132,8 @@ class AdminUserController extends AbstractController
     }
 
     /**
+     * Unblocks a user, sets status to 0
+     *
      * @Route("/admin/user/{username}/unblock", name="admin_user_unblock")
      * @ParamConverter("user", class="App\Entity\User")
      */
