@@ -6,6 +6,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +23,11 @@ class YoutubeVideo
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $youtubeId;
 
     /**
      * @ORM\Column(type="string")
@@ -54,7 +60,7 @@ class YoutubeVideo
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\VideoThumbnail", mappedBy="video")
+     * @ORM\OneToMany(targetEntity="App\Entity\VideoThumbnail", mappedBy="video", cascade={"persist"})
      */
     private $thumbnails;
 
@@ -101,16 +107,6 @@ class YoutubeVideo
      */
     private $embedHtml;
 
-    /**
-     * @ORM\Column(type="bigint")
-     */
-    private $embedHeight;
-
-    /**
-     * @ORM\Column(type="bigint")
-     */
-    private $embedWidth;
-
     public function __construct()
     {
         $this->thumbnails = new ArrayCollection();
@@ -123,6 +119,23 @@ class YoutubeVideo
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getYoutubeId()
+    {
+        return $this->youtubeId;
+    }
+
+    /**
+     * @param mixed $youtubeId
+     */
+    public function setYoutubeId($youtubeId): void
+    {
+        $this->youtubeId = $youtubeId;
+    }
+
 
     /**
      * @param mixed $id
@@ -229,7 +242,7 @@ class YoutubeVideo
     }
 
     /**
-     * @return mixed
+     * @return Collection|VideoThumbnail[]
      */
     public function getThumbnails()
     {
@@ -372,35 +385,48 @@ class YoutubeVideo
         $this->embedHtml = $embedHtml;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmbedHeight()
-    {
-        return $this->embedHeight;
+    public function smallestThumbnail() {
+        /** @var VideoThumbnail $thumbnail */
+        foreach($this->thumbnails->toArray() as $thumbnail) {
+            if($thumbnail->getWidth() == '120') {
+                return $thumbnail;
+            }
+        }
     }
 
-    /**
-     * @param mixed $embedHeight
-     */
-    public function setEmbedHeight($embedHeight): void
-    {
-        $this->embedHeight = $embedHeight;
+    public function smallThumbnail() {
+        /** @var VideoThumbnail $thumbnail */
+        foreach($this->thumbnails->toArray() as $thumbnail) {
+            if($thumbnail->getWidth() == '320') {
+                return $thumbnail;
+            }
+        }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmbedWidth()
-    {
-        return $this->embedWidth;
+    public function mediumThumbnail() {
+        /** @var VideoThumbnail $thumbnail */
+        foreach($this->thumbnails->toArray() as $thumbnail) {
+            if($thumbnail->getWidth() == '480') {
+                return $thumbnail;
+            }
+        }
     }
 
-    /**
-     * @param mixed $embedWidth
-     */
-    public function setEmbedWidth($embedWidth): void
-    {
-        $this->embedWidth = $embedWidth;
+    public function bigThumbnail() {
+        /** @var VideoThumbnail $thumbnail */
+        foreach($this->thumbnails->toArray() as $thumbnail) {
+            if($thumbnail->getWidth() == '640') {
+                return $thumbnail;
+            }
+        }
+    }
+
+    public function biggestThumbnail() {
+        /** @var VideoThumbnail $thumbnail */
+        foreach($this->thumbnails->toArray() as $thumbnail) {
+            if($thumbnail->getWidth() == '1280') {
+                return $thumbnail;
+            }
+        }
     }
 }

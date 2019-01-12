@@ -1,0 +1,18 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    <h1>{{ video.title }}</h1>
+    {% if video.published %}Video is published{% else %}Video is not published{% endif %}
+    <br>
+    <hr>
+    <b>youtube data</b>
+    <br><br>
+    title: {{ video.video.title }} <br>
+    description: {{ video.video.description }} <br>
+    duration: {{ video.video.duration }} <br>
+    quality: {{ video.video.definition }} <br>
+    channel: {{ video.video.channelTitle }} <br>
+    thumbnail (smallest): <br><img src="{{ video.video.smallThumbnail.url }}">
+
+
+{% endblock %}

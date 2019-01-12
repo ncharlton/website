@@ -15,6 +15,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * Class AdminUserController
  * @package App\Controller\Admin
+ *
+ * @IsGranted("ROLE_ADMIN", message="Admins only")
  */
 class AdminUserController extends AbstractController
 {

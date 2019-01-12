@@ -8,7 +8,7 @@
 
 namespace App\Controller\Main;
 
-use App\Service\Youtube\VideoService;
+use App\Service\Youtube\YoutubeVideoService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,13 +18,41 @@ class TestController
     /**
      * @Route("test/video")
      */
-    public function videoTest(VideoService $videoService) {
+    public function videoTest(YoutubeVideoService $videoService) {
         $id = '5LrNTJHmTSE';
 
         $video = $videoService->fetchVideoById($id);
-        print_r($video);
+        //print_r($video);
+//        echo $video->items[0]->id;
+//        echo "<br>";
+//        echo $video->items[0]->etag;
+//        echo "<br>";
+//        echo $video->items[0]->snippet->title;
+//        echo "<br>";
+//        echo $video->items[0]->snippet->description;
+//        echo "<br>";
+//        echo $video->items[0]->snippet->publishedAt;
+//        echo "<br>";
+//        echo $video->items[0]->contentDetails->duration;
+//        echo "<br>";
+//        echo $video->items[0]->contentDetails->definition;
+//        echo "<br>";
+        print_r($video->snippet->thumbnails);
 
-        echo $video->items[0]->player->embedHtml;
+//        echo "<br>";
+//        echo $video->items[0]->status->embeddable;
+//        echo "<br>";
+//        echo $video->items[0]->statistics->viewCount;
+//        echo "<br>";
+//        echo $video->items[0]->statistics->likeCount;
+//        echo "<br>";
+//        echo $video->items[0]->statistics->dislikeCount;
+//        echo "<br>";
+//        echo $video->items[0]->statistics->commentCount;
+//
+//        echo "<hr>";
+//        echo $video->items[0]->player->embedHtml;
+
 
         return new Response();
     }

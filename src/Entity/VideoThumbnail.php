@@ -43,6 +43,11 @@ class VideoThumbnail
     private $height;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $orderNumber;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -120,5 +125,21 @@ class VideoThumbnail
     public function setHeight($height): void
     {
         $this->height = $height;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderNumber()
+    {
+        return $this->orderNumber;
+    }
+
+    /**
+     * @param mixed $orderNumber
+     */
+    public function setOrderNumber($orderNumber): void
+    {
+        $this->orderNumber = $orderNumber;
     }
 }

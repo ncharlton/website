@@ -275,7 +275,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Clip[]
+     * @return ArrayCollection|Clip[]
      */
     public function getClips(): Collection
     {

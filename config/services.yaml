@@ -10,7 +10,6 @@ parameters:
     youtube_data_key: 'AIzaSyCdii-VCfIqst6B1qvtIHXswXX_NaSz1QQ'
 
 services:
-
     _defaults:
         autowire: true
         autoconfigure: true
@@ -24,6 +23,8 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # Twitch
+
     App\Service\Twitch\TwitchAuthenticationService:
         arguments:
             $privateKey: '%twitch_private_key%'
@@ -35,6 +36,11 @@ services:
     App\Service\Twitch\TwitchClipService:
         arguments:
             $clientId: '%twitch_public_key%'
+
+    # Youtube
+
+    App\Service\Youtube\YoutubeVideoService:
+        arguments: ['@doctrine.orm.entity_manager', '%youtube_data_key%']
 
     app.admin_user_form:
         class: App\Form\Admin\AdminUserType

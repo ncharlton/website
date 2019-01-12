@@ -6,11 +6,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class Video
  * @package App\Entity
- * @ORM\Entity
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  * @ORM\Table(name="video")
  */
 class Video
@@ -29,13 +31,36 @@ class Video
 
     /**
      * @ORM\Column(type="string")
+     * @Gedmo\Slug(fields={"title"})
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="string")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\YoutubeVideo")
      */
     private $video;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
 
     /**
      * @return mixed
@@ -70,6 +95,14 @@ class Video
     }
 
     /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * @return mixed
      */
     public function getDescription()
@@ -86,6 +119,22 @@ class Video
     }
 
     /**
+     * @return mixed
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param mixed $published
+     */
+    public function setPublished($published): void
+    {
+        $this->published = $published;
+    }
+
+    /**
      * @return YoutubeVideo
      */
     public function getVideo()
@@ -99,5 +148,21 @@ class Video
     public function setVideo($video): void
     {
         $this->video = $video;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

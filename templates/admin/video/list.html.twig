@@ -1,0 +1,28 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('admin_video_new') }}">New Video</a>
+    <br>
+    <table>
+        <thead>
+            <th>#</th>
+            <th></th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for video in videos %}
+                <tr>
+                    <td>{{ video.id }}</td>
+                    <td><img  src="{{ video.video.smallThumbnail.url }}"></td>
+                    <td><a href="{{ path('admin_video_view', {'slug': video.slug}) }}">{{ video.title }}</a></td>
+                    <td></td>
+                    <td>{{ video.published }}</td>
+                    <td><a href="{{ path('admin_video_delete', {'slug': video.slug}) }}">Delete</a> </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
