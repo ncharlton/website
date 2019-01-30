@@ -51,6 +51,11 @@ class Video
     private $video;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\VideoPlaylist", inversedBy="videos")
+     */
+    private $playlist;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
@@ -63,7 +68,7 @@ class Video
     private $updatedAt;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -71,15 +76,7 @@ class Video
     }
 
     /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
+     * @return string
      */
     public function getTitle()
     {
@@ -87,7 +84,7 @@ class Video
     }
 
     /**
-     * @param mixed $title
+     * @param string $title
      */
     public function setTitle($title): void
     {
@@ -103,7 +100,7 @@ class Video
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDescription()
     {
@@ -111,7 +108,7 @@ class Video
     }
 
     /**
-     * @param mixed $description
+     * @param string $description
      */
     public function setDescription($description): void
     {
@@ -119,7 +116,7 @@ class Video
     }
 
     /**
-     * @return mixed
+     * @return boolean
      */
     public function getPublished()
     {
@@ -127,7 +124,7 @@ class Video
     }
 
     /**
-     * @param mixed $published
+     * @param boolean $published
      */
     public function setPublished($published): void
     {
@@ -148,6 +145,22 @@ class Video
     public function setVideo($video): void
     {
         $this->video = $video;
+    }
+
+    /**
+     * @return VideoPlaylist
+     */
+    public function getPlaylist()
+    {
+        return $this->playlist;
+    }
+
+    /**
+     * @param VideoPlaylist $playlist
+     */
+    public function setPlaylist($playlist): void
+    {
+        $this->playlist = $playlist;
     }
 
     /**

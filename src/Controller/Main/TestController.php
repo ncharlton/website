@@ -8,6 +8,7 @@
 
 namespace App\Controller\Main;
 
+use App\Service\Voobly\VooblyService;
 use App\Service\Youtube\YoutubeVideoService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestController
 {
+    /**
+     * @Route("test/voobly")
+     * @param VooblyService $voobly
+     */
+    public function vooblyTest(VooblyService $voobly) {
+        $name = 'Sharki';
+
+        $id = $voobly->fetchUserIdByUsername($name);
+        var_dump($id);
+
+        $rank = $voobly->fetchRankByUserId($id);
+        var_dump($rank);
+
+        return new Response();
+    }
+
     /**
      * @Route("test/video")
      */

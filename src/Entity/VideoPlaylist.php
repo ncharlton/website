@@ -6,17 +6,17 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Class Event
+ * Class VideoPlaylist
  * @package App\Entity
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- * @ORM\Table(name="event")
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\VideoPlaylistRepository")
+ * @ORM\Table(name="video_playlist")
  */
-class Event
+class VideoPlaylist
 {
     /**
      * @ORM\Id
@@ -24,11 +24,6 @@ class Event
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $published;
 
     /**
      * @ORM\Column(type="string")
@@ -47,30 +42,33 @@ class Event
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
-     * @Gedmo\Blameable(on="create")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $user;
+    private $published;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="events")
+     * @Gedmo\SortablePosition()
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $game;
+    private $orderNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\VideoPlaylist", mappedBy="event")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="playlists")
      */
-    private $playlists;
+    private $event;
+
+
+    private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="playlist")
+     */
+    private $videos;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $startAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $endAt;
+    private $publishedAt;
 
     /**
      * @ORM\Column(type="datetime")
@@ -86,7 +84,7 @@ class Event
 
     public function __construct()
     {
-        $this->playlists = new ArrayCollection();
+        $this->videos = new ArrayCollection();
     }
 
     /**
@@ -103,22 +101,6 @@ class Event
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    /**
-     * @param mixed $published
-     */
-    public function setPublished($published): void
-    {
-        $this->published = $published;
     }
 
     /**
@@ -146,6 +128,14 @@ class Event
     }
 
     /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    /**
      * @return mixed
      */
     public function getDescription()
@@ -164,77 +154,100 @@ class Event
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getPublished()
     {
-        return $this->user;
+        return $this->published;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $published
      */
-    public function setUser($user): void
+    public function setPublished($published): void
     {
-        $this->user = $user;
+        $this->published = $published;
     }
 
     /**
      * @return mixed
      */
-    public function getGame()
+    public function getOrderNumber()
     {
-        return $this->game;
+        return $this->orderNumber;
     }
 
     /**
-     * @param mixed $game
+     * @param mixed $orderNumber
      */
-    public function setGame($game): void
+    public function setOrderNumber($orderNumber): void
     {
-        $this->game = $game;
-    }
-
-    /**
-     * @return Collection | VideoPlaylist[]
-     */
-    public function getPlaylists()
-    {
-        return $this->playlists;
+        $this->orderNumber = $orderNumber;
     }
 
     /**
      * @return mixed
      */
-    public function getStartAt()
+    public function getEvent()
     {
-        return $this->startAt;
+        return $this->event;
     }
 
     /**
-     * @param mixed $startAt
+     * @param mixed $event
      */
-    public function setStartAt($startAt): void
+    public function setEvent($event): void
     {
-        $this->startAt = $startAt;
+        $this->event = $event;
     }
 
     /**
      * @return mixed
      */
-    public function getEndAt()
+    public function getCategory()
     {
-        return $this->endAt;
+        return $this->category;
     }
 
     /**
-     * @param mixed $endAt
+     * @param mixed $category
      */
-    public function setEndAt($endAt): void
+    public function setCategory($category): void
     {
-        $this->endAt = $endAt;
+        $this->category = $category;
     }
 
     /**
      * @return mixed
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param Video $video
+     */
+    public function addVideo(Video $video) {
+        $this->videos->add($video);
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param \DateTime $publishedAt
+     */
+    public function setPublishedAt($publishedAt): void
+    {
+        $this->publishedAt = $publishedAt;
+    }
+
+    /**
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -242,26 +255,10 @@ class Event
     }
 
     /**
-     * @param mixed $createdAt
-     */
-    public function setCreatedAt($createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @param mixed $updatedAt
-     */
-    public function setUpdatedAt($updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
     }
 }

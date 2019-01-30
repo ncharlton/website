@@ -20,7 +20,11 @@
                     <td><a href="{{ path('admin_video_view', {'slug': video.slug}) }}">{{ video.title }}</a></td>
                     <td></td>
                     <td>{{ video.published }}</td>
-                    <td><a href="{{ path('admin_video_delete', {'slug': video.slug}) }}">Delete</a> </td>
+                    <td>
+                        <a href="{{ path('admin_video_delete', {'slug': video.slug}) }}">Delete</a>
+                        <a href="{{ path('admin_video_edit', {'slug': video.slug}) }}">Edit</a>
+                        <a href="{{ path('admin_video_playlist', {'slug': video.slug}) }}">Playlist</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

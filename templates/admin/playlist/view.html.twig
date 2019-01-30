@@ -1,0 +1,17 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    <h1>{{ playlist.title }}</h1>
+    <pre>{{ playlist.description }}</pre>
+    {% if playlist.published %}Published{% else %}Not Published{% endif %}
+    <br>
+    {{ playlist.orderNumber }}
+
+    <hr>
+    {% for video in playlist.videos %}
+        {{ video.title }}
+    {% endfor %}
+
+
+
+{% endblock %}

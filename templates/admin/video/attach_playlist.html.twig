@@ -1,0 +1,9 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit">Attach</button>
+    {{ form_end(form) }}
+{% endblock %}

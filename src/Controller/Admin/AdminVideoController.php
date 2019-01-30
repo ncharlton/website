@@ -6,8 +6,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Video;
+use App\Entity\VideoPlaylist;
 use App\Entity\YoutubeVideo;
 use App\Form\Admin\AdminConfirmType;
+use App\Form\Admin\AdminVideoPlaylistAttachType;
+use App\Form\Admin\AdminVideoType;
 use App\Service\Youtube\YoutubeVideoService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -75,11 +78,73 @@ class AdminVideoController extends AbstractController
     }
 
     /**
+     * @Route("/admin/video/{slug}/edit", name="admin_video_edit")
+     * @ParamConverter("video", options={"mapping": {"slug":"slug"}})
+     * @param Video $video
+     * @param Request $request
+     */
+    public function editAction(Video $video, Request $request) {
+        $form = $this->createForm(AdminVideoType::class, $video);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var Video $video */
+            $video = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($video);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Successfully edited video'
+            );
+        }
+
+        return $this->render('admin/video/edit.html.twig', [
+            'form' => $form->createView(),
+            'video' => $video
+        ]);
+    }
+
+    /**
      * @Route("/admin/video/{slug}", name="admin_video_view")
      * @ParamConverter("video", options={"mapping": {"slug":"slug"}})
      */
     public function viewAction(Video $video) {
         return $this->render('admin/video/view.html.twig', [
+            'video' => $video
+        ]);
+    }
+
+    /**
+     * @Route("/admin/video/{slug}/playlist", name="admin_video_playlist")
+     * @ParamConverter("video", options={"mapping": {"slug":"slug"}})
+     */
+    public function playlistAction(Video $video, Request $request) {
+        $form = $this->createForm(AdminVideoPlaylistAttachType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var VideoPlaylist $playlist */
+            $playlist = $form['playlist']->getData();
+
+            $video->setPlaylist($playlist);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($video);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Successfully attached playlist'
+            );
+
+            return $this->redirectToRoute('admin_video_view', ['slug' => $video->getSlug()]);
+        }
+
+        return $this->render('admin/video/attach_playlist.html.twig', [
+            'form' => $form->createView(),
             'video' => $video
         ]);
     }

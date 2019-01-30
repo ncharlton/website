@@ -1,0 +1,31 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('admin_playlist_new') }}">New Playlist</a>
+    <br>
+    <table>
+        <thead>
+            <th>#</th>
+            <th>Order</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for playlist in playlists %}
+                <tr>
+                    <td>{{playlist.id }}</td>
+                    <td></td>
+                    <td><a href="{{ path('admin_playlist_view', {'slug': playlist.slug}) }}">{{ playlist.title }}</a></td>
+                    <td></td>
+                    <td>{{ playlist.published }}</td>
+                    <td>
+                        <a href="{{ path('admin_playlist_delete', {'slug': playlist.slug}) }}">Delete</a>
+                        <a href="{{ path('admin_playlist_edit', {'slug': playlist.slug}) }}">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

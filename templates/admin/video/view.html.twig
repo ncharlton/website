@@ -13,6 +13,8 @@
     quality: {{ video.video.definition }} <br>
     channel: {{ video.video.channelTitle }} <br>
     thumbnail (smallest): <br><img src="{{ video.video.smallThumbnail.url }}">
+    <br>
+    playlist: {% if video.playlist %}{{ video.playlist.title }}{% endif %}
 
 
 {% endblock %}

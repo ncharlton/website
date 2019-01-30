@@ -9,6 +9,8 @@ parameters:
 
     youtube_data_key: 'AIzaSyCdii-VCfIqst6B1qvtIHXswXX_NaSz1QQ'
 
+    voobly_key: 'a2r4efoeim07t0ub2wryx05wjqodj4hj'
+
 services:
     _defaults:
         autowire: true
@@ -42,11 +44,21 @@ services:
     App\Service\Youtube\YoutubeVideoService:
         arguments: ['@doctrine.orm.entity_manager', '%youtube_data_key%']
 
+    # Voobly
+
+    App\Service\Voobly\VooblyService:
+        arguments:
+            $key: '%voobly_key%'
+
+
+
     app.admin_user_form:
         class: App\Form\Admin\AdminUserType
         arguments: ['@security.token_storage']
         tags:
           - { name: form.type }
+
+    # Listeners
 
     app.user_activity_listener:
         class: App\Listener\UserActivityListener
