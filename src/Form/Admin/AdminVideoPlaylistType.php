@@ -5,8 +5,10 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\Event;
 use App\Entity\VideoPlaylist;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -30,7 +32,15 @@ class AdminVideoPlaylistType extends AbstractType
             ])
             ->add('orderNumber', IntegerType::class, [
                 'required' => false
-            ]);
+            ])
+            ->add('event', EntityType::class, [
+                'class' => Event::class,
+                'multiple' => false,
+                'required' => false,
+                'placeholder' => 'no event',
+                'choice_label' => 'title'
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

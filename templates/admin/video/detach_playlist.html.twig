@@ -1,0 +1,9 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    Are you sure you want to remove {{ video.title }} from playlist: {{ video.playlist.title }}?
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit">Remove</button>
+    {{ form_end(form) }}
+{% endblock %}

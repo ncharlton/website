@@ -122,7 +122,7 @@ class AdminVideoController extends AbstractController
      * @ParamConverter("video", options={"mapping": {"slug":"slug"}})
      */
     public function playlistAction(Video $video, Request $request) {
-        $form = $this->createForm(AdminVideoPlaylistAttachType::class);
+        $form = $this->createForm(AdminVideoPlaylistAttachType::class, $video);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -144,6 +144,35 @@ class AdminVideoController extends AbstractController
         }
 
         return $this->render('admin/video/attach_playlist.html.twig', [
+            'form' => $form->createView(),
+            'video' => $video
+        ]);
+    }
+
+    /**
+     * @Route("/admin/video/{slug}/playlist/remove", name="admin_video_playlist_remove")
+     * @ParamConverter("video", options={"mapping": {"slug":"slug"}})
+     */
+    public function playlistRemoveAction(Video $video, Request $request) {
+        $form = $this->createForm(AdminConfirmType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $video->setPlaylist(null);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($video);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Successfully removed video from playlist'
+            );
+
+            return $this->redirectToRoute('admin_video_view', ['slug' => $video->getSlug()]);
+        }
+
+        return $this->render('admin/video/detach_playlist.html.twig', [
             'form' => $form->createView(),
             'video' => $video
         ]);
