@@ -62,6 +62,7 @@ class VideoPlaylist
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="playlist")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
      */
     private $videos;
 

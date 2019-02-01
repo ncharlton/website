@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for news in newsItems %}
+        {{ news.title }}<br>
+        {{ news.content | raw }}
+        <hr>
+    {% endfor %}
+{% endblock %}

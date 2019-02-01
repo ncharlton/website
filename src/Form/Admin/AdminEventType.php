@@ -11,8 +11,8 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -40,6 +40,9 @@ class AdminEventType extends AbstractType
             ])
             ->add('description', CKEditorType::class, [
 
+            ])
+            ->add('snippet', TextareaType::class, [
+                'required' => false
             ])
             ->add('startAt', DateType::class, [
                 'widget' => 'single_text',

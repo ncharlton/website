@@ -42,9 +42,14 @@ class Event
     private $slug;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $snippet;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
@@ -159,6 +164,22 @@ class Event
     public function setDescription($description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSnippet()
+    {
+        return $this->snippet;
+    }
+
+    /**
+     * @param mixed $snippet
+     */
+    public function setSnippet($snippet): void
+    {
+        $this->snippet = $snippet;
     }
 
     /**

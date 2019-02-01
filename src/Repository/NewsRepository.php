@@ -19,10 +19,10 @@ class NewsRepository extends EntityRepository
      * @param bool $queryMode
      * @return \Doctrine\ORM\Query | News[]
      */
-    public function fetchNewsListPublished($order = 'DESC', $queryMode = false) {
+    public function fetchPublishedNews($order = 'DESC', $queryMode = false) {
          $query = $this->createQueryBuilder('news')
-            ->where('news.published = 1')
-            ->orderBy('news.id', $order)
+            ->where('news.published = true')
+            ->orderBy('news.createdAt', $order)
             ->getQuery();
 
          if($queryMode) {

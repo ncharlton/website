@@ -10,12 +10,15 @@
     <body>
         <div id="app">
             <a href="{{ path('main_authentication_login') }}">Login</a>
+            <a href="{{ path('main_news_list') }}">News</a>
+            <a href="{{ path('main_clip_list') }}">Clips</a>
+            <a href="{{ path('main_clip_new') }}">New Clip</a>
+            <a href="{{ path('main_video_list') }}">Videos</a>
             {% if app.user %}
                 <a href="{{ path('admin_main_home') }}">Admin</a>
             {% endif %}
             <hr>
             <hr>
-            <streamer-status></streamer-status>
 
             {% block body %}
             {% endblock %}
@@ -26,15 +29,3 @@
         {% endblock %}
     </body>
 </html>
-<script>
-    import Hello from "../assets/js/components/Hello";
-    export default {
-        components: {Hello}
-    }
-</script>
-<script>
-    import StreamerStatus from "../assets/js/components/app/StreamerStatus";
-    export default {
-        components: {StreamerStatus}
-    }
-</script>

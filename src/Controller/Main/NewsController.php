@@ -20,6 +20,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class NewsController extends AbstractController
 {
     /**
+     * @Route("/news", name="main_news_list")
+     */
+    public function listAction() {
+        $news = $this->getDoctrine()->getRepository('App:News')
+            ->fetchPublishedNews();
+
+        return $this->render('main/news/list.html.twig', [
+            'newsItems' => $news
+        ]);
+    }
+
+    /**
      * @Route("/news/{slug}", name="main_news_view")
      * @ParamConverter("news", options={"mapping": {"slug":"slug"}})
      */
