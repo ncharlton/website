@@ -8,16 +8,27 @@
         {% endblock %}
     </head>
     <body>
-        <a href="{{ path('main_authentication_login') }}">Login</a>
-        {% if app.user %}
-            <a href="{{ path('admin_main_home') }}">Admin</a>
-        {% endif %}
-        <hr>
-        <hr>
-        {% block body %}{% endblock %}
+        <div id="app">
+            <a href="{{ path('main_authentication_login') }}">Login</a>
+            {% if app.user %}
+                <a href="{{ path('admin_main_home') }}">Admin</a>
+            {% endif %}
+            <hr>
+            <hr>
+            <hello></hello>
+
+            {% block body %}
+            {% endblock %}
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
 
         {% endblock %}
     </body>
 </html>
+<script>
+    import Hello from "../assets/js/components/Hello";
+    export default {
+        components: {Hello}
+    }
+</script>
