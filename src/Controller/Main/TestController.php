@@ -8,6 +8,7 @@
 
 namespace App\Controller\Main;
 
+use App\Service\Twitch\TwitchStreamService;
 use App\Service\Voobly\VooblyService;
 use App\Service\Youtube\YoutubeVideoService;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,6 +31,20 @@ class TestController
         var_dump($rank);
 
         return new Response();
+    }
+
+    /**
+     * @Route("/test/stream/status")
+     * @param TwitchStreamService $streamService
+     */
+    public function streamStatusTest(TwitchStreamService $streamService) {
+        $result = $streamService->isStreamerLive();
+        if($result ) {
+            echo true;
+        } else {
+            echo "asdsa";
+        }
+        die();
     }
 
     /**

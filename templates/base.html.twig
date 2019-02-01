@@ -15,7 +15,7 @@
             {% endif %}
             <hr>
             <hr>
-            <hello></hello>
+            <streamer-status></streamer-status>
 
             {% block body %}
             {% endblock %}
@@ -30,5 +30,11 @@
     import Hello from "../assets/js/components/Hello";
     export default {
         components: {Hello}
+    }
+</script>
+<script>
+    import StreamerStatus from "../assets/js/components/app/StreamerStatus";
+    export default {
+        components: {StreamerStatus}
     }
 </script>
