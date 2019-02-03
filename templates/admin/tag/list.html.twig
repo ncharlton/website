@@ -1,7 +1,36 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}Tags{% endblock %}
+
 {% block body %}
-    {% for tag in tags %}
-        {{ tag.tag }} <br>
-    {% endfor %}
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_tag_new') }}">New tag</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>Tags</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>tag</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tag in tags %}
+                                <tr>
+                                    <td>{{ tag.tag }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

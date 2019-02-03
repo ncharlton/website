@@ -1,31 +1,49 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}Playlists{% endblock %}
+
 {% block body %}
-    <a href="{{ path('admin_playlist_new') }}">New Playlist</a>
-    <br>
-    <table>
-        <thead>
-            <th>#</th>
-            <th>Order</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Published</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-            {% for playlist in playlists %}
-                <tr>
-                    <td>{{playlist.id }}</td>
-                    <td></td>
-                    <td><a href="{{ path('admin_playlist_view', {'slug': playlist.slug}) }}">{{ playlist.title }}</a></td>
-                    <td></td>
-                    <td>{{ playlist.published }}</td>
-                    <td>
-                        <a href="{{ path('admin_playlist_delete', {'slug': playlist.slug}) }}">Delete</a>
-                        <a href="{{ path('admin_playlist_edit', {'slug': playlist.slug}) }}">Edit</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_playlist_new') }}">New Playlist</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>Playlists</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Order</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Published</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for playlist in playlists %}
+                            <tr>
+                                <th scope="row">{{playlist.id }}</th>
+                                <td></td>
+                                <td><a href="{{ path('admin_playlist_view', {'slug': playlist.slug}) }}">{{ playlist.title }}</a></td>
+                                <td></td>
+                                <td>{{ playlist.published }}</td>
+                                <td>
+                                    <a href="{{ path('admin_playlist_delete', {'slug': playlist.slug}) }}">Delete</a>
+                                    <a href="{{ path('admin_playlist_edit', {'slug': playlist.slug}) }}">Edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

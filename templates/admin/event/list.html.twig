@@ -1,35 +1,53 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}Events{% endblock %}
+
 {% block body %}
-    <a href="{{ path('admin_event_new') }}">Create new event</a>
-    <br>
-    <table>
-        <thead>
-        <th>#</th>
-        <th>Published</th>
-        <th>Title</th>
-        <th>Starts</th>
-        <th>End</th>
-        <th>Created</th>
-        <th>Updated</th>
-        <th>Actions</th>
-        </thead>
-        <tbody>
-            {% for event in events %}
-                <tr>
-                    <td>{{ event.id }}</td>
-                    <td>{{ event.published }}</td>
-                    <td><a href="{{ path('admin_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a></td>
-                    <td>{{ event.startAt | date('Y-m-d') }}</td>
-                    <td>{{ event.endAt | date('Y-m-d') }}</td>
-                    <td>{{ event.createdAt | date('Y-m-d') }}</td>
-                    <td>{{ event.updatedAt | date('Y-m-d') }}</td>
-                    <td>
-                        <a href="{{ path('admin_event_edit', {'slug' : event.slug}) }}">edit</a>
-                        <a href="{{ path('admin_event_delete', {'slug' : event.slug}) }}">delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_event_new') }}">Create new event</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>Events</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Published</th>
+                                <th>Title</th>
+                                <th>Starts</th>
+                                <th>End</th>
+                                <th>Created</th>
+                                <th>Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in events %}
+                            <tr>
+                                <th scope="row">{{ event.id }}</th>
+                                <td>{{ event.published }}</td>
+                                <td><a href="{{ path('admin_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a></td>
+                                <td>{{ event.startAt | date('Y-m-d') }}</td>
+                                <td>{{ event.endAt | date('Y-m-d') }}</td>
+                                <td>{{ event.createdAt | date('Y-m-d') }}</td>
+                                <td>{{ event.updatedAt | date('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ path('admin_event_edit', {'slug' : event.slug}) }}">edit</a>
+                                    <a href="{{ path('admin_event_delete', {'slug' : event.slug}) }}">delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

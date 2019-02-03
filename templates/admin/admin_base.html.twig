@@ -3,21 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Admin panel!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
 </head>
 <body>
-{% if app.user %}
-    <a href="{{ path('main_home') }}">Frontend</a>
-    <a href="{{ path('admin_user_list') }}">Users</a> &nbsp;
-    <a href="{{ path('admin_game_list') }}">Games</a> &nbsp;
-    <a href="{{ path('admin_news_list') }}">News</a>  &nbsp;
-    <a href="{{ path('admin_clip_list') }}">Clips</a>
-    <a href="{{ path('admin_event_list') }}">Events</a>
-    <a href="{{ path('admin_video_list') }}">Videos</a>
-    <a href="{{ path('admin_playlist_list') }}">Playlists</a>
-    <a href="{{ path('admin_tag_list') }}">Tags</a>
-    <hr>
-{% endif %}
+<!-- Header -->
+<header class="header">
+    <nav class="navbar navbar-expand-lg">
+        <div class="search-panel">
+            <div class="search-inner d-flex align-items-center justify-content-center">
+                <div class="close-btn">Close <i class="fa fa-close"></i></div>
+                <form id="searchForm" action="#">
+                    <div class="form-group">
+                        <input type="search" name="search" placeholder="What are you searching for...">
+                        <button type="submit" class="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            <div class="navbar-header">
+                <!-- Navbar Header--><a href="{{ path('admin_main_home') }}" class="navbar-brand">
+                    <div class="brand-text brand-big visible text-uppercase"><strong>Memb.tv Admin</strong></div>
+                    <div class="brand-text brand-sm"><strong class="text-primary">D</strong><strong>A</strong></div></a>
+            </div>
+            <div class="right-menu list-inline no-margin-bottom">
+                <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
+
+                <!-- Log out               -->
+                <div class="list-inline-item logout">                   <a id="logout" href="login.html" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- Header end -->
+<div class="d-flex align-items-stretch">
+    <!-- Sidebar Navigation-->
+    <nav id="sidebar">
+        <!-- Sidebar Header-->
+        <div class="sidebar-header d-flex align-items-center">
+
+        </div>
+        <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+        <ul class="list-unstyled">
+            <li><a href="{{ path('admin_main_home') }}"> <i class="icon-home"></i>Dashboard</a></li>
+            <li><a href="{{ path('admin_user_list') }}">Users</a> </li>
+            <li><a href="{{ path('admin_game_list') }}">Games</a>  </li>
+            <li><a href="{{ path('admin_news_list') }}">News</a> </li>
+            <li><a href="{{ path('admin_clip_list') }}">Clips</a> </li>
+            <li><a href="{{ path('admin_event_list') }}">Events</a> </li>
+            <li><a href="{{ path('admin_video_list') }}">Videos</a> </li>
+            <li><a href="{{ path('admin_playlist_list') }}">Playlists</a> </li>
+            <li><a href="{{ path('admin_tag_list') }}">Tags</a> </li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Example dropdown </a>
+                <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <!-- Sidebar Navigation end-->
+
+    <!-- Content start -->
+    <div class="page-content">
+        <div class="page-header">
+            <div class="container-fluid">
+                <h2 class="h5 no-margin-bottom">{% block pageheader %}{% endblock %}</h2>
+            </div>
+        </div>
+        <section class="no-padding-top no-padding-bottom">
+            <div class="container-fluid">
+                {% block body %}{% endblock %}
+            </div>
+        </section>
+</div>
 
 {% for label, messages in app.flashes %}
     {% for message in messages %}
@@ -28,7 +90,9 @@
     {% endfor %}
 {% endfor %}
 
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('admin') }}
+{% endblock %}
 </body>
 </html>

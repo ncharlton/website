@@ -1,34 +1,52 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}News{% endblock %}
+
 {% block body %}
-    <a href="{{ path('admin_news_new') }}">Write news</a>
-    <hr>
-    <table>
-        <thead>
-            <th>#</th>
-            <th>Published</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Published</th>
-            <th>Ations</th>
-        </thead>
-        <tbody>
-            {% for news in newsItems %}
-                <tr>
-                    <td>{{ news.id }}</td>
-                    <td>{{ news.published }}</td>
-                    <td><a href="{{ path('admin_news_view', {'slug': news.slug}) }}">{{ news.title }}</a> </td>
-                    <td>{{ news.author.username }}</td>
-                    <td>{{ news.createdAt | date('Y-m-d') }}</td>
-                    <td>{{ news.updatedAt | date('Y-m-d') }}</td>
-                    <td>{% if news.published %}{{ news.publishedAt | date('Y-m-d') }}{% endif %}</td>
-                    <td><a href="{{ path('admin_news_delete', {'slug': news.slug}) }}">Delete</a></td>
-                    <td><a href="{{ path('admin_news_edit', {'slug': news.slug}) }}">Edit</a></td>
-                    <td><a href="{{ path('main_news_preview', {'slug': news.slug}) }}">Preview</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_news_new') }}">Write news</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>Newss</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Published</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Published</th>
+                            <th>Ations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for news in newsItems %}
+                            <tr>
+                                <th scope="row">{{ news.id }}</th>
+                                <td>{{ news.published }}</td>
+                                <td><a href="{{ path('admin_news_view', {'slug': news.slug}) }}">{{ news.title }}</a> </td>
+                                <td>{{ news.author.username }}</td>
+                                <td>{{ news.createdAt | date('Y-m-d') }}</td>
+                                <td>{{ news.updatedAt | date('Y-m-d') }}</td>
+                                <td>{% if news.published %}{{ news.publishedAt | date('Y-m-d') }}{% endif %}</td>
+                                <td><a href="{{ path('admin_news_delete', {'slug': news.slug}) }}">Delete</a></td>
+                                <td><a href="{{ path('admin_news_edit', {'slug': news.slug}) }}">Edit</a></td>
+                                <td><a href="{{ path('main_news_preview', {'slug': news.slug}) }}">Preview</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

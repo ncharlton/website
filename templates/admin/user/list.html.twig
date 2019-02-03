@@ -2,36 +2,49 @@
 
 {% block title %}{% endblock %}
 
+{% block pageheader %}Users{% endblock %}
+
 {% block body %}
-<table>
-    <thead>
-        <th>#</th>
-        <th>status</th>
-        <td>role</td>
-        <th>active</th>
-        <th>username</th>
-        <th>email</th>
-        <th>registered</th>
-        <th>action</th>
-    </thead>
-    <tbody>
-    {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.statusWritten }}</td>
-            <td>{{ user.role() }}</td>
-            <td>{% if user.activeNow %}Online{% endif %}</td>
-            <td><a href="{{ path('admin_user_view', {'username' : user.username}) }}">{{ user.username }}</a></td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.createdAt | date("d/m/Y") }}</td>
-            <td>
-                <a href="{{ path('admin_user_edit', {'username' : user.username}) }}">edit</a>
-                <a href="{{ path('admin_user_delete', {'username' : user.username}) }}">delete</a>
-                <a href="{{ path('admin_user_block', {'username' : user.username}) }}">block</a>
-                <a href="{{ path('admin_user_unblock', {'username' : user.username}) }}">unblock</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>Users</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>status</th>
+                            <th>role</th>
+                            <th>active</th>
+                            <th>username</th>
+                            <th>email</th>
+                            <th>registered</th>
+                            <th>action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <th scope="row">{{ user.id }}</th>
+                                <td>{{ user.statusWritten }}</td>
+                                <td>{{ user.role() }}</td>
+                                <td>{% if user.activeNow %}Online{% endif %}</td>
+                                <td><a href="{{ path('admin_user_view', {'username' : user.username}) }}">{{ user.username }}</a></td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.createdAt | date("d/m/Y") }}</td>
+                                <td>
+                                    <a href="{{ path('admin_user_edit', {'username' : user.username}) }}">edit</a>
+                                    <a href="{{ path('admin_user_delete', {'username' : user.username}) }}">delete</a>
+                                    <a href="{{ path('admin_user_block', {'username' : user.username}) }}">block</a>
+                                    <a href="{{ path('admin_user_unblock', {'username' : user.username}) }}">unblock</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
