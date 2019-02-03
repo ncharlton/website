@@ -29,4 +29,22 @@ class EventRepository extends EntityRepository
             return $query->execute();
         }
     }
+
+    /**
+     * @param bool $queryMode
+     * @param string $order
+     * @return \Doctrine\ORM\Query | Event[]
+     */
+    public function fetchPublished($queryMode = false, $order = 'DESC') {
+        $query = $this->createQueryBuilder('event')
+            ->andWhere('event.published = true')
+            ->orderBy('event.createdAt', $order)
+            ->getQuery();
+
+        if($queryMode) {
+            return $query;
+        } else {
+            return $query->execute();
+        }
+    }
 }

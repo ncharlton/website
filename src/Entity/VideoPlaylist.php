@@ -67,6 +67,13 @@ class VideoPlaylist
     private $videos;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="playlists")
+     * @ORM\JoinTable(name="playlist_tags")
+     * @ORM\OrderBy({"tag" = "ASC"})
+     */
+    private $tags;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedAt;
@@ -86,6 +93,7 @@ class VideoPlaylist
     public function __construct()
     {
         $this->videos = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -229,6 +237,40 @@ class VideoPlaylist
      */
     public function addVideo(Video $video) {
         $this->videos->add($video);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags): void
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag) {
+        if(!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag) {
+        if($this->tags->contains($tag)) {
+            $this->tags->remove($tag);
+        }
     }
 
     /**

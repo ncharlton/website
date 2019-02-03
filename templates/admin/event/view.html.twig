@@ -4,4 +4,8 @@
 {{ event.title }}
 <hr>
 {{ event.description | raw }}
+    <br>
+    {% for tag in event.tags %}
+        {{ tag.tag }}
+    {% endfor %}
 {% endblock %}

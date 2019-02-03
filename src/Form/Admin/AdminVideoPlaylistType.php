@@ -6,6 +6,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Event;
+use App\Entity\Tag;
 use App\Entity\VideoPlaylist;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -33,6 +34,14 @@ class AdminVideoPlaylistType extends AbstractType
             ])
             ->add('orderNumber', IntegerType::class, [
                 'required' => false
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'required' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'placeholder' => 'Tags',
+                'choice_label' => 'tag'
             ])
             ->add('event', EntityType::class, [
                 'class' => Event::class,

@@ -5,7 +5,9 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\Tag;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -28,6 +30,14 @@ class AdminVideoType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'required' => true
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'required' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'placeholder' => 'Tags',
+                'choice_label' => 'tag'
             ])
             ->add('youtube', TextType::class, [
                 'mapped' => false,

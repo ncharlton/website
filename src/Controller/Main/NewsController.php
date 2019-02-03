@@ -47,8 +47,6 @@ class NewsController extends AbstractController
      * @Route("/news/{slug}/preview", name="main_news_preview")
      * @ParamConverter("news", options={"mapping": {"slug":"slug"}})
      * @IsGranted("ROLE_ADMIN")
-     * @param News $news
-     * @return Response
      */
     public function previewAction(News $news) {
         return $this->render('main/news/preview.html.twig', [

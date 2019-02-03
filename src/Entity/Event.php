@@ -68,6 +68,13 @@ class Event
     private $playlists;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="events")
+     * @ORM\JoinTable(name="event_tags")
+     * @ORM\OrderBy({"tag" = "ASC"})
+     */
+    private $tags;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $startAt;
@@ -92,6 +99,7 @@ class Event
     public function __construct()
     {
         $this->playlists = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -220,6 +228,36 @@ class Event
     public function getPlaylists()
     {
         return $this->playlists;
+    }
+
+    /**
+     * @return Collection | Tag[]
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag) {
+        if(!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag) {
+        if($this->tags->contains($tag)) {
+            $this->tags->remove($tag);
+        }
+    }
+
+    public function setTags($tags) {
+        $this->tags = $tags;
     }
 
     /**

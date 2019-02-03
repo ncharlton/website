@@ -5,6 +5,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -56,6 +57,13 @@ class Video
     private $playlist;
 
     /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="videos")
+     * @ORM\JoinColumn(name="video_tags")
+     * @ORM\OrderBy({"tag" = "ASC"})
+     */
+    private $tags;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
@@ -66,6 +74,11 @@ class Video
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -161,6 +174,40 @@ class Video
     public function setPlaylist($playlist): void
     {
         $this->playlist = $playlist;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags): void
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function addTag(Tag $tag) {
+        if(!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+    }
+
+    /**
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag) {
+        if($this->tags->contains($tag)) {
+            $this->tags->remove($tag);
+        }
     }
 
     /**

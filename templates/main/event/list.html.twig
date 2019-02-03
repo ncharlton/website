@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for event in events %}
+        <a href="{{ path('main_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a>
+
+        <br>
+        {{ event.description | raw }}
+        <br>
+    {% endfor %}
+{% endblock %}

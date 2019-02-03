@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ event.title }}
+    <br>
+    {{ event.description | raw }}
+    <br>
+    {{ event.snippet }}
+    <br>
+    created: {{ event.createdAt | date('Y-m-d') }}
+    <br>
+    starts: {{ event.startAt | date('Y-m-d') }}
+    <br>
+    endss: {{ event.endAt | date('Y-m-d') }}
+
+    <hr>
+    <b>Playlists</b>
+    <br>
+    {% for playlist in event.playlists %}
+        Playlist: {{ playlist.title }}
+        <br>
+        {% if playlist.videos %}
+            {% for video in playlist.videos %}
+              - <a href="{{ path('main_video_view', {'slug' : video.slug }) }}">{{ video.title }}</a><br>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    <hr>
+    <b>Game</b>
+    <br>
+    {{ event.game.name }}
+
+{% endblock %}

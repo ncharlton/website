@@ -1,0 +1,7 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    {% for tag in tags %}
+        {{ tag.tag }} <br>
+    {% endfor %}
+{% endblock %}

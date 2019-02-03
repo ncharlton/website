@@ -7,6 +7,7 @@ namespace App\Form\Admin;
 
 use App\Entity\Event;
 use App\Entity\Game;
+use App\Entity\Tag;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -34,6 +35,14 @@ class AdminEventType extends AbstractType
                 'class' => Game::class,
                 'required' => false,
                 'choice_label' => 'name'
+            ])
+            ->add('tags', EntityType::class, [
+                'placeholder' => 'Tags',
+                'class' => Tag::class,
+                'required' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => 'tag'
             ])
             ->add('title', TextType::class, [
 
