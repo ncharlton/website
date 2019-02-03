@@ -30,6 +30,15 @@ class AdminEventType extends AbstractType
             ->add('published', CheckboxType::class, [
                 'required' => false
             ])
+            ->add('seoTitle', TextType::class, [
+                'required' => false
+            ])
+            ->add('seoKeywords', TextType::class, [
+                'required' => false,
+            ])
+            ->add('seoDescription', TextareaType::class, [
+                'required' => false
+            ])
             ->add('game', EntityType::class, [
                 'placeholder' => 'Game',
                 'class' => Game::class,

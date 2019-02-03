@@ -26,6 +26,21 @@ class Event
     private $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $seoTitle;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $seoKeywords;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $seoDescription;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $published;
@@ -116,6 +131,54 @@ class Event
     public function setId($id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeoTitle()
+    {
+        return $this->seoTitle;
+    }
+
+    /**
+     * @param mixed $seoTitle
+     */
+    public function setSeoTitle($seoTitle): void
+    {
+        $this->seoTitle = $seoTitle;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeoKeywords()
+    {
+        return $this->seoKeywords;
+    }
+
+    /**
+     * @param mixed $seoKeywords
+     */
+    public function setSeoKeywords($seoKeywords): void
+    {
+        $this->seoKeywords = $seoKeywords;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeoDescription()
+    {
+        return $this->seoDescription;
+    }
+
+    /**
+     * @param mixed $seoDescription
+     */
+    public function setSeoDescription($seoDescription): void
+    {
+        $this->seoDescription = $seoDescription;
     }
 
     /**

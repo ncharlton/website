@@ -16,18 +16,19 @@
         </thead>
         <tbody>
             {% for event in events %}
-                <td>{{ event.id }}</td>
-                <td>{{ event.published }}</td>
-                <td><a href="{{ path('admin_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a></td>
-                <td>{{ event.startAt | date('Y-m-d') }}</td>
-                <td>{{ event.endAt | date('Y-m-d') }}</td>
-                <td>{{ event.createdAt | date('Y-m-d') }}</td>
-                <td>{{ event.updatedAt | date('Y-m-d') }}</td>
-                <td>
-                    <a href="{{ path('admin_event_edit', {'slug' : event.slug}) }}">edit</a>
-                    <a href="{{ path('admin_event_delete', {'slug' : event.slug}) }}">delete</a>
-                </td>
-
+                <tr>
+                    <td>{{ event.id }}</td>
+                    <td>{{ event.published }}</td>
+                    <td><a href="{{ path('admin_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a></td>
+                    <td>{{ event.startAt | date('Y-m-d') }}</td>
+                    <td>{{ event.endAt | date('Y-m-d') }}</td>
+                    <td>{{ event.createdAt | date('Y-m-d') }}</td>
+                    <td>{{ event.updatedAt | date('Y-m-d') }}</td>
+                    <td>
+                        <a href="{{ path('admin_event_edit', {'slug' : event.slug}) }}">edit</a>
+                        <a href="{{ path('admin_event_delete', {'slug' : event.slug}) }}">delete</a>
+                    </td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
