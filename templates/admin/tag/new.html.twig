@@ -1,8 +1,20 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}New tag{% endblock %}
+
 {% block body %}
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Create</button>
-    {{ form_end(form) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <div class="title"><strong class="d-block">New tag</strong></div>
+                <div class="block-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <button class="btn btn-primary" type="submit">Create</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

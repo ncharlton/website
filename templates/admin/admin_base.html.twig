@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Admin panel!{% endblock %}</title>
+    <title>Memb Admin - {% block title %}{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('admin') }}
     {% endblock %}
@@ -48,7 +48,7 @@
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
             <li><a href="{{ path('admin_main_home') }}"> <i class="icon-home"></i>Dashboard</a></li>
-            <li><a href="{{ path('admin_user_list') }}">Users</a> </li>
+            <li><a href="{{ path('admin_user_list') }}"> <i class="icon-user"></i>User </a> </li>
             <li><a href="{{ path('admin_game_list') }}">Games</a>  </li>
             <li><a href="{{ path('admin_news_list') }}">News</a> </li>
             <li><a href="{{ path('admin_clip_list') }}">Clips</a> </li>
@@ -76,20 +76,20 @@
         </div>
         <section class="no-padding-top no-padding-bottom">
             <div class="container-fluid">
+                <!-- flash messages -->
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <!-- content -->
                 {% block body %}{% endblock %}
             </div>
         </section>
 </div>
-
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="flash-{{ label }}">
-            {{ message }}
-        </div>
-        <hr>
-    {% endfor %}
-{% endfor %}
-
 
 {% block javascripts %}
     {{ encore_entry_script_tags('admin') }}

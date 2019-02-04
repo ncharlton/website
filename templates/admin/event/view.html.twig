@@ -1,11 +1,84 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}Event - {{ event.title }}{% endblock %}
+
 {% block body %}
-{{ event.title }}
-<hr>
-{{ event.description | raw }}
-    <br>
-    {% for tag in event.tags %}
-        {{ tag.tag }}
-    {% endfor %}
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title">
+                    <div class="pull-left">
+                        <strong>Details</strong>
+                    </div>
+                </div>
+                <div class="block-body">
+                    <p>
+                        {% if event.published %}
+                            <span class="badge badge-success">Published</span>
+                        {% else %}
+                            <span class="badge badge-light">Unpublished</span>
+                        {% endif %}
+                        &nbsp;
+                        <strong>Created:</strong> {{ event.createdAt | date('d-m-Y') }}
+                        <strong>Last updated:</strong> {{ event.updatedAt | date('d-m-Y') }}
+                        <strong>Created by:</strong> <a href="{{ path('admin_user_view', {'username' : event.user.username }) }}">{{ event.user.username }}</a>
+                    </p>
+                    <p><strong>Timespan:</strong> {{ event.startAt | date('d-m-Y') }} - {{ event.endAt | date('d-m-Y') }}</p>
+                    <p><strong>Snippet</strong></p>
+                    <p>{{ event.snippet }}</p>
+                    <p><strong>Description</strong></p>
+                    {{ event.description | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="block">
+                <div class="title"><strong>Tags</strong></div>
+                <div class="block-body">
+                    {% for tag in event.tags %}
+                        <span class="badge badge-light">{{ tag.tag }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="block">
+                <div class="title"><strong>Game</strong></div>
+                <div class="block-body">
+                    {% if event.game %}
+                        <p><strong>Name:</strong> {{ event.game.name }}</p>
+                    {% else %}
+                        <p>Not connected to any game</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="block">
+                <div class="title"><strong>Seo</strong></div>
+                <div class="block-body">
+                    <p><strong>Seo title:</strong> {{ event.seoTitle }}</p>
+                    <p><strong>Seo keywords:</strong> {{ event.seoKeywords }}</p>
+                    <p><strong>Seo description:</strong> {{ event.seoDescription }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title"><strong>Playlists</strong></div>
+                <div class="block-body">
+                    {% for playlist in event.playlists %}
+                        <p><a href="{{ path('admin_playlist_view', {'slug' : playlist.slug}) }}">{{ playlist.title }}</a></p>
+                        <p>{{ playlist.description }}</p>
+                        <p>Videos: {{ playlist.videos | length }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

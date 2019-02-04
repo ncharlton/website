@@ -1,11 +1,23 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Block {{ user.username }}{% endblock %}
+
+{% block pageheader %}Block user{% endblock %}
 
 {% block body %}
-    Do you really want to block {{ user.username }}?
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button type="submit">Delete</button>
-    {{ form_end(form) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <div class="title"><strong class="d-block">Block {{ user.username }}</strong></div>
+                <div class="block-body">
+                    <p>Do you really want to block {{ user.username }}?</p>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <button class="btn btn-primary" type="submit">Block</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

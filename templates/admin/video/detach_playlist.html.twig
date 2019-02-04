@@ -1,9 +1,23 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block title %}Detach playlist{% endblock %}
+
+{% block pageheader %}Detach playlist{% endblock %}
+
 {% block body %}
-    Are you sure you want to remove {{ video.title }} from playlist: {{ video.playlist.title }}?
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Remove</button>
-    {{ form_end(form) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <div class="title"><strong class="d-block">Detach playlist</strong></div>
+                <div class="block-body">
+                    <p>Are you sure you want to remove {{ video.title }} from playlist: {{ video.playlist.title }}?</p>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <button class="btn btn-primary" type="submit">Detach</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

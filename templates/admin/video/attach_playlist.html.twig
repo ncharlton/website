@@ -1,11 +1,27 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
+{% block title %}Attach playlist{% endblock %}
 
-    <button type="submit">Attach</button>
-    {{ form_end(form) }}
-    <hr>
-    <a href="{{ path('admin_video_playlist_remove', {'slug' : video.slug}) }}">Remove video from playlist</a>
+{% block pageheader %}Attach playlist{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <div class="title"><strong class="d-block">Attach playlist</strong></div>
+                <div class="block-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <button class="btn btn-primary" type="submit">Attach</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="block">
+                <div class="block-body">
+                    <a href="{{ path('admin_video_playlist_remove', {'slug' : video.slug}) }}">Remove video from playlist (DEPRECATED - DON'T USE)</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -22,7 +22,7 @@ class TestController
      * @param VooblyService $voobly
      */
     public function vooblyTest(VooblyService $voobly) {
-        $name = 'Sharki';
+        $name = 'TheViper';
 
         $id = $voobly->fetchUserIdByUsername($name);
         var_dump($id);

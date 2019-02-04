@@ -2,10 +2,22 @@
 
 {% block title %}Delete - {{ event.title }}{% endblock %}
 
+{% block pageheader %}Delete Event{% endblock %}
+
 {% block body %}
-    Are you sure you want to delete {{ event.title }}?
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button type="submit">Delete</button>
-    {{ form_end(form) }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <div class="title"><strong class="d-block">Delete event</strong></div>
+                <div class="block-body">
+                    <p>Are you sure you want to delete {{ event.title }}?</p>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+
+                    <button class="btn btn-primary" type="submit">Delete</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
