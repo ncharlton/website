@@ -6,8 +6,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
+use App\Service\Util\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -32,13 +34,23 @@ class AdminEventController extends AbstractController
     /**
      * @Route("/admin/event/new", name="admin_event_new")
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request, FileUploader $uploader) {
         $form = $this->createForm('App\Form\Admin\AdminEventType');
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Event $event */
             $event = $form->getData();
+
+            if(empty($form['image']->getData())) {
+
+            } else {
+                // file
+                $file = $event->getImage();
+                $uploader->setTargetDirecotry($this->getParameter('file_event_dir'));
+                $fileName = $uploader->upload($file);
+                $event->setImage($fileName);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);
@@ -71,13 +83,34 @@ class AdminEventController extends AbstractController
      * @Route("/admin/event/{slug}/edit", name="admin_event_edit")
      * @ParamConverter("event", options={"mapping":{"slug":"slug"}})
      */
-    public function editAction(Event $event, Request $request) {
+    public function editAction(Event $event, Request $request, FileUploader $uploader) {
+        // store
+        $storeImage = $event->getImage();
+
+        if($event->getImage()) {
+            $event->setImage(
+                new File($this->getParameter('file_event_dir').'/'.$event->getImage())
+            );
+        }
+
         $form = $this->createForm('App\Form\Admin\AdminEventType', $event);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Event $event */
             $event = $form->getData();
+
+            if(empty($form['image']->getData())) {
+                if(!empty($storeImage)) {
+                    $event->setImage($storeImage);
+                }
+            } else {
+                // file
+                $file = $event->getImage();
+                $uploader->setTargetDirecotry($this->getParameter('file_event_dir'));
+                $fileName = $uploader->upload($file);
+                $event->setImage($fileName);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($event);

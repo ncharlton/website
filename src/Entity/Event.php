@@ -52,9 +52,9 @@ class Event
     private $title;
 
     /**
-     * @ORM\Column(type="string")
-     *
-     * @Assert\File(mimeTypes={""})
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png"})
+     * @Assert\Image()
      */
     private $image;
 
@@ -219,6 +219,22 @@ class Event
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
     }
 
     /**

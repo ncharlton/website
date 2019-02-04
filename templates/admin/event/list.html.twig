@@ -32,15 +32,21 @@
                         {% for event in events %}
                             <tr>
                                 <th scope="row">{{ event.id }}</th>
-                                <td>{{ event.published }}</td>
+                                <td>
+                                    {% if event.published %}
+                                        <span class="badge badge-success">Published</span>
+                                    {% else %}
+                                        <span class="badge badge-light">Unpublished</span>
+                                    {% endif %}
+                                </td>
                                 <td><a href="{{ path('admin_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a></td>
                                 <td>{{ event.startAt | date('Y-m-d') }}</td>
                                 <td>{{ event.endAt | date('Y-m-d') }}</td>
                                 <td>{{ event.createdAt | date('Y-m-d') }}</td>
                                 <td>{{ event.updatedAt | date('Y-m-d') }}</td>
                                 <td>
-                                    <a href="{{ path('admin_event_edit', {'slug' : event.slug}) }}">edit</a>
-                                    <a href="{{ path('admin_event_delete', {'slug' : event.slug}) }}">delete</a>
+                                    <a href="{{ path('admin_event_edit', {'slug' : event.slug}) }}"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('admin_event_delete', {'slug' : event.slug}) }}"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

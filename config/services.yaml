@@ -11,6 +11,8 @@ parameters:
 
     voobly_key: 'a2r4efoeim07t0ub2wryx05wjqodj4hj'
 
+    file_event_dir: '%kernel.project_dir%/public/media/events'
+
 services:
     _defaults:
         autowire: true

@@ -25,14 +25,15 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="navbar-header">
                 <!-- Navbar Header--><a href="{{ path('admin_main_home') }}" class="navbar-brand">
-                    <div class="brand-text brand-big visible text-uppercase"><strong>Memb.tv Admin</strong></div>
-                    <div class="brand-text brand-sm"><strong class="text-primary">D</strong><strong>A</strong></div></a>
+                    <div class="brand-text brand-big visible text-uppercase"><img src="{{ asset('img/logo.png') }}"></div>
+                    <div class="brand-text brand-sm"><img src="{{ asset('img/logo.png') }}"></div></a>
             </div>
             <div class="right-menu list-inline no-margin-bottom">
                 <div class="list-inline-item"><a href="#" class="search-open nav-link"><i class="icon-magnifying-glass-browser"></i></a></div>
 
                 <!-- Log out               -->
-                <div class="list-inline-item logout">                   <a id="logout" href="login.html" class="nav-link">Logout <i class="icon-logout"></i></a></div>
+                <div class="list-inline-item logout">
+                <a id="logout" href="{{ path('main_logout') }}" class="nav-link">Logout <i class="icon-logout"></i></a></div>
             </div>
         </div>
     </nav>
@@ -47,15 +48,15 @@
         </div>
         <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
         <ul class="list-unstyled">
-            <li><a href="{{ path('admin_main_home') }}"> <i class="icon-home"></i>Dashboard</a></li>
-            <li><a href="{{ path('admin_user_list') }}"> <i class="icon-user"></i>User </a> </li>
-            <li><a href="{{ path('admin_game_list') }}">Games</a>  </li>
-            <li><a href="{{ path('admin_news_list') }}">News</a> </li>
-            <li><a href="{{ path('admin_clip_list') }}">Clips</a> </li>
-            <li><a href="{{ path('admin_event_list') }}">Events</a> </li>
-            <li><a href="{{ path('admin_video_list') }}">Videos</a> </li>
-            <li><a href="{{ path('admin_playlist_list') }}">Playlists</a> </li>
-            <li><a href="{{ path('admin_tag_list') }}">Tags</a> </li>
+            <li><a href="{{ path('admin_main_home') }}"> <i class="fas fa-tachometer-alt"></i> &nbsp; Dashboard</a></li>
+            <li><a href="{{ path('admin_user_list') }}"> <i class="fas fa-users"></i> &nbsp; Users </a> </li>
+            <li><a href="{{ path('admin_game_list') }}"> <i class="fas fa-dice-five"></i> &nbsp; Games</a>  </li>
+            <li><a href="{{ path('admin_news_list') }}"> <i class="fas fa-newspaper"></i> &nbsp; News</a> </li>
+            <li><a href="{{ path('admin_clip_list') }}"> <i class="fas fa-video"></i> &nbsp; Clips</a> </li>
+            <li><a href="{{ path('admin_event_list') }}"> <i class="fas fa-calendar-week"></i> &nbsp; Events</a> </li>
+            <li><a href="{{ path('admin_video_list') }}"> <i class="fab fa-youtube"></i> &nbsp; Videos</a> </li>
+            <li><a href="{{ path('admin_playlist_list') }}"> <i class="fas fa-video"></i> &nbsp; Playlists</a> </li>
+            <li><a href="{{ path('admin_tag_list') }}"> <i class="fas fa-tags"></i> &nbsp; Tags</a> </li>
             <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i>Example dropdown </a>
                 <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                     <li><a href="#">Page</a></li>

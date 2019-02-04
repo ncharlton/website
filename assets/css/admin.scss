@@ -2,13 +2,29 @@
 @import "~bootstrap/scss/bootstrap-grid";
 @import "~bootstrap/scss/bootstrap-reboot";
 
+$theme-colors: (
+        "primary": #ff870a,
+        "danger": #ff4136
+);
+
 @import "admin/style.default.css";
 @import "admin/font.css";
 @import "admin/custom.css";
 
+
+
 .navigation-i-fix {
   padding-right: 20px;
   border-right: 1px solid #454649;
+}
+
+.btn-primary {
+  background: #e48119 !important;
+  border-color: #ff870a !important;
+}
+
+a {
+  color: #e48119;
 }
 
 table {
