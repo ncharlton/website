@@ -1,0 +1,49 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block pageheader %}Page - {{ page.title }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_page_edit', {'slug' : page.slug}) }}">Edit page</a>
+                <a class="btn btn-primary" href="{{ path('admin_page_delete', {'slug' : page.slug}) }}">Delete page</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title">
+                    <div class="pull-left">
+                        <strong>Details</strong>
+                    </div>
+                </div>
+                <div class="block-body">
+                    <p>
+                        {% if page.published %}
+                            <span class="badge badge-success">Published</span>
+                        {% else %}
+                            <span class="badge badge-light">Unpublished</span>
+                        {% endif %}
+                        &nbsp;
+                        <strong>Created:</strong> {{ page.createdAt | date('d-m-Y') }}
+                        <strong>Last updated:</strong> {{ page.updatedAt | date('d-m-Y') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="block">
+                <div class="title"><strong>Seo</strong></div>
+                <div class="block-body">
+                    <p><strong>Seo title:</strong> {{ page.seoTitle }}</p>
+                    <p><strong>Seo keywords:</strong> {{ page.seoKeywords }}</p>
+                    <p><strong>Seo description:</strong> {{ page.seoDescription }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

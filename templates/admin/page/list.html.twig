@@ -1,0 +1,55 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block pageheader %}Pages{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_page_new') }}">Create new page</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>Pages</strong></div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Published</th>
+                            <th>Title</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for page in pages %}
+                            <tr>
+                                <th scope="row">{{ page.id }}</th>
+                                <td>
+                                    {% if page.published %}
+                                        <span class="badge badge-success">Published</span>
+                                    {% else %}
+                                        <span class="badge badge-light">Unpublished</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ path('admin_page_view', {'slug' : page.slug}) }}">{{ page.title }}</a></td>
+                                <td>{{ page.createdAt | date('Y-m-d') }}</td>
+                                <td>{{ page.updatedAt | date('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ path('admin_page_edit', {'slug' : page.slug}) }}"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('admin_page_delete', {'slug' : page.slug}) }}"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

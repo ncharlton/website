@@ -45,5 +45,4 @@ class AdminNewsType extends AbstractType
                'data_class' => "App\Entity\News"
            ]);
     }
-
 }
