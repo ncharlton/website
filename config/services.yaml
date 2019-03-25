@@ -56,6 +56,18 @@ services:
         arguments:
             $key: '%voobly_key%'
 
+    # Menus
+
+    app.menu_builder:
+        class: App\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory", "@security.token_storage"]
+
+    app.main_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", createMainMenu]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: main }
 
 
     app.admin_user_form:

@@ -9,15 +9,7 @@
     </head>
     <body>
         <div id="app">
-            <a href="{{ path('main_authentication_login') }}">Login</a>
-            <a href="{{ path('main_news_list') }}">News</a>
-            <a href="{{ path('main_clip_list') }}">Clips</a>
-            <a href="{{ path('main_clip_new') }}">New Clip</a>
-            <a href="{{ path('main_video_list') }}">Videos</a>
-            <a href="{{ path('main_event_list') }}">Events</a>
-            {% if app.user %}
-                <a href="{{ path('admin_main_home') }}">Admin</a>
-            {% endif %}
+            {{ knp_menu_render('main') }}
             <hr>
             <hr>
 
