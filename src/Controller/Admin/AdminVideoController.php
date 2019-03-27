@@ -12,6 +12,7 @@ use App\Form\Admin\AdminConfirmType;
 use App\Form\Admin\AdminVideoPlaylistAttachType;
 use App\Form\Admin\AdminVideoType;
 use App\Service\Youtube\YoutubeVideoService;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,12 +30,18 @@ class AdminVideoController extends AbstractController
     /**
      * @Route("/admin/videos", name="admin_video_list")
      */
-    public function listAction() {
-        $videos = $this->getDoctrine()->getRepository('App:Video')
-            ->fetchNewest();
+    public function listAction(Request $request ,PaginatorInterface $paginator) {
+        $query = $this->getDoctrine()->getRepository('App:Video')
+            ->fetchNewest(true);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('admin/video/list.html.twig', [
-            'videos' => $videos
+            'pagination' => $pagination
         ]);
     }
 
