@@ -7,6 +7,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Event;
 use App\Service\Util\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,12 +23,18 @@ class AdminEventController extends AbstractController
     /**
      * @Route("/admin/events", name="admin_event_list")
      */
-    public function listAction() {
-        $events = $this->getDoctrine()->getRepository('App:Event')
-            ->fetchNewest();
+    public function listAction(Request $request, PaginatorInterface $paginator) {
+        $query = $this->getDoctrine()->getRepository('App:Event')
+            ->fetchNewest(true);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('admin/event/list.html.twig', [
-            'events' => $events
+            'pagination' => $pagination
         ]);
     }
 
