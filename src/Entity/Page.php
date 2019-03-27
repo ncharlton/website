@@ -236,4 +236,11 @@ class Page
     {
         $this->publishedAt = $publishedAt;
     }
+
+    /**
+     * @return string
+     */
+    public function getRoute() {
+        return '/page/' . $this->slug;
+    }
 }

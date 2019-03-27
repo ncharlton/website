@@ -6,8 +6,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="block">
-                <a class="btn btn-primary" href="{{ path('admin_page_edit', {'slug' : page.slug}) }}">Edit page</a>
-                <a class="btn btn-primary" href="{{ path('admin_page_delete', {'slug' : page.slug}) }}">Delete page</a>
+                <a class="btn btn-primary" href="{{ path('admin_page_edit', {'slug' : page.slug}) }}">
+                    <i class="fas fa-edit"></i> &nbsp; Edit
+                </a>
+                <a class="btn btn-primary" href="{{ path('admin_page_delete', {'slug' : page.slug}) }}">
+                    <i class="fas fa-trash-alt"></i> &nbsp; Delete
+                </a>
+                <a class="btn btn-outline-primary" href="{{ path('main_page_preview', {'slug' : page.slug}) }}">Preview page</a>
             </div>
         </div>
     </div>

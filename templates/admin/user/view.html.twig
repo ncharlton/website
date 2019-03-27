@@ -1,19 +1,56 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block pageheader %}User - {{ user.username }}{% endblock %}
 
 {% block body %}
-    <b>ID:</b> #{{ user.id }} <br>
-    <b>Twitch ID:</b> {{ user.twitchId }} <br>
-    <b>Status:</b> {{ user.statusWritten }} <br>
-    <b>Username:</b> {{ user.username }} <br>
-    <b>Email:</b> {{ user.email }} <br>
-    <b>Registered:</b> {{ user.createdAt | date('Y-m-d') }}<br>
-    <b>Last Active:</b> {{ user.lastActive |date('Y-m-d') }}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path("admin_user_edit", {"username" : user.username}) }}">
+                    <i class="fas fa-edit"></i> &nbsp; Edit
+                </a>
+                <a class="btn btn-primary" href="{{ path('admin_user_delete', {'username' : user.username}) }}">
+                    <i class="fas fa-trash-alt"></i> &nbsp; Delete
+                </a>
+                {% if not user.blocked %}
+                    <a class="btn btn-outline-primary" href="{{ path('admin_user_block', {'username' : user.username}) }}">
+                        Block
+                    </a>
+                {% else %}
+                    <a class="btn btn-outline-primary" href="{{ path('admin_user_unblock', {'username' : user.username}) }}">
+                        Unblock
+                    </a>
+                {% endif %}
 
-    <a href="{{ path("admin_user_edit", {"username" : user.username}) }}">Edit</a>
-    <a href="{{ path('admin_user_delete', {'username' : user.username}) }}">delete</a>
-    <a href="{{ path('admin_user_block', {'username' : user.username}) }}">block</a>
-    <a href="{{ path('admin_user_unblock', {'username' : user.username}) }}">unblock</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title">
+                    <div class="pull-left">
+                        <strong>User - {{ user.username }}</strong>
+                    </div>
+                </div>
+                <div class="block-body">
+                    <p>
+
+                        <strong>Registered:</strong> {{ user.createdAt | date('d-m-Y') }}
+
+                        <b>ID:</b> #{{ user.id }} <br>
+                        <b>Twitch ID:</b> {{ user.twitchId }} <br>
+                        <b>Status:</b> {{ user.statusWritten }} <br>
+                        <b>Username:</b> {{ user.username }} <br>
+                        <b>Email:</b> {{ user.email }} <br>
+                        <b>Registered:</b> {{ user.createdAt | date('Y-m-d') }}<br>
+                        <b>Last Active:</b> {{ user.lastActive |date('Y-m-d') }}
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}

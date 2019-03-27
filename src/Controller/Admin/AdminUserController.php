@@ -131,7 +131,7 @@ class AdminUserController extends AbstractController
                 sprintf('Successfully blocked %s', $user->getUsername())
             );
 
-            return $this->redirectToRoute('admin_user_list');
+            return $this->redirectToRoute('admin_user_view', ['username' => $user->getUsername()]);
         }
 
         return $this->render('admin/user/block.html.twig', [
@@ -159,10 +159,10 @@ class AdminUserController extends AbstractController
 
             $this->addFlash(
                 'success',
-                sprintf('Successfully blocked %s', $user->getUsername())
+                sprintf('Successfully unblocked %s', $user->getUsername())
             );
 
-            return $this->redirectToRoute('admin_user_list');
+            return $this->redirectToRoute('admin_user_view', ['username' => $user->getUsername()]);
         }
 
         return $this->render('admin/user/unblock.html.twig', [

@@ -19,8 +19,9 @@
                         <thead>
                         <tr>
                             <th>{{ knp_pagination_sortable(pagination, '#', 'page.id') }}</th>
-                            <th>{{ knp_pagination_sortable(pagination, 'Published', 'page.published') }}</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Title', 'page.title') }}</th>
+                            <th>Route</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Published', 'page.published') }}</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Created', 'page.createdAt') }}</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Updated', 'page.updatedAt') }}</th>
                             <th>Actions</th>
@@ -30,6 +31,8 @@
                         {% for page in pagination %}
                             <tr>
                                 <th scope="row">{{ page.id }}</th>
+                                <td><a href="{{ path('admin_page_view', {'slug' : page.slug}) }}">{{ page.title }}</a></td>
+                                <td>{{ page.route }}</a></td>
                                 <td>
                                     {% if page.published %}
                                         <span class="badge badge-success">Published</span>
@@ -37,12 +40,13 @@
                                         <span class="badge badge-light">Unpublished</span>
                                     {% endif %}
                                 </td>
-                                <td><a href="{{ path('admin_page_view', {'slug' : page.slug}) }}">{{ page.title }}</a></td>
+
                                 <td>{{ page.createdAt | date('Y-m-d') }}</td>
                                 <td>{{ page.updatedAt | date('Y-m-d') }}</td>
                                 <td>
                                     <a href="{{ path('admin_page_edit', {'slug' : page.slug}) }}"><i class="fas fa-edit"></i></a>
                                     <a href="{{ path('admin_page_delete', {'slug' : page.slug}) }}"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{ path('main_page_preview', {'slug' : page.slug }) }}">Preview</a>
                                 </td>
                             </tr>
                         {% endfor %}
