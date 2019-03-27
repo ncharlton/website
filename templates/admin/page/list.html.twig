@@ -13,21 +13,21 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="block margin-bottom-sm">
-                <div class="title"><strong>Pages</strong></div>
+                <div class="title"><strong>Pages</strong> ({{ pagination.getTotalItemCount }})</div>
                 <div class="table-responsive">
                     <table class="table table-sm">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Published</th>
-                            <th>Title</th>
-                            <th>Created</th>
-                            <th>Updated</th>
+                            <th>{{ knp_pagination_sortable(pagination, '#', 'page.id') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Published', 'page.published') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Title', 'page.title') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Created', 'page.createdAt') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Updated', 'page.updatedAt') }}</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for page in pages %}
+                        {% for page in pagination %}
                             <tr>
                                 <th scope="row">{{ page.id }}</th>
                                 <td>
@@ -48,6 +48,9 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
                 </div>
             </div>
         </div>

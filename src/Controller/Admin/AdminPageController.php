@@ -8,6 +8,7 @@ namespace App\Controller\Admin;
 use App\Entity\Page;
 use App\Form\Admin\AdminConfirmType;
 use App\Form\Admin\AdminPageType;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,12 +27,18 @@ class AdminPageController extends AbstractController
      *
      * @return Response
      */
-    public function listAction() {
-        $pages = $this->getDoctrine()->getRepository(Page::class)
-            ->findAll();
+    public function listAction(Request $request, PaginatorInterface $paginator) {
+        $query = $this->getDoctrine()->getRepository(Page::class)
+            ->fetchNewest(true);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('admin/page/list.html.twig', [
-            'pages' => $pages
+            'pagination' => $pagination
         ]);
     }
 
