@@ -15,6 +15,22 @@ use Doctrine\ORM\EntityRepository;
 class NewsRepository extends EntityRepository
 {
     /**
+     * @param bool $queryMode
+     * @return \Doctrine\ORM\Query | News[]
+     */
+    public function fetchNewest($queryMode = false) {
+        $query = $this->createQueryBuilder('news')
+            ->orderBy('news.createdAt', 'DESC')
+            ->getQuery();
+
+        if($queryMode) {
+            return $query;
+        } else {
+            return $query->execute();
+        }
+    }
+
+    /**
      * @param string $order
      * @param bool $queryMode
      * @return \Doctrine\ORM\Query | News[]

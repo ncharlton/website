@@ -6,6 +6,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\News;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,13 +21,19 @@ class AdminNewsController extends AbstractController
     /**
      * @Route("/admin/news", name="admin_news_list")
      */
-    public function listAction() {
-        /** @var News[] $news */
-        $news = $this->getDoctrine()->getRepository('App:News')
-            ->findAll();
+    public function listAction(Request $request, PaginatorInterface $paginator) {
+
+        $query = $this->getDoctrine()->getRepository('App:News')
+            ->fetchNewest(true);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('admin/news/list.html.twig', [
-            'newsItems' => $news
+            'pagination' => $pagination,
         ]);
     }
 
