@@ -8,15 +8,33 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Tag;
 use App\Service\Twitch\TwitchStreamService;
 use App\Service\Voobly\VooblyService;
 use App\Service\Youtube\YoutubeVideoService;
+use JMS\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TestController
+class TestController extends AbstractController
 {
+    /**
+     * @Route("/test/tags")
+     *
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    public function tagTest(SerializerInterface $serializer) {
+        $tags = $this->getDoctrine()->getRepository('App:Tag')
+            ->findAll();
+
+        $tags = $serializer->serialize($tags, 'json');
+
+        return new JsonResponse($tags);
+    }
+
     /**
      * @Route("test/voobly")
      * @param VooblyService $voobly

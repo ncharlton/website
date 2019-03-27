@@ -1,0 +1,28 @@
+nav.main-navigation {
+  height: 62px;
+
+  ul {
+    height: 62px;
+
+    li {
+      height: 62px;
+      display: block;
+      float: left;
+      list-style: none;
+      padding: 0 35px;
+      border-left: 1px solid #444;
+      border-right: 1px solid #444;
+
+      a {
+        display: block;
+        height: 62px;
+        line-height: 55px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 18px;
+        text-transform: uppercase;
+        color: #ffffff;
+      }
+    }
+  }
+}

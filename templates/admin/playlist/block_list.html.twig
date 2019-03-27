@@ -4,7 +4,6 @@
             <div class="title"><strong>Playlists</strong></div>
         </div>
         <div class="block-body">
-            {{ dump(playlists) }}
             {% for playlist in playlists %}
                 {{ playlist.title }}
             {% endfor %}

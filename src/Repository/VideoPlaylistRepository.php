@@ -20,7 +20,7 @@ class VideoPlaylistRepository extends EntityRepository
      */
     public function fetchPublishedPlaylists($queryMode = false) {
         $query = $this->createQueryBuilder('video_playlist')
-            ->select('video_playlist, videos')
+            ->select('video_playlist')
             ->innerJoin('video_playlist.videos', 'videos')
             ->andWhere('videos.published = true')
             ->andWhere('video_playlist.published = true')

@@ -51,18 +51,14 @@ class MenuBuilder
         # videos
         $menu->addChild('Videos', ['route' => 'main_video_list']);
 
-        # clips
-        $menu->addChild('Clips', ['route' => 'main_clip_list']);
-
-        # events
-        $menu->addChild('Events', ['route' => 'main_event_list']);
-
         # if logged in
         if($user instanceof User) {
+
             # if admin
-            if($user->isAdmin()) {
+            if($user->isSuperAdmin()) {
+
                 # admin
-                $menu->addChild('Admin', ['route' => 'admin_main_home']);
+                //$menu->addChild('Admin', ['route' => 'admin_main_home']);
             }
             # logout
             $menu->addChild('Logout', ['route' => 'main_logout']);

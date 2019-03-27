@@ -133,7 +133,7 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -141,7 +141,7 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getStatus(): int
+    public function getStatus()
     {
         return $this->status;
     }
@@ -149,7 +149,7 @@ class User implements UserInterface
     /**
      * @param int $status
      */
-    public function setStatus(int $status): void
+    public function setStatus(int $status)
     {
         $this->status = $status;
     }
@@ -157,7 +157,7 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getTwitchId(): int
+    public function getTwitchId()
     {
         return $this->twitchId;
     }
@@ -165,7 +165,7 @@ class User implements UserInterface
     /**
      * @param int $twitchId
      */
-    public function setTwitchId(int $twitchId): void
+    public function setTwitchId(int $twitchId)
     {
         $this->twitchId = $twitchId;
     }
@@ -173,7 +173,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -181,7 +181,7 @@ class User implements UserInterface
     /**
      * @param string $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -189,7 +189,7 @@ class User implements UserInterface
     /**
      * @param string $username
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username)
     {
         $this->username = $username;
     }
@@ -197,7 +197,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getAccessToken(): string
+    public function getAccessToken()
     {
         return $this->accessToken;
     }
@@ -205,7 +205,7 @@ class User implements UserInterface
     /**
      * @param string $accessToken
      */
-    public function setAccessToken(string $accessToken): void
+    public function setAccessToken(string $accessToken)
     {
         $this->accessToken = $accessToken;
     }
@@ -213,7 +213,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRefreshToken(): string
+    public function getRefreshToken()
     {
         return $this->refreshToken;
     }
@@ -221,7 +221,7 @@ class User implements UserInterface
     /**
      * @param string $refreshToken
      */
-    public function setRefreshToken(string $refreshToken): void
+    public function setRefreshToken(string $refreshToken)
     {
         $this->refreshToken = $refreshToken;
     }
@@ -229,7 +229,7 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getTokenExpire(): int
+    public function getTokenExpire()
     {
         return $this->tokenExpire;
     }
@@ -237,7 +237,7 @@ class User implements UserInterface
     /**
      * @param int $tokenExpire
      */
-    public function setTokenExpire(int $tokenExpire): void
+    public function setTokenExpire(int $tokenExpire)
     {
         $this->tokenExpire = $tokenExpire;
     }
@@ -245,7 +245,7 @@ class User implements UserInterface
     /**
      * @return \DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
@@ -253,7 +253,7 @@ class User implements UserInterface
     /**
      * @param \DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -261,7 +261,7 @@ class User implements UserInterface
     /**
      * @return \DateTime
      */
-    public function getLastActive(): \DateTime
+    public function getLastActive()
     {
         return $this->lastActive;
     }
@@ -269,7 +269,7 @@ class User implements UserInterface
     /**
      * @param \DateTime $lastActive
      */
-    public function setLastActive(\DateTime $lastActive): void
+    public function setLastActive(\DateTime $lastActive)
     {
         $this->lastActive = $lastActive;
     }
@@ -277,7 +277,7 @@ class User implements UserInterface
     /**
      * @return ArrayCollection|Clip[]
      */
-    public function getClips(): Collection
+    public function getClips()
     {
         return $this->clips;
     }
@@ -372,7 +372,7 @@ class User implements UserInterface
     }
 
     public function isAdmin() {
-        if(in_array('ROLE_ADMIN', $this->roles)) {
+        if(in_array(array('ROLE_ADMIN', 'ROLE_SUPER_ADMIN'), $this->roles)) {
             return true;
         } else {
             return false;
@@ -380,7 +380,7 @@ class User implements UserInterface
     }
 
     public function isMod() {
-        if(in_array('ROLE_MOD', $this->roles)) {
+        if(in_array(array('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN') , $this->roles)) {
             return true;
         } else {
             return false;

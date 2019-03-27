@@ -8,6 +8,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Class Video
@@ -15,6 +17,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  * @ORM\Table(name="video")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class Video
 {
@@ -22,37 +26,52 @@ class Video
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
+     *
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Expose()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
+     *
+     * @Serializer\Expose()
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Expose()
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     *
+     * @Serializer\Expose()
      */
     private $published;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\YoutubeVideo")
+     *
+     * @Serializer\Expose()
      */
     private $video;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\VideoPlaylist", inversedBy="videos")
+     *
+     * @Serializer\Expose()
      */
     private $playlist;
 
@@ -60,6 +79,8 @@ class Video
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="videos")
      * @ORM\JoinColumn(name="video_tags")
      * @ORM\OrderBy({"tag" = "ASC"})
+     *
+     * @Serializer\Expose()
      */
     private $tags;
 

@@ -8,6 +8,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class VideoPlaylist
@@ -15,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Entity(repositoryClass="App\Repository\VideoPlaylistRepository")
  * @ORM\Table(name="video_playlist")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class VideoPlaylist
 {
@@ -22,38 +25,52 @@ class VideoPlaylist
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Expose()
      */
     private $title;
 
     /**
      * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
+     *
+     * @Serializer\Expose()
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Expose()
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     *
+     * @Serializer\Expose()
      */
     private $published;
 
     /**
      * @Gedmo\SortablePosition()
      * @ORM\Column(type="string", nullable=true)
+     *
+     * @Serializer\Expose()
      */
     private $orderNumber;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="playlists")
+     *
+     * @Serializer\Expose()
      */
     private $event;
 
@@ -63,6 +80,8 @@ class VideoPlaylist
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="playlist")
      * @ORM\OrderBy({"createdAt" = "DESC"})
+     *
+     * @Serializer\Expose()
      */
     private $videos;
 
@@ -70,23 +89,31 @@ class VideoPlaylist
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="playlists")
      * @ORM\JoinTable(name="playlist_tags")
      * @ORM\OrderBy({"tag" = "ASC"})
+     *
+     * @Serializer\Expose()
      */
     private $tags;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Serializer\Expose()
      */
     private $publishedAt;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     *
+     * @Serializer\Expose()
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
+     *
+     * @Serializer\Expose()
      */
     private $updatedAt;
 

@@ -1,16 +1,43 @@
 <template>
     <div>
-        <div v-if="loaded">
-            <div v-for="playlist in playlists">
-                {{ playlist.title }}
-                <video-playlist-preview v-for="video in playlist.videos"
-                    :video="video"
-                    :key="video.id"
-                />
-                <hr>
+        <section class="video-slide" v-if="loaded">
+            <div class="carousel-videos" v-for="playlist in playlists">
+                <div class="slide-title">
+                    {{ playlist.title }}
+                </div>
+
+                <br>
+                <div class="carousel-row">
+                    <div class="carousel-tile" v-for="video in playlist.videos">
+                        <a :href="'/video/' + video.slug">
+                            <img :src="video.video.thumbnails[1].url" class="img-fluid">
+                            <div class="badge badge-duration">{{ video.video.duration | formatDuration }}</div>
+                            <div class="slide-item-title">
+                                <p>{{ video.title }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-        {{ loaded }}
+            <div class="carousel-videos" v-for="playlist in playlists">
+                <div class="slide-title">
+                    {{ playlist.title }}
+                </div>
+
+                <br>
+                <div class="carousel-row">
+                    <div class="carousel-tile" v-for="video in playlist.videos">
+                        <a :href="'/video/' + video.slug">
+                            <img :src="video.video.thumbnails[1].url" class="img-fluid">
+                            <div class="badge badge-duration">{{ video.video.duration | formatDuration }}</div>
+                            <div class="slide-item-title">
+                                <p>{{ video.title }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 

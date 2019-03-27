@@ -1,17 +1,54 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}Playlist - {{ playlist.title }}{% endblock %}
+
 {% block body %}
-    <h1>{{ playlist.title }}</h1>
-    <pre>{{ playlist.description }}</pre>
-    {% if playlist.published %}Published{% else %}Not Published{% endif %}
-    <br>
-    {{ playlist.orderNumber }}
-
-    <hr>
-    {% for video in playlist.videos %}
-        {{ video.title }}
-    {% endfor %}
-
-
-
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title">
+                    <div class="pull-left">
+                        <strong>Details</strong>
+                    </div>
+                </div>
+                <div class="block-body">
+                    <p>
+                        {% if playlist.published %}
+                            <span class="badge badge-success">Published</span>
+                        {% else %}
+                            <span class="badge badge-light">Unpublished</span>
+                        {% endif %}
+                        &nbsp;
+                        <strong>Created:</strong> {{ playlist.createdAt | date('d-m-Y') }}
+                        <strong>Last updated:</strong> {{ playlist.updatedAt | date('d-m-Y') }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title">
+                    <div class="pull-left">
+                        <strong>Videos</strong>
+                    </div>
+                </div>
+                <div class="block-body">
+                    {% for video in playlist.videos %}
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img class="img-fluid" src="{{ video.video.smallThumbnail.url }}">
+                            </div>
+                            <div class="col-sm-9">
+                                <a href="{{ path('admin_video_view', {'slug':video.slug}) }}">{{ video.title }}</a>
+                                <br>
+                                {{ video.video.formattedDuration }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

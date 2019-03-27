@@ -1,9 +1,11 @@
 <template>
     <div>
-        <div v-if="loaded">
-            <a :href="'/video/' + video.slug" >{{ video.title }}</a>
-            <br>
-            <img :src="video.video.thumbnails[1].url">
+        <div v-if="loaded" class="carousel-tile">
+            <a :href="'/video/' + video.slug" >
+                <img :src="video.video.thumbnails[1].url">
+            </a>
+
+
         </div>
     </div>
 </template>
