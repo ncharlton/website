@@ -9,8 +9,28 @@ use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 
+/**
+ * Class UserRepository
+ * @package App\Repository
+ */
 class UserRepository extends EntityRepository
 {
+    /**
+     * @param bool $queryMode
+     * @return \Doctrine\ORM\Query | User[]
+     */
+    public function fetchNewest($queryMode = false) {
+        $query = $this->createQueryBuilder('user')
+            ->orderBy('user.createdAt', 'DESC')
+            ->getQuery();
+
+        if($queryMode) {
+            return $query;
+        } else {
+            return $query->execute();
+        }
+    }
+
     /**
      * @param int $id
      * @return User

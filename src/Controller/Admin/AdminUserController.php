@@ -6,6 +6,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +24,19 @@ class AdminUserController extends AbstractController
     /**
      * @Route("/admin/users", name="admin_user_list")
      */
-    public function listAction() {
+    public function listAction(Request $request, PaginatorInterface $paginator) {
         /** @var User[] $users */
-        $users = $this->getDoctrine()->getRepository('App:User')
-            ->findAll();
+        $query = $this->getDoctrine()->getRepository('App:User')
+            ->fetchNewest(true);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
 
         return $this->render('admin/user/list.html.twig', [
-            'users' => $users
+            'pagination' => $pagination
         ]);
     }
 
