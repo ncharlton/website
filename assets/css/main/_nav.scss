@@ -9,19 +9,32 @@ nav.main-navigation {
       display: block;
       float: left;
       list-style: none;
-      padding: 0 35px;
-      border-left: 1px solid #444;
-      border-right: 1px solid #444;
+      padding: 0 15px;
+
+      @extend %transition-link;
+
+      &:hover {
+        background: $color-orange-main;
+      }
+
+      &.current {
+        background: $color-orange-main;
+      }
 
       a {
         display: block;
         height: 62px;
-        line-height: 55px;
-        font-weight: bold;
+        line-height: 60px;
         text-align: center;
-        font-size: 18px;
+        font-size: 16px;
         text-transform: uppercase;
         color: #ffffff;
+
+        @extend %transition-link;
+
+        &:hover {
+          text-decoration: none;
+        }
       }
     }
   }

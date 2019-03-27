@@ -1,0 +1,14 @@
+.search {
+  float: right;
+  height: 62px;
+  padding: 20px;
+  background: $color-grey-medium;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  i {
+    color: $color-grey-light;
+  }
+}

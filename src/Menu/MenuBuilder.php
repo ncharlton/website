@@ -64,8 +64,7 @@ class MenuBuilder
             $menu->addChild('Logout', ['route' => 'main_logout']);
 
         } else {
-            # login
-            $menu->addChild('Login', ['route' => 'main_authentication_login']);
+
         }
 
 

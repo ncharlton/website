@@ -9,18 +9,7 @@
     </head>
     <body>
         <div id="app">
-            <header>
-                <div class="logo">
-                    <a href="{{ path('main_home') }}">
-                        <img src="{{ asset('img/logo.png') }}">
-                    </a>
-                </div>
-                <div class="navigation">
-                    <nav class="main-navigation">
-                        {{ knp_menu_render('main') }}
-                    </nav>
-                </div>
-            </header>
+            {% include 'component/_header.html.twig' %}
 
             <main class="main">
                 {% block body %}

@@ -5,6 +5,8 @@ import StreamerStatus from './components/app/StreamerStatus'
 import VideoPlaylist from './components/app/VideoPlaylist'
 import VideoViewer from './components/app/VideoViewer'
 
+require('bootstrap/js/src');
+require('@fortawesome/fontawesome-free/css/all.min.css');
 require('../css/app.scss');
 
 /**
