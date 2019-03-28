@@ -39,8 +39,10 @@ class NewsController extends AbstractController
         if(!$news->getPublished()) {
             return new NotFoundHttpException();
         }
-
-        return new Response($news);
+        dump($news->getTags());
+        return $this->render('main/news/view.html.twig', [
+            'news' => $news
+        ]);
     }
 
     /**

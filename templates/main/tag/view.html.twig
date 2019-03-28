@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+News
+<hr>
+{% for news in tag.news %}
+    {{ news.title }}
+{% endfor %}
+<hr>
+Playlists
+    <hr>
+{% for playlist in tag.playlists %}
+    {{ playlist.title }} <br>
+{% endfor %}
+{% endblock %}

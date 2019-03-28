@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<article class="news">
+    <div class="box">
+        <div class="news-cover">
+        </div>
+        <div class="box-inner">
+            <h1>{{ news.title }}</h1>
+
+            <p class="info">
+                <span class="published-at">
+                    {{ news.publishedAt | date('d/m/Y') }}
+                </span>
+            </p>
+
+            <div class="tags">
+                {% for tag in news.tags %}
+                    {% if tag.slug %}
+                    <a class="badge badge-light" href="{{ path('main_tag_view', {'slug' : tag.slug}) }}">
+                        {{ tag.tag }}
+                    </a>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+
+            <hr class="break">
+
+            <div class="content">
+                {{ news.content | raw }}
+            </div>
+
+            <hr class="break">
+        </div>
+
+            {% if news.event %}
+            <div class="event-preview-small bg-grey-lightest">
+                <h3>Event</h3>
+                <h2>{{ news.event.title }}</h2>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="event-cover">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        asdsd
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>
+                            Timeframe: {{ news.event.startAt | date('d/m/Y') }} - {{ news.event.endAt | date('d/m/Y') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        <div class="box-inner">
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="box">
+        <div class="box-inner">
+
+        </div>
+    </div>
+{% endblock %}

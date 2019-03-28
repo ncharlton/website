@@ -1,0 +1,30 @@
+article.news {
+  .news-cover {
+    width: 100%;
+    height: 300px;
+    background: red;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  p {
+    &.info {
+      font-size: 12px;
+
+      span {
+        &.published-at {
+          color: $color-grey-lighter;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .content {
+    margin: 30px 10px;
+    color: $color-grey-light;
+    font-size: 18px;
+  }
+}

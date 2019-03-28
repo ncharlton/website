@@ -91,6 +91,11 @@ class Event
     private $playlists;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\News", mappedBy="event")
+     */
+    private $news;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="events")
      * @ORM\JoinTable(name="event_tags")
      * @ORM\OrderBy({"tag" = "ASC"})
@@ -122,6 +127,7 @@ class Event
     public function __construct()
     {
         $this->playlists = new ArrayCollection();
+        $this->news = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -315,6 +321,14 @@ class Event
     public function getPlaylists()
     {
         return $this->playlists;
+    }
+
+    /**
+     * @return ArrayCollection | News[]
+     */
+    public function getNews()
+    {
+        return $this->news;
     }
 
     /**

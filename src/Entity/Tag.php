@@ -8,6 +8,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -41,6 +42,19 @@ class Tag
     private $tag;
 
     /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Gedmo\Slug(fields={"tag"})
+     *
+     * @Serializer\Expose()
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\News", mappedBy="tags")
+     */
+    private $news;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="tags")
      */
     private $events;
@@ -57,6 +71,7 @@ class Tag
 
     public function __construct()
     {
+        $this->news = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->videos = new ArrayCollection();
         $this->playlists = new ArrayCollection();
@@ -92,6 +107,33 @@ class Tag
     public function setTag($tag)
     {
         $this->tag = $tag;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return ArrayCollection | News[]
+     */
+    public function getNews() {
+        return $this->news;
+    }
+
+    public function addNews(News $news) {
+        if(!$this->news->contains($news)) {
+            $this->events->add($news);
+        }
+    }
+
+    public function removeNews(News $news) {
+        if($this->news->contains($news)) {
+            $this->events->remove($news);
+        }
     }
 
     /**

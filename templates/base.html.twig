@@ -12,8 +12,17 @@
             {% include 'component/_header.html.twig' %}
 
             <main class="main">
-                {% block body %}
-                {% endblock %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            {% block body %}{% endblock %}
+                        </div>
+                        <div class="col-lg-4">
+                            {% block sidebar %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+
             </main>
         </div>
         {% block javascripts %}

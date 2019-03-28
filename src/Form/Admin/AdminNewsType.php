@@ -5,7 +5,10 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\Event;
+use App\Entity\Tag;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -34,6 +37,21 @@ class AdminNewsType extends AbstractType
             ])
             ->add('published', CheckboxType::class, [
                 'required' => false
+            ])
+            ->add('event', EntityType::class, [
+                'class' => Event::class,
+                'multiple' => false,
+                'required' => false,
+                'placeholder' => 'no event',
+                'choice_label' => 'title'
+            ])
+            ->add('tags', EntityType::class, [
+                'class' => Tag::class,
+                'required' => false,
+                'multiple' => true,
+                'expanded' => true,
+                'placeholder' => 'Tags',
+                'choice_label' => 'tag'
             ])
             ->add('content', CKEditorType::class);
     }

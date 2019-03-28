@@ -19,12 +19,14 @@
                         <thead>
                             <tr>
                                 <th>tag</th>
+                                <th>slug</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for tag in tags %}
                                 <tr>
                                     <td>{{ tag.tag }}</td>
+                                    <td>{{ tag.slug }}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
