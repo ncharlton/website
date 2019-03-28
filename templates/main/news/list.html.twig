@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for news in newsItems %}
-        {{ news.title }}<br>
-        {{ news.content | raw }}
-        <hr>
-    {% endfor %}
+    <div class="box">
+        <div class="box-inner">
+            {% for news in newsItems %}
+                <a href="{{ path('main_news_view', {'slug' : news.slug}) }}">{{ news.title }}</a>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,15 +1,39 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-News
-<hr>
-{% for news in tag.news %}
-    {{ news.title }}
-{% endfor %}
-<hr>
-Playlists
-    <hr>
-{% for playlist in tag.playlists %}
-    {{ playlist.title }} <br>
-{% endfor %}
+    <div class="box">
+        <div class="badge badge-light">{{ tag.tag }}</div>
+        <div class="box-inner">
+            <h3>News</h3>
+
+            {% for news in tag.news %}
+                {{ news.title }}
+            {% endfor %}
+        </div>
+        <hr class="break">
+        <div class="box-inner">
+            <h3>Playlists</h3>
+
+            {% for playlist in tag.playlists %}
+                {{ playlist.title }} <br>
+            {% endfor %}
+        </div>
+        <hr class="break">
+        <div class="box-inner">
+            <h3>Videos</h3>
+
+            {% for video in tag.videos %}
+                {{ video.title }} <br>
+            {% endfor %}
+        </div>
+        <hr class="break">
+        <div class="box-inner">
+            <h3>Events</h3>
+
+            {% for event in tag.events %}
+                {{ event.title }} <br>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
