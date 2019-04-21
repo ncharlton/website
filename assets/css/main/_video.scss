@@ -70,11 +70,22 @@ section.video-viewer {
     background: #2d2d2d;
     z-index: 1000;
     transition: all 0.3s ease;
+    color: #ffffff;
+    margin-top: 5px;
+    text-align: center;
+    line-height: 38px;
+    transform: rotate(180deg);
 
     &.active {
       right: 310px;
       background: #2d2d2d;
       transition: all 0.3s ease;
+
+
+      i {
+        transform: rotate(180deg);
+        transition: all 0.5s ease;
+      }
     }
   }
 
@@ -127,7 +138,7 @@ section.video-viewer {
 
 
     & .video-sub-title {
-      margin-bottom: 0px;
+      margin-bottom: 0;
       font-size: 16px;
       text-transform: uppercase;
       color: #c1c1c1;
@@ -176,9 +187,9 @@ section.video-viewer {
 
       }
     }
+
     .next-video:hover {
         background: #383838;
-
     }
   }
 }

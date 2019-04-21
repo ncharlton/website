@@ -7,7 +7,8 @@
             <h3>News</h3>
 
             {% for news in tag.news %}
-                {{ news.title }}
+                <a href="{{ path('main_news_view', { slug : news.slug }) }}">{{ news.title }}</a>
+                <br>
             {% endfor %}
         </div>
         <hr class="break">
@@ -23,7 +24,7 @@
             <h3>Videos</h3>
 
             {% for video in tag.videos %}
-                {{ video.title }} <br>
+                <a href="{{ path('main_video_view', {slug : video.slug}) }}">{{ video.title }}</a> <br>
             {% endfor %}
         </div>
         <hr class="break">
@@ -31,7 +32,8 @@
             <h3>Events</h3>
 
             {% for event in tag.events %}
-                {{ event.title }} <br>
+                <a href="{{ path('main_event_view', {slug : event.slug}) }}"> {{ event.title }}</a>
+                <br>
             {% endfor %}
         </div>
     </div>

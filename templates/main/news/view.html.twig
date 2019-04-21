@@ -37,7 +37,7 @@
             {% if news.event %}
             <div class="event-preview-small bg-grey-lightest">
                 <h3>Event</h3>
-                <h2>{{ news.event.title }}</h2>
+                <h2><a href="{{ path('main_event_view', {slug : news.event.slug}) }}">{{ news.event.title }}</a></h2>
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="event-cover">

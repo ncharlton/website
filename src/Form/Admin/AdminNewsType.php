@@ -53,7 +53,9 @@ class AdminNewsType extends AbstractType
                 'placeholder' => 'Tags',
                 'choice_label' => 'tag'
             ])
-            ->add('content', CKEditorType::class);
+            ->add('content', CKEditorType::class, [
+                'config_name' => 'news'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

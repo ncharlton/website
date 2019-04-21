@@ -36,7 +36,7 @@ class VooblyService
     public function fetchUserByUsername($username) {
         $headers = [];
 
-        $this->fetchUserIdByUsername();
+        $this->fetchUserIdByUsername($username);
 
         $url = $this->api . '/user';
     }

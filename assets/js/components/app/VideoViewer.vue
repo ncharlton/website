@@ -2,6 +2,7 @@
     <div v-if="loaded" class="container-fluid">
         <section class="video-viewer">
             <div id="video-switch" class="video-view-switch active" v-on:click="switchView()">
+                <i class="fas fa-chevron-right"></i>
             </div>
             <div id="video-view" class="video-view active">
                 <iframe class="video-embed-item" :src="'http://youtube.com/embed/' + video.video.youtube_id "></iframe>
@@ -24,7 +25,6 @@
                                 <p class="next-video-title">
                                     {{ nextVideo.title }}
                                 </p>
-
                             </div>
                             <div class="clearfix"></div>
                         </a>
