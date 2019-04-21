@@ -54,7 +54,7 @@ class AdminEventController extends AbstractController
             } else {
                 // file
                 $file = $event->getImage();
-                $uploader->setTargetDirecotry($this->getParameter('file_event_dir'));
+                $uploader->setTargetDirectory($this->getParameter('file_event_dir'));
                 $fileName = $uploader->upload($file);
                 $event->setImage($fileName);
             }
@@ -114,7 +114,7 @@ class AdminEventController extends AbstractController
             } else {
                 // file
                 $file = $event->getImage();
-                $uploader->setTargetDirecotry($this->getParameter('file_event_dir'));
+                $uploader->setTargetDirectory($this->getParameter('file_event_dir'));
                 $fileName = $uploader->upload($file);
                 $event->setImage($fileName);
             }

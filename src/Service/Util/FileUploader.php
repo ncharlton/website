@@ -16,8 +16,12 @@ class FileUploader
 {
     private $targetDirectory;
 
+    /**
+     * @param UploadedFile $file
+     * @return string
+     */
     public function upload(UploadedFile $file) {
-        $fileName = md5(uniqid() . '.' . $file->guessExtension());
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
         try {
             $file->move($this->getTargetDirectory(), $fileName);
@@ -28,7 +32,7 @@ class FileUploader
         return $fileName;
     }
 
-    public function setTargetDirecotry($dir) {
+    public function setTargetDirectory($dir) {
         $this->targetDirectory = $dir;
     }
 

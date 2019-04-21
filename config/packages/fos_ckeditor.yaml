@@ -1,8 +1,12 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
 fos_ck_editor:
     configs:
+
         news:
             toolbar: full
+            smiley_path: /img/icons/
+            smiley_descriptions: ['membDJ', 'membFace', 'membSub']
+            smiley_images: ['membdj.png', 'membface.png', 'membsub.png']
 
 twig:
     form_themes:

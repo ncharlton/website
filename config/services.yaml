@@ -12,6 +12,7 @@ parameters:
     voobly_key: 'a2r4efoeim07t0ub2wryx05wjqodj4hj'
 
     file_event_dir: '%kernel.project_dir%/public/media/events'
+    file_news_dir: '%kernel.project_dir%/public/media/news'
 
 services:
     _defaults:

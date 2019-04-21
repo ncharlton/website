@@ -9,7 +9,12 @@
                 <div class="title"><strong class="d-block">Edit {{ news.title }}</strong></div>
                 <div class="block-body">
                     {{ form_start(form) }}
+                    {% if news.cover %}
+                        <img src="{{ (asset('media/news/') ~ cover) | imagine_filter('thumbnail') }}">
+                    {% endif %}
+                    {{ form_row(form.cover) }}
                     {{ form_widget(form) }}
+
 
                     <button class="btn btn-primary" type="submit">Edit</button>
                     {{ form_end(form) }}

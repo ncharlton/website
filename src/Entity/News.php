@@ -49,6 +49,13 @@ class News
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png"})
+     * @Assert\Image()
+     */
+    private $cover;
+
+    /**
+     * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
@@ -174,6 +181,22 @@ class News
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCover()
+    {
+        return $this->cover;
+    }
+
+    /**
+     * @param mixed $cover
+     */
+    public function setCover($cover)
+    {
+        $this->cover = $cover;
     }
 
     /**
