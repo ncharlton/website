@@ -9,6 +9,10 @@
                 <div class="title"><strong class="d-block">Edit {{ event.title }}</strong></div>
                 <div class="block-body">
                     {{ form_start(form) }}
+                    {% if event.image %}
+                        <img src="{{ (asset('media/events/') ~ image) | imagine_filter('thumbnail') }}">
+                    {% endif %}
+                    {{ form_row(form.image) }}
                     {{ form_widget(form) }}
 
                     <button class="btn btn-primary" type="submit">Edit</button>

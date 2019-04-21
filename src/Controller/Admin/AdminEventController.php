@@ -117,6 +117,7 @@ class AdminEventController extends AbstractController
                 $uploader->setTargetDirectory($this->getParameter('file_event_dir'));
                 $fileName = $uploader->upload($file);
                 $event->setImage($fileName);
+                $storeImage = $event->getImage();
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -133,7 +134,8 @@ class AdminEventController extends AbstractController
 
         return $this->render('admin/event/edit.html.twig', [
             'form' => $form->createView(),
-            'event' => $event
+            'event' => $event,
+            'image' => $storeImage
         ]);
     }
 
