@@ -84,7 +84,7 @@ class News
     private $event;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news", cascade={"persist"})
      * @ORM\JoinColumn(name="news_tags")
      */
     private $tags;

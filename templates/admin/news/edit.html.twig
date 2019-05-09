@@ -8,6 +8,8 @@
             <div class="block">
                 <div class="title"><strong class="d-block">Edit {{ news.title }}</strong></div>
                 <div class="block-body">
+                    {% form_theme form 'admin/form/jquery.collection.html.twig' %}
+
                     {{ form_start(form) }}
                     {% if news.cover %}
                         <img src="{{ (asset('media/news/') ~ cover) | imagine_filter('thumbnail') }}">
@@ -22,4 +24,8 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $('.tags').collection();
+    </script>
 {% endblock %}

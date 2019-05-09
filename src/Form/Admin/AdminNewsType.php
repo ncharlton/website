@@ -11,6 +11,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -50,14 +51,27 @@ class AdminNewsType extends AbstractType
                 'placeholder' => 'no event',
                 'choice_label' => 'title'
             ])
-            ->add('tags', EntityType::class, [
-                'class' => Tag::class,
-                'required' => false,
-                'multiple' => true,
-                'expanded' => true,
-                'placeholder' => 'Tags',
-                'choice_label' => 'tag'
+            ->add('tags', CollectionType::class, [
+                'entry_type' => AdminTagType::class,
+                'entry_options' => [
+                    'label' => 'Tag'
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'label' => 'Enter Tags',
+                'attr' => [
+                    'class' => 'tags'
+                ]
             ])
+//            ->add('tags', EntityType::class, [
+//                'class' => Tag::class,
+//                'required' => false,
+//                'multiple' => true,
+//                'expanded' => true,
+//                'placeholder' => 'Tags',
+//                'choice_label' => 'tag'
+//            ])
             ->add('content', CKEditorType::class, [
                 'config_name' => 'news'
             ]);

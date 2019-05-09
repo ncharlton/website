@@ -27,6 +27,7 @@
         "jquery-validation": "^1.19.0",
         "moment": "^2.24.0",
         "popper.js": "^1.14.7",
+        "symfony-collection": "ninsuo/symfony-collection",
         "vue-tippy": "^2.1.2"
     }
 }
