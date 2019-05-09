@@ -124,7 +124,7 @@ class TwitchAuthenticator extends AbstractGuardAuthenticator
 
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        // TODO: Implement start() method.
+        return new RedirectResponse('/login');
     }
 
 
