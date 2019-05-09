@@ -50,8 +50,6 @@ class AdminNewsController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             /** @var News $news */
             $news = $form->getData();
-            dump($form->getData());
-
 
             if(empty($form['cover']->getData())) {
 
