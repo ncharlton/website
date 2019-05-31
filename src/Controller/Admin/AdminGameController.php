@@ -6,8 +6,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Game;
+use App\Entity\SeoPage;
 use App\Form\Admin\AdminConfirmType;
 use App\Form\Admin\AdminGameType;
+use App\Form\Admin\AdminSeoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +22,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminGameController extends AbstractController
 {
+    /**
+     * @Route("/admin/game/{slug}", name="admin_game_view")
+     * @ParamConverter("game", options={"mapping":{"slug":"slug"}})
+     */
+    public function viewAction(Game $game)
+    {
+        return $this->render('admin/game/view.html.twig', [
+            'game' => $game
+        ]);
+    }
+
     /**
      * List all games
      *
@@ -40,8 +53,8 @@ class AdminGameController extends AbstractController
      * Create new game
      *
      * @Route("/admin/game/new", name="admin_game_new")
-     * @var Request $request
      *
+     * @param Request $request
      * @return Response
      */
     public function newAction(Request $request)
@@ -76,8 +89,9 @@ class AdminGameController extends AbstractController
      *
      * @Route("/admin/game/{slug}/edit", name="admin_game_edit")
      * @ParamConverter("game", options={"mapping": {"slug":"slug"}})
-     * @var Game $game
-     * @var Request $request
+     *
+     * @param Game $game
+     * @param Request $request
      * @return Response
      */
     public function editAction(Game $game, Request $request):Response
@@ -110,8 +124,9 @@ class AdminGameController extends AbstractController
      *
      * @Route("/admin/game/{slug}/delete", name="admin_game_delete")
      * @ParamConverter("game", options={"mapping": {"slug":"slug"}})
-     * @var Game $game
-     * @var Request $request
+     *
+     * @param Game $game
+     * @param Request $request
      * @return Response
      */
     public function deleteAction(Game $game, Request $request)

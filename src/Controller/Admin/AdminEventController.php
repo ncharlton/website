@@ -6,6 +6,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
+use App\Form\Admin\AdminConfirmType;
 use App\Service\Util\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -144,7 +145,7 @@ class AdminEventController extends AbstractController
      * @ParamConverter("event", options={"mapping":{"slug":"slug"}})
      */
     public function deleteAction(Event $event, Request $request) {
-        $form = $this->createForm('App\Form\Admin\AdminConfirmType');
+        $form = $this->createForm(AdminConfirmType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {

@@ -36,17 +36,17 @@
                                 </td>
                                 <td>
                                     {% if user.activeNow %}
-                                        <div class="badge badge-success">
-                                            Online
-                                        </div>
+                                        <div class="badge badge-success">Online</div>
+                                    {% else %}
+                                        <div class="badge badge-danger">Offline</div>
                                     {% endif %}
                                 </td>
 
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.createdAt | date("d/m/Y") }}</td>
                                 <td>
-                                    <a href="{{ path('admin_user_edit', {'username' : user.username}) }}">edit</a>
-                                    <a href="{{ path('admin_user_delete', {'username' : user.username}) }}">delete</a>
+                                    <a href="{{ path('admin_user_edit', {'username' : user.username}) }}"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('admin_user_delete', {'username' : user.username}) }}"><i class="fas fa-trash-alt"></i></a>
                                     <a href="{{ path('admin_user_block', {'username' : user.username}) }}">block</a>
                                     <a href="{{ path('admin_user_unblock', {'username' : user.username}) }}">unblock</a>
                                 </td>

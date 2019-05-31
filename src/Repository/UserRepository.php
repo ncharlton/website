@@ -16,6 +16,18 @@ use Doctrine\ORM\NonUniqueResultException;
 class UserRepository extends EntityRepository
 {
     /**
+     * @param int $limit
+     * @return User[]
+     */
+    public function fetchNewestUsersWithLimit($limit = 10) {
+        return $this->createQueryBuilder('user')
+            ->orderBy('user.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
      * @param bool $queryMode
      * @return \Doctrine\ORM\Query | User[]
      */

@@ -228,5 +228,4 @@ class Game {
     {
         $this->genre = $genre;
     }
-
 }

@@ -1,5 +1,21 @@
 {% extends 'admin/admin_base.html.twig' %}
 
 {% block body %}
-    Admin panel
+    <div class="row">
+        <div class="column-6">
+            <div class="checklist-block block">
+                <div class="title">
+                    <strong>Newest users</strong>
+                </div>
+                <div class="checklist">
+                    {% for user in newUsers %}
+                        <div class="item d-flex align-items-start">
+                            <p><a href="{{ path('admin_user_view', {'username' : user.username}) }}">{{ user.username }}</a></p>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

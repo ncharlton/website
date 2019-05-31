@@ -69,12 +69,18 @@ class Tag
      */
     private $playlists;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Map", mappedBy="tags")
+     */
+    private $maps;
+
     public function __construct()
     {
         $this->news = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->videos = new ArrayCollection();
         $this->playlists = new ArrayCollection();
+        $this->maps = new ArrayCollection();
     }
 
     /**
@@ -211,6 +217,28 @@ class Tag
     public function removePlaylist(VideoPlaylist $playlist) {
         if($this->playlists->contains($playlist)) {
             $this->playlists->remove($playlist);
+        }
+    }
+
+    /**
+     * @return ArrayCollection|Map[]
+     */
+    public function getMaps()
+    {
+        return $this->maps;
+    }
+
+    public function addMap(Map $map)
+    {
+        if(!$this->maps->contains($map)) {
+            $this->maps->add($map);
+        }
+    }
+
+    public function removeMap(Map $map)
+    {
+        if($this->maps->contains($map)) {
+            $this->maps->remove($map);
         }
     }
 }

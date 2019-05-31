@@ -5,6 +5,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,6 +21,11 @@ class AdminMainController extends AbstractController
      */
     public function homeAction()
     {
-        return $this->render('admin/main/home.html.twig');
+        $newUsers = $this->getDoctrine()->getRepository(User::class)
+            ->fetchNewestUsersWithLimit(5);
+
+        return $this->render('admin/main/home.html.twig', [
+            'newUsers' => $newUsers
+        ]);
     }
 }
