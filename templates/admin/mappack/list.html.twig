@@ -1,0 +1,52 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block pageheader %}mappacks{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="block margin-bottom-sm">
+                <div class="title"><strong>mappacks</strong> ({{ pagination.getTotalItemCount }})</div>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th>{{ knp_pagination_sortable(pagination, '#', 'mappack.id') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Title', 'mappack.title') }}</th>
+                            <th>active</th>
+                            <th>created</th>
+                            <th>action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for mappack in pagination %}
+                            <tr>
+                                <th scope="row">{{ mappack.id }}</th>
+                                <td><a href="{{ path('admin_mappack_view', {'slug' : mappack.slug}) }}">{{mappack.title }}</a></td>
+                                <td>
+                                    {% if mappack.published %}
+                                        <div class="badge badge-success">Published</div>
+                                    {% else %}
+                                        <div class="badge badge-light">Unpublished</div>
+                                    {% endif %}
+                                </td>
+
+                                <td>{{ mappack.createdAt | date("d/m/Y") }}</td>
+                                <td>
+                                    <a href="{{ path('admin_mappack_edit', {'slug' : mappack.slug}) }}"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('admin_mappack_delete', {'slug' : mappack.slug}) }}"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

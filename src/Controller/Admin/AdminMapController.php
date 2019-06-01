@@ -54,7 +54,7 @@ class AdminMapController extends AbstractController
                 'Successfully created map'
             );
 
-            $this->redirectToRoute('admin_map_view', ['slug' => $map->getSlug()]);
+            return $this->redirectToRoute('admin_map_view', ['slug' => $map->getSlug()]);
         }
 
         return $this->render('admin/map/new.html.twig', [
@@ -64,7 +64,7 @@ class AdminMapController extends AbstractController
 
     /**
      * @Route("/admin/map/{slug}", name="admin_map_view")
-     * @ParamConverter("map", options={"mapping":{"slug":"slug"}})
+     * @ParamConverter("map", class="App\Entity\Map", options={"mapping":{"slug":"slug"}})
      */
     public function viewAction(Map $map) {
         return $this->render('admin/map/view.html.twig', [
@@ -93,7 +93,7 @@ class AdminMapController extends AbstractController
                 'Successfully created map'
             );
 
-            $this->redirectToRoute('admin_map_view', ['slug' => $map->getSlug()]);
+            return $this->redirectToRoute('admin_map_view', ['slug' => $map->getSlug()]);
         }
 
         return $this->render('admin/map/edit.html.twig', [
@@ -124,7 +124,7 @@ class AdminMapController extends AbstractController
         }
 
         return $this->render('admin/map/delete.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
             'map' => $map,
         ]);
     }

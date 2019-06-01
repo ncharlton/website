@@ -61,19 +61,26 @@ class Map
     private $createdAt;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $published;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="maps", cascade={"persist"})
      * @ORM\JoinColumn(name="news_tags")
      */
     private $tags;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\MapPack", inversedBy="maps")
+     * @ORM\JoinColumn(name="maps_packs")
+     */
+    private $mapPacks;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->mapPacks = new ArrayCollection();
     }
 
     /**
@@ -223,6 +230,25 @@ class Map
     {
         if($this->tags->contains($tag)) {
             $this->tags->remove($tag);
+        }
+    }
+
+    public function getMapPacks()
+    {
+        return $this->mapPacks;
+    }
+
+    public function addMapPack(MapPack $mapPack)
+    {
+        if(!$this->mapPacks->contains($mapPack)) {
+            $this->mapPacks->add($mapPack);
+        }
+    }
+
+    public function removeMapPack(MapPack $mapPack)
+    {
+        if($this->mapPacks->contains($mapPack)) {
+            $this->mapPacks->remove($mapPack);
         }
     }
 }
