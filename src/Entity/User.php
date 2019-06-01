@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user")
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class User implements UserInterface
 {
@@ -25,6 +28,8 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
      *
      * @var int $id
      */
@@ -63,6 +68,8 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=false)
      *
      * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      *
      * @var string $username
      */

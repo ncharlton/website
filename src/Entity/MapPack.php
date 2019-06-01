@@ -54,6 +54,7 @@ class MapPack
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Map", inversedBy="mapPacks")
+     * @ORM\JoinColumn(name="maps_packs")
      */
     private $maps;
 
@@ -164,6 +165,10 @@ class MapPack
     public function getMaps()
     {
         return $this->maps;
+    }
+
+    public function setMaps($maps) {
+        $this->maps = $maps;
     }
 
     public function addMap(Map $map)

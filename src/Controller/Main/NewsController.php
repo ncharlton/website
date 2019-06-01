@@ -37,7 +37,7 @@ class NewsController extends AbstractController
      */
     public function viewAction(News $news) {
         if(!$news->getPublished()) {
-            return new NotFoundHttpException();
+            return $this->redirectToRoute('main_news_list');
         }
 
         return $this->render('main/news/view.html.twig', [

@@ -1,5 +1,37 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+{% block pageheader %}News - {{ news.title }}{% endblock %}
+
 {% block body %}
-    {{ news.title }}
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <a class="btn btn-primary" href="{{ path('admin_news_edit', {'slug' : news.slug}) }}"><i class="fas fa-edit"></i> Edit </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="block">
+                <div class="title">
+                    <strong>News - {{ news.title }}</strong>
+                </div>
+                <div class="block-body">
+                    <img width="25%" class="img-thumbnail" src="{{ asset('media/news/') ~ news.cover }}">
+                    <p>
+                        {% if news.published %}
+                            <span class="badge badge-success">Published</span>
+                        {% else %}
+                            <span class="badge badge-light">Unpublished</span>
+                        {% endif %}
+                        <br>
+                        <strong>Created:</strong> {{ news.createdAt | date('d-m-Y') }}<br>
+                        <strong>Updated:</strong> {{ news.updatedAt | date('d-m-Y') }}<br>
+                        <strong>Author:</strong> {{ news.author.username }}<br>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

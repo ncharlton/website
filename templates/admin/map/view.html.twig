@@ -1,0 +1,11 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block body %}
+    {{ dump(map) }}
+
+    <hr>
+
+    {% for mapPack in map.mapPacks %}
+        {{ dump(mapPack) }}
+    {% endfor %}
+{% endblock %}

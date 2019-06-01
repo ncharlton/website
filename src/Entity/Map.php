@@ -72,8 +72,8 @@ class Map
     private $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\MapPack", inversedBy="maps")
-     * @ORM\JoinColumn(name="maps_packs")
+     * @ORM\ManyToMany(targetEntity="App\Entity\MapPack", mappedBy="maps")
+
      */
     private $mapPacks;
 
@@ -231,6 +231,10 @@ class Map
         if($this->tags->contains($tag)) {
             $this->tags->remove($tag);
         }
+    }
+
+    public function setMapPacks($mapPacks) {
+        $this->mapPacks = $mapPacks;
     }
 
     public function getMapPacks()

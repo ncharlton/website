@@ -16,8 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * Class AdminUserController
  * @package App\Controller\Admin
- *
- * @IsGranted("ROLE_ADMIN", message="Admins only")
  */
 class AdminUserController extends AbstractController
 {
@@ -54,7 +52,7 @@ class AdminUserController extends AbstractController
      * @Route("/admin/user/{username}/edit", name="admin_user_edit")
      * @ParamConverter("user", class="App\Entity\User")
      *
-     * @IsGranted("ROLE_ADMIN")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function editAction(User $user, Request $request) {
         $form = $this->createForm("App\Form\Admin\AdminUserType", $user);
@@ -85,6 +83,8 @@ class AdminUserController extends AbstractController
     /**
      * @Route("/admin/user/{username}/delete", name="admin_user_delete")
      * @ParamConverter("user", class="App\Entity\User")
+     *
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function deleteAction(User $user, Request $request) {
         $form = $this->createForm('App\Form\Admin\AdminConfirmType');

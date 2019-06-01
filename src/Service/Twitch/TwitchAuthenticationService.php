@@ -95,6 +95,4 @@ class TwitchAuthenticationService
             'refreshToken' => $result->body->refresh_token
         );
     }
-
-
 }

@@ -31,7 +31,7 @@ class TwitchUserService
         return array(
             'twitchId' => $result->id,
             'twitchUsername' => $result->display_name,
-            'twitchEmail' => $result->email,
+            'twitchEmail' => (property_exists($result, 'email')) ? $result->email : null,
             'twitchProfileUrl' => $result->profile_image_url,
             'twitchOfflineUrl' => $result->offline_image_url,
         );

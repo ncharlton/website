@@ -48,7 +48,6 @@ class UserService
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
-
     }
 
     public function updateUser() {

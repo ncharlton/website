@@ -2,8 +2,6 @@
 fos_ck_editor:
     jquery: true
     configs:
-        general:
-            toolbar: simple
         news:
             toolbar: full
             smiley_path: /img/icons/
