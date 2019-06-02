@@ -27,6 +27,5 @@ class ApiTwitchController extends AbstractController
         } else {
             return new JsonResponse(false, 200);
         }
-
     }
 }

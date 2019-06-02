@@ -1,7 +1,14 @@
 <template>
     <div>
-        <div v-if="status">Online</div>
-        <div v-if="!status">Offline</div>
+        <div v-if="status != null">
+            <div v-if="status">
+                <strong>Memb is online</strong>
+                <p>{{ stream[0].title }}</p>
+                <p class="badge badge-primary">Viewers: {{ stream[0].viewer_count }}</p>
+            </div>
+            <div v-if="!status">Offline</div>
+        </div>
+
     </div>
 </template>
 
@@ -25,6 +32,7 @@
                     .then((result) => {
                         if(result.data) {
                             this.stream = result.data
+                            console.log(this.stream);
                             this.status = true
                         } else {
                             this.status = false

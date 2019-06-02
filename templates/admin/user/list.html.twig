@@ -45,7 +45,7 @@
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.createdAt | date("d/m/Y") }}</td>
                                 <td>
-                                    {% if user.isAdmin %}
+                                    {% if app.user.isAdmin %}
                                         <a href="{{ path('admin_user_edit', {'username' : user.username}) }}"><i class="fas fa-edit"></i></a>
                                         <a href="{{ path('admin_user_delete', {'username' : user.username}) }}"><i class="fas fa-trash-alt"></i></a>
                                     {% endif %}

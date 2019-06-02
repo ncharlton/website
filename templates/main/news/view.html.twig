@@ -16,7 +16,6 @@
             </p>
 
             <div class="tags">
-
                 {% for tag in news.tags %}
                     {% if tag.slug %}
                     <a class="badge badge-light" href="{{ path('main_tag_view', {'slug' : tag.slug}) }}">

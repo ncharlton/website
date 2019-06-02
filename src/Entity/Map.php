@@ -37,7 +37,7 @@ class Map
     private $slug;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -73,9 +73,14 @@ class Map
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\MapPack", mappedBy="maps")
-
      */
     private $mapPacks;
+
+    /**
+     * @var MapDetail
+     * @ORM\OneToOne(targetEntity="App\Entity\MapDetail")
+     */
+    private $mapDetail;
 
     public function __construct()
     {
@@ -254,5 +259,21 @@ class Map
         if($this->mapPacks->contains($mapPack)) {
             $this->mapPacks->remove($mapPack);
         }
+    }
+
+    /**
+     * @return MapDetail|null
+     */
+    public function getMapDetail(): ?MapDetail
+    {
+        return $this->mapDetail;
+    }
+
+    /**
+     * @param MapDetail $mapDetail
+     */
+    public function setMapDetail(MapDetail $mapDetail): void
+    {
+        $this->mapDetail = $mapDetail;
     }
 }

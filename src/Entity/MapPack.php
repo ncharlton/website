@@ -37,7 +37,7 @@ class MapPack
     private $slug;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -58,9 +58,15 @@ class MapPack
      */
     private $maps;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="mapPack")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->maps = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -181,6 +187,36 @@ class MapPack
     public function removeMap(Map $map) {
         if($this->maps->contains($map)) {
             $this->maps->remove($map);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param mixed $events
+     */
+    public function setEvents($events): void
+    {
+        $this->events = $events;
+    }
+
+    public function addEvent(Event $event)
+    {
+        if(!$this->events->contains($event)) {
+            $this->events->add($event);
+        }
+    }
+
+    public function removeEvent(Event $event)
+    {
+        if($this->events->contains($event)) {
+            $this->events->remove($event);
         }
     }
 }

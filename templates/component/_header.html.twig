@@ -4,11 +4,14 @@
             <img src="{{ asset('img/logo.png') }}">
         </a>
     </div>
-    <div class="login">
-        <a href="{{ path('main_authentication_login') }}">
-            <i class="fab fa-twitch"></i> &nbsp; SIGNUP & LOGIN
-        </a>
-    </div>
+
+    {% if not app.user %}
+        <div class="login">
+            <a href="{{ path('main_authentication_login') }}">
+                <i class="fab fa-twitch"></i> &nbsp; SIGNUP & LOGIN
+            </a>
+        </div>
+    {% endif %}
     <div class="search">
         <i class="fas fa-search"></i>
     </div>

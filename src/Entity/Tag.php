@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,6 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="tag")
  *
  * @Serializer\ExclusionPolicy("all")
+ *
+ * @UniqueEntity(fields={"tag"})
  */
 class Tag
 {

@@ -24,7 +24,7 @@ class TestController extends AbstractController
      * @Route("/test/tags")
      *
      * @param SerializerInterface $serializer
-     * @return JsonResponse
+     * @return Response
      */
     public function tagTest(SerializerInterface $serializer) {
         $tags = $this->getDoctrine()->getRepository('App:Tag')
@@ -32,7 +32,7 @@ class TestController extends AbstractController
 
         $tags = $serializer->serialize($tags, 'json');
 
-        return new JsonResponse($tags);
+        return new Response($tags, 200, array('application/json'));
     }
 
     /**

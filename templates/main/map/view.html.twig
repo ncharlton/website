@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="box">
+        <div class="box-inner">
+            <h1>{{ map.title }}</h1>
+            <p class="info">
+                <span class="published-at">
+                    {{ map.createdAt | date('d/m/Y') }}
+                </span>
+            </p>
+            <hr class="break">
+            <div class="content">
+                {{ map.description | raw }}
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-inner">
+            <h2>Map details</h2>
+            <strong>Start:</strong> {{ map.mapDetail.start }} <br>
+            <strong>Scout:</strong> {{ map.mapDetail.scout }} <br>
+            <strong>Type:</strong> {{ map.mapDetail.type }} <br>
+            <strong>Shore fish:</strong> {{ map.mapDetail.shoreFish }} <br>
+            <strong>Deep fish:</strong> {{ map.mapDetail.deepFish }} <br>
+            <strong>Wood:</strong> {{ map.mapDetail.wood }} <br>
+            <strong>Gold:</strong> {{ map.mapDetail.gold }} <br>
+            <strong>Stone:</strong> {{ map.mapDetail.stone }} <br>
+            <strong>Hunt:</strong> {{ map.mapDetail.hunt }} <br>
+            <strong>Berries:</strong> {{ map.mapDetail.berries }} <br>
+            <strong>Relics:</strong> {{ map.mapDetail.relics }} <br>
+            <strong>Hills:</strong> {{ map.mapDetail.hills }} <br>
+            <strong>Cliffs:</strong> {{ map.mapDetail.cliffs }} <br>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="box">
+        <div class="box-inner">
+            <strong>Featured in following map packs:</strong>
+            <hr>
+            {% for mappack in map.mapPacks %}
+                <a href="{{ path('main_mappack_view', {'slug':mappack.slug}) }}">{{ mappack.title }}</a>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -48,6 +48,9 @@ class MenuBuilder
         # news
         $menu->addChild('News', ['route' => 'main_news_list']);
 
+        # maps
+        $menu->addChild('Maps', ['route' => 'main_map_list']);
+
         # videos
         $menu->addChild('Videos', ['route' => 'main_video_list']);
 
@@ -55,10 +58,10 @@ class MenuBuilder
         if($user instanceof User) {
 
             # if admin
-            if($user->isSuperAdmin()) {
+            if($user->isAdmin()) {
 
                 # admin
-                //$menu->addChild('Admin', ['route' => 'admin_main_home']);
+                $menu->addChild('Admin', ['route' => 'admin_main_home']);
             }
             # logout
             $menu->addChild('Logout', ['route' => 'main_logout']);

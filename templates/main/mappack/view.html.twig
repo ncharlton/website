@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="box">
+        <div class="box-inner">
+            <h1>{{ mappack.title }}</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-inner">
+            <h2>Featured Maps</h2>
+            {% for map in mappack.maps %}
+                <a href="{{ path('main_map_view', {'slug':map.slug}) }}">{{ map.title }}</a>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

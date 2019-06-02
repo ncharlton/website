@@ -103,6 +103,13 @@ class Event
     private $tags;
 
     /**
+     * @var MapPack
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\MapPack", inversedBy="events")
+     */
+    private $mapPack;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $startAt;
@@ -423,5 +430,21 @@ class Event
     public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return MapPack|null
+     */
+    public function getMapPack(): ?MapPack
+    {
+        return $this->mapPack;
+    }
+
+    /**
+     * @param MapPack $mapPack
+     */
+    public function setMapPack(MapPack $mapPack): void
+    {
+        $this->mapPack = $mapPack;
     }
 }

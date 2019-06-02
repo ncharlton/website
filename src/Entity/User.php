@@ -370,7 +370,8 @@ class User implements UserInterface
         }
     }
 
-    public function isSuperAdmin() {
+    public function isSuperAdmin()
+    {
         if(in_array('ROLE_SUPER_ADMIN', $this->roles)) {
             return true;
         } else {
@@ -378,15 +379,17 @@ class User implements UserInterface
         }
     }
 
-    public function isAdmin() {
-        if(in_array(array('ROLE_ADMIN', 'ROLE_SUPER_ADMIN'), $this->roles)) {
+    public function isAdmin()
+    {
+        if(in_array('ROLE_ADMIN', $this->roles) || in_array('ROLE_SUPER_ADMIN', $this->roles)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function isMod() {
+    public function isMod()
+    {
         if(in_array(array('ROLE_MOD', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN') , $this->roles)) {
             return true;
         } else {
@@ -394,7 +397,8 @@ class User implements UserInterface
         }
     }
 
-    public function role() {
+    public function role()
+    {
         if(in_array('ROLE_SUPER_ADMIN', $this->roles)) {
             return 'Super admin';
         }

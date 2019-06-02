@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Memb Admin - {% block title %}{% endblock %}</title>
+
     {% block stylesheets %}
         {{ encore_entry_link_tags('admin') }}
     {% endblock %}
@@ -54,17 +55,33 @@
             <li><a href="{{ path('admin_main_home') }}"> <i class="fas fa-tachometer-alt"></i> &nbsp; Dashboard</a></li>
             <li><a href="{{ path('admin_user_list') }}"> <i class="fas fa-users"></i> &nbsp; Users </a> </li>
             <li><a href="{{ path('admin_page_list') }}"> <i class="fas fa-file-alt"></i> &nbsp; Pages </a> </li>
-            <li><a href="{{ path('admin_game_list') }}"> <i class="fas fa-dice-five"></i> &nbsp; Games</a>  </li>
+
             <li><a href="{{ path('admin_news_list') }}"> <i class="fas fa-newspaper"></i> &nbsp; News</a> </li>
-            <li><a href="{{ path('admin_clip_list') }}"> <i class="fas fa-video"></i> &nbsp; Clips</a> </li>
+
             <li><a href="{{ path('admin_event_list') }}"> <i class="fas fa-calendar-week"></i> &nbsp; Events</a> </li>
-            <li><a href="{{ path('admin_video_list') }}"> <i class="fab fa-youtube"></i> &nbsp; Videos</a> </li>
-            <li><a href="{{ path('admin_playlist_list') }}"> <i class="fas fa-video"></i> &nbsp; Playlists</a> </li>
-            <li><a href="{{ path('admin_tag_list') }}"> <i class="fas fa-tags"></i> &nbsp; Tags</a> </li>
-            <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fas fa-map"></i> &nbsp; Maps </a>
-                <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                    <li><a href="{{ path('admin_map_list') }}">Maps</a></li>
-                    <li><a href="{{ path('admin_mappack_list') }}">Map Packs</a></li>
+
+
+
+            <li>
+                <a href="#mapDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fas fa-map"></i> &nbsp; Maps </a>
+                <ul id="mapDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ path('admin_map_list') }}"><i class="fas fa-map"></i> &nbsp;Maps</a></li>
+                    <li><a href="{{ path('admin_mappack_list') }}"><i class="fas fa-map"></i> &nbsp;Map Packs</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#videoDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fab fa-youtube"></i> &nbsp; Videos </a>
+                <ul id="videoDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ path('admin_clip_list') }}"> <i class="fas fa-video"></i> &nbsp; Clips</a> </li>
+                    <li><a href="{{ path('admin_video_list') }}"> <i class="fab fa-youtube"></i> &nbsp; Videos</a> </li>
+                    <li><a href="{{ path('admin_playlist_list') }}"> <i class="fas fa-video"></i> &nbsp; Playlists</a> </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#taxomonyDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fas fa-tags"></i> &nbsp; Taxomonies </a>
+                <ul id="taxomonyDropdown" class="collapse list-unstyled ">
+                    <li><a href="{{ path('admin_game_list') }}"> <i class="fas fa-dice-five"></i> &nbsp; Games</a>  </li>
+                    <li><a href="{{ path('admin_tag_list') }}"> <i class="fas fa-tags"></i> &nbsp; Tags</a> </li>
                 </ul>
             </li>
         </ul>
@@ -93,6 +110,7 @@
                 {% block body %}{% endblock %}
             </div>
         </section>
+    </div>
 </div>
 
 {% block javascripts %}

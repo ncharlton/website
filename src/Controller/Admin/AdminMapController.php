@@ -6,12 +6,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Map;
+use App\Entity\MapDetail;
 use App\Form\Admin\AdminConfirmType;
+use App\Form\Admin\AdminMapDetailType;
 use App\Form\Admin\AdminMapType;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminMapController extends AbstractController
@@ -126,6 +129,57 @@ class AdminMapController extends AbstractController
         return $this->render('admin/map/delete.html.twig', [
             'form' => $form->createView(),
             'map' => $map,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/map/{slug}/details/edit", name="admin_map_details_edit")
+     * @ParamConverter("map", class="App\Entity\Map", options={"mapping":{"slug":"slug"}})
+     *
+     * @param Request $request
+     * @param Map $map
+     * @return Response
+     */
+    public function newMapDetailAction(Request $request, Map $map)
+    {
+        $createMode = false;
+        if(!is_null($map->getMapDetail()) && $map->getMapDetail() instanceof MapDetail) {
+            // edit map detail
+            $form = $this->createForm(AdminMapDetailType::class, $map->getMapDetail());
+        } else {
+            // create new map detail
+            $form = $this->createForm(AdminMapDetailType::class);
+            $createMode = true;
+        }
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var MapDetail $mapDetail */
+            $mapDetail = $form->getData();
+
+            if($createMode) {
+                $map->setMapDetail($mapDetail);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($mapDetail);
+
+            if($createMode) {
+                $em->persist($map);
+            }
+
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Successfully edited map details'
+            );
+        }
+
+        return $this->render('admin/map/detail_edit.html.twig', [
+            'form' => $form->createView(),
+            'map' => $map
         ]);
     }
 }
