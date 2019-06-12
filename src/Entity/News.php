@@ -61,10 +61,17 @@ class News
     private $slug;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      * @Assert\NotNull()
      */
     private $published;
+
+    /**
+     * @var bool|null
+     *
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $highlight;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="news")
@@ -229,6 +236,22 @@ class News
     public function setPublished($published): void
     {
         $this->published = $published;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHighlight(): ?bool
+    {
+        return $this->highlight;
+    }
+
+    /**
+     * @param bool|null $highlight
+     */
+    public function setHighlight(?bool $highlight): void
+    {
+        $this->highlight = $highlight;
     }
 
     /**

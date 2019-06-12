@@ -51,6 +51,9 @@ class MenuBuilder
         # maps
         $menu->addChild('Maps', ['route' => 'main_map_list']);
 
+        # events
+        $menu->addChild('Events', ['route' => 'main_event_list']);
+
         # videos
         $menu->addChild('Videos', ['route' => 'main_video_list']);
 

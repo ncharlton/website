@@ -30,7 +30,7 @@
                         {% for playlist in playlists %}
                             <tr>
                                 <th scope="row">{{playlist.id }}</th>
-                                <td></td>
+                                <td>{{ playlist.orderNumber }}</td>
                                 <td><a href="{{ path('admin_playlist_view', {'slug': playlist.slug}) }}">{{ playlist.title }}</a></td>
                                 <td></td>
                                 <td>{{ playlist.published }}</td>

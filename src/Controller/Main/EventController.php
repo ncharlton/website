@@ -8,6 +8,7 @@ namespace App\Controller\Main;
 use App\Entity\Event;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -33,6 +34,10 @@ class EventController extends AbstractController
      * @ParamConverter("event", options={"mapping":{"slug":"slug"}})
      */
     public function viewAction(Event $event) {
+        if(!$event->getPublished()) {
+            throw new NotFoundHttpException();
+        }
+
         return $this->render('main/event/view.html.twig', [
             'event' => $event
         ]);

@@ -8,13 +8,17 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Class Map
  * @package App\Entity
  * @ORM\Entity(repositoryClass="App\Repository\MapRepository")
  * @ORM\Table(name="map")
+ * @Vich\Uploadable()
  */
 class Map
 {
@@ -46,8 +50,55 @@ class Map
      */
     private $download;
 
-    // TODO
-    private $image;
+    /**
+     * @Vich\UploadableField(
+     *     mapping="map_image",
+     *     fileNameProperty="imageName",
+     *     size="imageSize"
+     * )
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var integer
+     */
+    private $imageSize;
+
+    /**
+     * @Vich\UploadableField(
+     *     mapping="map_download",
+     *     fileNameProperty="downloadName",
+     *     size="downloadSize"
+     * )
+     *
+     * @var File
+     */
+    private $downloadFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $downloadName;
+
+    /**
+     * @ORM\Column(type="integer")
+     *
+     * @var integer
+     */
+    private $downloadSize;
 
     /**
      * @ORM\Column(type="json_array", nullable=true)
@@ -59,6 +110,14 @@ class Map
      * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -81,6 +140,12 @@ class Map
      * @ORM\OneToOne(targetEntity="App\Entity\MapDetail")
      */
     private $mapDetail;
+
+    /**
+     * @var Game|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="maps")
+     */
+    private $game;
 
     public function __construct()
     {
@@ -142,6 +207,80 @@ class Map
     public function setDescription($description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @param File|UploadedFile $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if(null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    /**
+     * @param File|UploadedFile $downloadFile
+     */
+    public function setDownloadFile(?File $downloadFile = null): void
+    {
+        $this->downloadFile = $downloadFile;
+
+        if(null !== $downloadFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getDownloadFile(): ?File
+    {
+        return $this->downloadFile;
+    }
+
+    public function getDownloadName(): ?string
+    {
+        return $this->downloadName;
+    }
+
+    public function setDownloadName(?string $downloadName): void
+    {
+        $this->downloadName = $downloadName;
+    }
+
+    public function getDownloadSize(): ?int
+    {
+        return $this->downloadSize;
+    }
+
+    public function setDownloadSize(?int $downloadSize): void
+    {
+        $this->downloadSize = $downloadSize;
     }
 
     /**
@@ -275,5 +414,21 @@ class Map
     public function setMapDetail(MapDetail $mapDetail): void
     {
         $this->mapDetail = $mapDetail;
+    }
+
+    /**
+     * @return Game|null
+     */
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param Game|null $game
+     */
+    public function setGame(?Game $game): void
+    {
+        $this->game = $game;
     }
 }

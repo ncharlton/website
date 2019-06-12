@@ -44,6 +44,9 @@ class AdminNewsType extends AbstractType
             ->add('published', CheckboxType::class, [
                 'required' => false
             ])
+            ->add('highlight', CheckboxType::class, [
+                'required' => false
+            ])
             ->add('event', EntityType::class, [
                 'class' => Event::class,
                 'multiple' => false,

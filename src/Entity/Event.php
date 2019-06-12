@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+    const EVENT_TYPES = ['tournament', 'community', 'meetup', 'general'];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")

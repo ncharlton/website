@@ -6,6 +6,7 @@
 namespace App\Controller\Main;
 
 use App\Entity\Video;
+use App\Entity\VideoPlaylist;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -23,8 +24,8 @@ class VideoController extends AbstractController
      * @Route("/videos", name="main_video_list")
      */
     public function listAction(SerializerInterface $serializer) {
-        $playlists = $this->getDoctrine()->getRepository('App:VideoPlaylist')
-            ->fetchPublishedPlaylists();
+        $playlists = $this->getDoctrine()->getRepository(VideoPlaylist::class)
+            ->fetchPublishedPlaylistsOrderByPosition();
 
         $playlists = $serializer->serialize($playlists, 'json');
 

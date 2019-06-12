@@ -69,6 +69,7 @@ class VideoPlaylist
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="playlists")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      *
      * @Serializer\Expose()
      */

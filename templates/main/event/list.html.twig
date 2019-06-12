@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for event in events %}
-        <a href="{{ path('main_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a>
+    <div class="box">
+        <div class="box-inner">
+            <h1>Events</h1>
 
-        <br>
-        {{ event.description | raw }}
-        <br>
-    {% endfor %}
+            {% for event in events %}
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="event-cover">
+                            <img src="{{ (asset('media/events/') ~ event.image) | imagine_filter('event_thumb') }}">
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <a href="{{ path('main_event_view', {'slug' : event.slug}) }}">{{ event.title }}</a>
+                    </div>
+                </div>
+
+
+
+                <br>
+                {{ event.description | raw }}
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

@@ -24,8 +24,8 @@ class AdminVideoPlaylistController extends AbstractController
      */
     public function listAction() {
         /** @var VideoPlaylist[] $playlists */
-        $playlists = $this->getDoctrine()->getRepository('App:VideoPlaylist')
-            ->findAll();
+        $playlists = $this->getDoctrine()->getRepository(VideoPlaylist::class)
+            ->fetchOrderByPosition();
 
         return $this->render('admin/playlist/list.html.twig', [
             'playlists' => $playlists
