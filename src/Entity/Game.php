@@ -7,12 +7,15 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
  * @ORM\Table(name="game")
  * @package App\Entity
+ *
+ * @Serializer\ExclusionPolicy("all")
  */
 class Game {
     /**
@@ -20,12 +23,16 @@ class Game {
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      *
+     * @Serializer\Expose()
+     *
      * @var int $id;
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", nullable=false)
+     *
+     * @Serializer\Expose()
      */
     private $name;
 
