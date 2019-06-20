@@ -32,6 +32,7 @@ class Tag
      * @ORM\Column(type="integer")
      *
      * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $id;
 
@@ -41,6 +42,7 @@ class Tag
      * @Assert\Length(min="2", max="50")
      *
      * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $tag;
 
@@ -49,6 +51,7 @@ class Tag
      * @Gedmo\Slug(fields={"tag"})
      *
      * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $slug;
 

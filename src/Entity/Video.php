@@ -17,8 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  *
  * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  * @ORM\Table(name="video")
- *
- * @Serializer\ExclusionPolicy("all")
  */
 class Video
 {
@@ -27,15 +25,14 @@ class Video
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      *
-     * @Serializer\Expose()
-     *
+     * @Serializer\Groups({"video"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $title;
 
@@ -43,35 +40,35 @@ class Video
      * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $published;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\YoutubeVideo")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $video;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\VideoPlaylist", inversedBy="videos")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $playlist;
 
@@ -80,13 +77,15 @@ class Video
      * @ORM\JoinColumn(name="video_tags")
      * @ORM\OrderBy({"tag" = "ASC"})
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $tags;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $createdAt;
 

@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,6 +26,8 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $id;
 
@@ -50,6 +53,8 @@ class Event
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $title;
 
@@ -57,22 +62,30 @@ class Event
      * @ORM\Column(type="string", nullable=true)
      * @Assert\File(mimeTypes={"image/jpeg", "image/jpg", "image/png"})
      * @Assert\Image()
+     *
+     * @Serializer\Groups({"video"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
+     *
+     * @Serializer\Groups({"video"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $snippet;
 
@@ -84,6 +97,8 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="events")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $game;
 
@@ -108,22 +123,30 @@ class Event
      * @var MapPack
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\MapPack", inversedBy="events")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $mapPack;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Serializer\Groups({"video"})
      */
     private $startAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     *
+     * @Serializer\Groups({"video"})
      */
     private $endAt;
 
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $createdAt;
 

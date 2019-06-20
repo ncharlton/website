@@ -7,12 +7,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class MapDetail
  * @package App\Entity
  * @ORM\Entity
  * @ORM\Table(name="map_detail")
+ *
  */
 class MapDetail
 {
@@ -37,84 +39,98 @@ class MapDetail
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"list"})
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $start;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $scout;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $type;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $shoreFish;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $deepFish;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $wood;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $gold;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $stone;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $hunt;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $berries;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $relics;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $hills;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $cliffs;
 
@@ -122,6 +138,7 @@ class MapDetail
      * @var \DateTime
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     * @Serializer\Groups({"list"})
      */
     private $createdAt;
 

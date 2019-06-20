@@ -1,0 +1,6 @@
+{# published = bool #}
+{% if published is defined and published %}
+    <div class="badge badge-success">Published</div>
+{% else %}
+    <div class="badge badge-light">Unpublished</div>
+{% endif %}

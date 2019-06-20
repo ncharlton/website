@@ -13,5 +13,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class MapRepository extends EntityRepository
 {
+    public function filter(array $load) {
+        $q = $this->createQueryBuilder('map')
+            ->innerJoin('map.mapDetail', 'mapDetail');
 
+        if($load['start'] !== '') {
+            $q->andWhere("mapDetail.start = :start");
+            $q->setParameter('start', $load['start']);
+        }
+
+        if($load['scout'] !== '') {
+            $q->andWhere("mapDetail.scout = :scout");
+            $q->setParameter('scout', $load['scout']);
+        }
+
+        if($load['orderBy'] == 'title') {
+            $q->orderBy('map.title', strtoupper($load['orderDirection']));
+        }
+
+        if($load['orderBy'] == 'created') {
+            $q->orderBy('map.createdAt', strtoupper($load['orderDirection']));
+        }
+
+        return $q->getQuery()->execute();
+    }
 }

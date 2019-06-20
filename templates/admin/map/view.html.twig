@@ -1,25 +1,100 @@
 {% extends 'admin/admin_base.html.twig' %}
 
 {% block body %}
-
     <div class="row">
         <div class="col-lg-12">
             <div class="block">
                 <div class="block-body">
                     <a class="btn btn-primary" href="{{ path('admin_map_edit', {'slug':map.slug}) }}"><i class="fas fa-edit"></i> Edit</a>
                     <a class="btn btn-primary" href="{{ path('admin_map_details_edit', {'slug':map.slug}) }}"><i class="fas fa-edit"></i> Edit Details</a>
+                    <a class="btn btn-primary" href="{{ path('admin_map_delete', {'slug':map.slug}) }}"><i class="fas fa-trash-alt"></i> Delete</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="block">
+                <div class="block-title">
+                    <h2>{{ map.title }}</h2>
+                    {% include 'component/_published.html.twig' with {'published' : map.published} %}
+                    <hr>
+                    <p>
+                        <strong>Created:</strong> {{ map.createdAt | date('d/m/Y') }} |
+                        <strong>Updated:</strong> {{ map.updatedAt | date('d/m/Y') }}
+                    </p>
+                </div>
+                <div class="block-body">
+                    {{ map.description | raw }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="block">
+                <div class="block-body">
+                    {% if map.imageName %}
+                        <img class="img-fluid" src="{{ vich_uploader_asset(map, 'imageFile') | imagine_filter('map') }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="block">
+                <div class="block-title">
+                    <h3>More</h3>
+                </div>
+                <div class="block-body">
 
-    {{ dump(map) }}
-
-    <hr>
-
-    {{ dump(map.mapDetail) }}
-
-    {% for mapPack in map.mapPacks %}
-        {{ dump(mapPack) }}
-    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="block">
+                <div class="block-title">
+                    <h3>Map details:</h3>
+                </div>
+                <div class="block-body">
+                    {% if map.mapDetail %}
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <ul>
+                                    <li><strong>Start: </strong> {{ map.mapDetail.start }}</li>
+                                    <li><strong>Type: </strong> {{ map.mapDetail.type }}</li>
+                                    <li><strong>Scout: </strong> {{ map.mapDetail.scout }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul>
+                                    <li><strong>Hills: </strong> {{ map.mapDetail.hills }}</li>
+                                    <li><strong>Cliffs: </strong> {{ map.mapDetail.cliffs }}</li>
+                                    <li><strong>Relics: </strong> {{ map.mapDetail.relics }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul>
+                                    <li><strong>Stone: </strong> {{ map.mapDetail.stone }}</li>
+                                    <li><strong>Gold: </strong> {{ map.mapDetail.gold }}</li>
+                                    <li><strong>Food: </strong> {{ map.mapDetail.hunt }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="block">
+                <div class="block-title">
+                    <h3>Map packs</h3>
+                </div>
+                <div class="block-body">
+                    {% for mapPack in map.mapPacks %}
+                        <a href="{{ path('admin_mappack_view', {'slug' : mapPack.slug}) }}">{{ mapPack.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

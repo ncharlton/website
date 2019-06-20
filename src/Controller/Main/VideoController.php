@@ -27,7 +27,8 @@ class VideoController extends AbstractController
         $playlists = $this->getDoctrine()->getRepository(VideoPlaylist::class)
             ->fetchPublishedPlaylistsOrderByPosition();
 
-        $playlists = $serializer->serialize($playlists, 'json');
+        $playlists = $serializer->serialize($playlists, 'json', SerializationContext::create()->setGroups(['video']));
+
 
         return $this->render('main/playlist/list.html.twig', [
             'playlists' => $playlists
@@ -39,7 +40,7 @@ class VideoController extends AbstractController
      * @ParamConverter("video", options={"mapping": {"slug":"slug"}})
      */
     public function viewAction(Video $video, SerializerInterface $serializer) {
-        $videoJson = $serializer->serialize($video, 'json');
+        $videoJson = $serializer->serialize($video, 'json', SerializationContext::create()->setGroups(['video']));
 
         return $this->render('main/video/view.html.twig', [
             'video' => $video,

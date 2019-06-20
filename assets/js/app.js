@@ -4,10 +4,13 @@ import Moment from 'moment'
 import StreamerStatus from './components/app/StreamerStatus'
 import VideoPlaylist from './components/app/VideoPlaylist'
 import VideoViewer from './components/app/VideoViewer'
+import MapFilter from './components/app/MapFilter'
+import { VueSpinners } from '@saeris/vue-spinners'
 
 require('bootstrap/js/src');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('../css/app.scss');
+
 
 /**
  * Vue filters
@@ -22,16 +25,18 @@ Vue.filter('formatDuration', function (value) {
        } else {
            return duration.minutes() + ':' + duration.seconds();
        }
-
    }
 });
+
+Vue.use(VueSpinners);
 
 new Vue({
     el: '#app',
     components: {
         StreamerStatus,
         VideoPlaylist,
-        VideoViewer
+        VideoViewer,
+        MapFilter
     },
     data() {
         return {

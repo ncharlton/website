@@ -8,6 +8,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class YoutubeVideo
@@ -21,46 +22,64 @@ class YoutubeVideo
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $youtubeId;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $etag;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $publishedAt;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $channelId;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $channelTitle;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $description;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\VideoThumbnail", mappedBy="video", cascade={"persist"})
+     *
+     * @Serializer\Groups({"video"})
      */
     private $thumbnails;
 
@@ -69,41 +88,56 @@ class YoutubeVideo
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $duration;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $definition;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $embeddable;
 
     /**
      * @ORM\Column(type="bigint")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $viewCount;
 
     /**
      * @ORM\Column(type="bigint")
+     * @Serializer\Groups({"video"})
      */
     private $likeCount;
 
     /**
      * @ORM\Column(type="bigint")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $dislikeCount;
 
     /**
      * @ORM\Column(type="bigint")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $commentCount;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $embedHtml;
 

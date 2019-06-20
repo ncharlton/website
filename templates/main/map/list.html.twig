@@ -3,10 +3,7 @@
 {% block body %}
     <div class="box">
         <div class="box-inner">
-            {% for map in maps %}
-                <a href="{{ path('main_map_view', {'slug':map.slug}) }}">{{ map.title }}</a>
-                <hr>
-            {% endfor %}
+            <map-filter></map-filter>
         </div>
     </div>
 {% endblock %}

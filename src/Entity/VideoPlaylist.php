@@ -16,8 +16,6 @@ use JMS\Serializer\Annotation as Serializer;
  *
  * @ORM\Entity(repositoryClass="App\Repository\VideoPlaylistRepository")
  * @ORM\Table(name="video_playlist")
- *
- * @Serializer\ExclusionPolicy("all")
  */
 class VideoPlaylist
 {
@@ -26,14 +24,14 @@ class VideoPlaylist
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $title;
 
@@ -41,21 +39,21 @@ class VideoPlaylist
      * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $published;
 
@@ -63,7 +61,7 @@ class VideoPlaylist
      * @Gedmo\SortablePosition()
      * @ORM\Column(type="string", nullable=true)
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $orderNumber;
 
@@ -71,7 +69,7 @@ class VideoPlaylist
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="playlists")
      * @ORM\JoinColumn(onDelete="SET NULL")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $event;
 
@@ -82,7 +80,7 @@ class VideoPlaylist
      * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="playlist")
      * @ORM\OrderBy({"createdAt" = "DESC"})
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $videos;
 
@@ -91,14 +89,14 @@ class VideoPlaylist
      * @ORM\JoinTable(name="playlist_tags")
      * @ORM\OrderBy({"tag" = "ASC"})
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $tags;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $publishedAt;
 
@@ -106,7 +104,7 @@ class VideoPlaylist
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $createdAt;
 
@@ -114,7 +112,7 @@ class VideoPlaylist
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
      *
-     * @Serializer\Expose()
+     * @Serializer\Groups({"video"})
      */
     private $updatedAt;
 

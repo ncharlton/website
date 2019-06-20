@@ -6,6 +6,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class VideoThumbnail
@@ -19,6 +20,8 @@ class VideoThumbnail
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $id;
 
@@ -29,21 +32,29 @@ class VideoThumbnail
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $url;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $width;
 
     /**
      * @ORM\Column(type="string")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $height;
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"video"})
      */
     private $orderNumber;
 

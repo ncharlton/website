@@ -6,6 +6,8 @@
 namespace App\Controller\Main;
 
 use App\Entity\Map;
+use JMS\Serializer\SerializationContext;
+use JMS\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +25,12 @@ class MapController extends AbstractController
      *
      * @return Response
      */
-    public function listAction(): Response
+    public function listAction(SerializerInterface $serializer): Response
     {
         $maps = $this->getDoctrine()->getRepository(Map::class)
             ->findAll();
+
+        $maps = $serializer->serialize($maps, 'json', SerializationContext::create()->setGroups(['list']));
 
         return $this->render('main/map/list.html.twig', [
             'maps' => $maps,

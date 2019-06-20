@@ -20,7 +20,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\MapRepository")
  * @ORM\Table(name="map")
  * @Vich\Uploadable()
- * @Serializer\ExclusionPolicy("all")
  */
 class Map
 {
@@ -28,29 +27,28 @@ class Map
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"list", "video"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     * @Serializer\Groups({"list"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string")
      * @Gedmo\Slug(fields={"title"})
+     * @Serializer\Groups({"list"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Serializer\Groups({"list"})
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $download;
 
     /**
      * @Vich\UploadableField(
@@ -64,14 +62,15 @@ class Map
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Serializer\Groups({"list"})
      * @var string
      */
     private $imageName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
+     * @Serializer\Groups({"list"})
      *
      * @var integer
      */
@@ -89,14 +88,14 @@ class Map
     private $downloadFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
     private $downloadName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      *
      * @var integer
      */
@@ -110,6 +109,7 @@ class Map
     /**
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
+     * @Serializer\Groups({"list"})
      */
     private $createdAt;
 
@@ -117,7 +117,7 @@ class Map
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
      *
-     * @var \DateTime
+     * @var \DateTime|\DateTimeImmutable
      */
     private $updatedAt;
 
@@ -139,7 +139,8 @@ class Map
 
     /**
      * @var MapDetail
-     * @ORM\OneToOne(targetEntity="App\Entity\MapDetail")
+     * @ORM\OneToOne(targetEntity="App\Entity\MapDetail", fetch="EAGER")
+     * @Serializer\Groups({"list"})
      */
     private $mapDetail;
 
@@ -433,4 +434,22 @@ class Map
     {
         $this->game = $game;
     }
+
+    /**
+     * @return \DateTime|\DateTimeImmutable
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+
 }
