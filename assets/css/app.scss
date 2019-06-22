@@ -1,3 +1,10 @@
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1480px
+) !default;
+
 @import "~bootstrap/scss/bootstrap-reboot";
 @import "~bootstrap/scss/bootstrap-grid.scss";
 @import "~bootstrap/scss/bootstrap";
@@ -7,12 +14,12 @@
 @import "main/import";
 
 
+
 body {
   background: $color-background;
+  font-family: 'Montserrat', Arial;
+  color: #fff;
 
-  & .dark {
-    background: #000;
-  }
 }
 
 .map-wrapper {
@@ -21,7 +28,8 @@ body {
   flex-wrap: wrap;
 
   .map-card {
-    width: 30%;
+    width: 180px;
+    margin: 10px;
     height: 100px;
 
     .map-title {
@@ -47,14 +55,26 @@ body {
   opacity: 0;
 }
 
-.fademaps-enter-active, .fademaps-leave-active {
-  transition: all .3s;
+.fadeloader-enter-active {
+  transition: all ease-out .7s;
+}
+.fadeloader-leave-active {
+  transition: all ease-out .3s;
+}
+.fadeloader-enter /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.fadeloader-leave-to {
+  opacity: 0;
+}
 
+.fademaps-enter-active {
+  transition: all ease-out .7s;
 }
-.fademaps-enter, /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
+.fademaps-leave-active {
+  transition: all ease-out .3s;
 }
-.fademaps-leave-to {
+.fademaps-enter, .fademaps-leave-to  /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-  transform: translateY(-100);
+  transform: translateY(100%);
 }

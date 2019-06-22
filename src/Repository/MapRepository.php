@@ -27,6 +27,16 @@ class MapRepository extends EntityRepository
             $q->setParameter('scout', $load['scout']);
         }
 
+        if($load['base'] !== '') {
+            $q->andWhere("mapDetail.base = :base");
+            $q->setParameter('base', $load['base']);
+        }
+
+        if($load['type'] !== '') {
+            $q->andWhere("mapDetail.type = :type");
+            $q->setParameter('type', $load['type']);
+        }
+
         if($load['orderBy'] == 'title') {
             $q->orderBy('map.title', strtoupper($load['orderDirection']));
         }

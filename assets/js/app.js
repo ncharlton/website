@@ -28,6 +28,10 @@ Vue.filter('formatDuration', function (value) {
    }
 });
 
+Vue.filter('streamSlice', function(value) {
+    return value.slice(0, 20) + ' ...';
+});
+
 Vue.use(VueSpinners);
 
 new Vue({

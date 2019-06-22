@@ -1,0 +1,51 @@
+a.stream-link {
+  color: white;
+
+  & :hover {
+  }
+}
+
+.streamer-online {
+  width: 260px;
+  margin-top: 9px;
+  float: right;
+
+  .streamer-online-image {
+    float: left;
+    width: 52px;
+    background: purple;
+    height: 34px;
+    margin: 5px;
+    border-radius: 3px;
+
+    img {
+      border-radius: 3px;
+      height: 34px;
+    }
+  }
+
+  .streamer-online-content {
+    margin-top: 1px;
+    width: 180px;
+    float: left;
+    overflow: hidden;
+
+    p.stream-title {
+      font-size: 12px;
+      margin-bottom: 0;
+    }
+
+    .badge-live {
+      background: #fd2d59;
+      font-weight: normal;
+      font-size: 12px;
+    }
+
+    .badge-viewers {
+      background: #338cd0;
+      font-weight: normal;
+      font-size: 12px;
+    }
+
+  }
+}

@@ -3,13 +3,20 @@
         <transition name="fade">
             <div v-if="status != null">
                 <div v-if="status">
-                    <a href="http://twitch.tv/membtv">
-                        <img class="img-fluid" :src="thumbnail">
-                        <p>{{ stream[0].title }}</p>
-                        <p class="badge badge-primary">Viewers: {{ stream[0].viewer_count }}</p>
+                    <a class="stream-link" target="_blank" href="https://twitch.tv/membtv">
+                        <div class="streamer-online">
+                            <div class="streamer-online-image">
+                                <img class="img-fluid" :src="thumbnail">
+                            </div>
+                            <div class="streamer-online-content">
+                                <span class="badge badge-live">LIVE</span>
+                                <span class="badge badge-viewers"><i class="far fa-eye"></i> {{ stream[0].viewer_count }}</span>
+                                <p class="stream-title">{{ stream[0].title | streamSlice }}</p>
+
+                            </div>
+                        </div>
                     </a>
                 </div>
-                <div v-if="!status">Offline</div>
             </div>
         </transition>
     </div>
@@ -57,7 +64,7 @@
         mounted: function() {
             window.setInterval(() => {
                 this.isStreamerLive();
-            },60000);
+            }, 60000);
         }
     }
 </script>

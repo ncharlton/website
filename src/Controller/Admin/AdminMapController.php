@@ -175,6 +175,8 @@ class AdminMapController extends AbstractController
                 'success',
                 'Successfully edited map details'
             );
+
+            return $this->redirectToRoute('admin_map_view', ['slug' => $map->getSlug()]);
         }
 
         return $this->render('admin/map/detail_edit.html.twig', [

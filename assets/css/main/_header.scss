@@ -10,35 +10,40 @@ header {
 
   & .logo {
     float: left;
-    width: 150px;
+    width: 200px;
     margin: 15px 15px;
+
+    & .logo-text {
+      width: 100px;
+      margin-left: 10px;
+    }
+
+    & .bull {
+
+    }
   }
 
   & .navigation {
-    float: right;
+    float: left;
     height: 62px;
+  }
+
+  a.twitch-login {
+    color: white;
   }
 
   & .login {
     float: right;
     height: 62px;
     padding: 18px;
+    font-size: 12px;
+    line-height: 30px;
+    background: $color-puple-twitch;
 
-    a {
-      display: block;
-      padding: 5px 10px;
-      background: $color-puple-twitch;
-      color: #ffffff;
-      text-transform: uppercase;
-      font-size: 12px;
+    @extend %transition-link;
 
-      @include border-radius(5px);
-      @extend %transition-link;
-
-      &:hover {
-        background: #744bbe;
-        text-decoration: none;
-      }
+    &:hover {
+      background: #744bbe;
     }
   }
 }

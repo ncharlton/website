@@ -34,6 +34,10 @@ class AdminMapDetailType extends AbstractType
                 'choices' => MapDetail::TYPE,
                 'choice_label' => function($choice, $key, $value) {return $value;}
             ])
+            ->add('base', ChoiceType::class, [
+                'choices' => MapDetail::BASE,
+                'choice_label' => function($choice, $key, $value) {return $value;}
+            ])
             ->add('shoreFish', ChoiceType::class, [
                 'choices' => MapDetail::SHORE_FISH,
                 'choice_label' => function($choice, $key, $value) {return $value;}
@@ -54,6 +58,10 @@ class AdminMapDetailType extends AbstractType
                 'choices' => MapDetail::STONE,
                 'choice_label' => function($choice, $key, $value) {return $value;}
             ])
+            ->add('food', ChoiceType::class, [
+                'choices' => MapDetail::FOOD,
+                'choice_label' => function($choice, $key, $value) {return $value;}
+            ])
             ->add('hunt', ChoiceType::class, [
                 'choices' => MapDetail::HUNT,
                 'choice_label' => function($choice, $key, $value) {return $value;}
@@ -72,6 +80,14 @@ class AdminMapDetailType extends AbstractType
             ])
             ->add('cliffs', ChoiceType::class, [
                 'choices' => MapDetail::CLIFFS,
+                'choice_label' => function($choice, $key, $value) {return $value;}
+            ])
+            ->add('terrain', ChoiceType::class, [
+                'choices' => MapDetail::TERRAIN,
+                'choice_label' => function($choice, $key, $value) {return $value;}
+            ])
+            ->add('wallable', ChoiceType::class, [
+                'choices' => MapDetail::WALLABLE,
                 'choice_label' => function($choice, $key, $value) {return $value;}
             ])
         ;

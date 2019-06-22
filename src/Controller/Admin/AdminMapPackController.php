@@ -41,17 +41,6 @@ class AdminMapPackController extends AbstractController
     }
 
     /**
-     * @Route("/admin/mappack/{slug}", name="admin_mappack_view")
-     * @ParamConverter("mappack", class="App\Entity\MapPack", options={"mapping":{"slug":"slug"}})
-     */
-    public function viewAction(MapPack $mappack) {
-
-        return $this->render('admin/mappack/view.html.twig', [
-            'mappack' => $mappack
-        ]);
-    }
-
-    /**
      * @Route("/admin/mappack/new", name="admin_mappack_new")
      */
     public function newAction(Request $request)
@@ -81,7 +70,16 @@ class AdminMapPackController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/mappack/{slug}", name="admin_mappack_view")
+     * @ParamConverter("mappack", class="App\Entity\MapPack", options={"mapping":{"slug":"slug"}})
+     */
+    public function viewAction(MapPack $mappack) {
 
+        return $this->render('admin/mappack/view.html.twig', [
+            'mappack' => $mappack
+        ]);
+    }
 
     /**
      * @Route("/admin/mappack/{slug}/edit", name="admin_mappack_edit")

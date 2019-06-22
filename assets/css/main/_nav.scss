@@ -14,19 +14,20 @@ nav.main-navigation {
       @extend %transition-link;
 
       &:hover {
-        background: $color-orange-main;
+        background: $color-grey-medium;
       }
 
       &.current {
-        background: $color-orange-main;
+        border-bottom: 2px solid $color-orange-main;
       }
 
       a {
         display: block;
         height: 62px;
-        line-height: 60px;
+        line-height: 65px;
+        font-weight: bold;
         text-align: center;
-        font-size: 16px;
+        font-size: 14px;
         text-transform: uppercase;
         color: #ffffff;
 

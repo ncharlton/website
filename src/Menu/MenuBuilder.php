@@ -54,6 +54,9 @@ class MenuBuilder
         # events
         $menu->addChild('Events', ['route' => 'main_event_list']);
 
+        # clips
+        $menu->addChild('Clips', ['route' => 'main_clip_list']);
+
         # videos
         $menu->addChild('Videos', ['route' => 'main_video_list']);
 

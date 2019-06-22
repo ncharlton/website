@@ -31,12 +31,13 @@ class ApiMapController extends AbstractController
     public function fetchAllAction(SerializerInterface $serializer, Request $request)
     {
         $load = [
-            'start' => 0,
             'page' => 1,
             'orderBy' => 'title',
             'orderDirection' => 'asc',
 
             'start' => '',
+            'type' => '',
+            'base' => '',
             'scout' => '',
         ];
 
@@ -56,6 +57,20 @@ class ApiMapController extends AbstractController
             $fScout = $request->query->get('fScout');
             if(in_array($fScout, MapDetail::SCOUT)) {
                 $load['scout'] = $fScout;
+            }
+        }
+
+        if($request->query->has('fType')) {
+            $fType = $request->query->get('fType');
+            if(in_array($fType, MapDetail::TYPE)) {
+                $load['type'] = $fType;
+            }
+        }
+
+        if($request->query->has('fBase')) {
+            $fBase = $request->query->get('fBase');
+            if(in_array($fBase, MapDetail::BASE)) {
+                $load['base'] = $fBase;
             }
         }
 

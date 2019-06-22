@@ -18,22 +18,29 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class MapDetail
 {
-    const START = ['nomad', 'standard', 'random'];
-    const SCOUT = ['scout', 'hourse', 'camel', 'random'];
-
+    // basic
     const TYPE = ['land', 'water', 'mixed'];
+    const START = ['nomad', 'town center', 'migration', 'random'];
+    const BASE = ['open', 'walled', 'random'];
+    const SCOUT = ['none', 'scout', 'animal', 'random'];
 
-    const SHORE_FISH = ['none', 'low', 'normal', 'high'];
-    const DEEP_FISH = ['none', 'low', 'normal', 'high'];
-
-    const WOOD = ['none', 'low', 'normal', 'high'];
-    const GOLD = ['none', 'low', 'normal', 'high'];
-    const STONE = ['none', 'low', 'normal', 'high'];
-    const HUNT = ['none', 'low', 'normal', 'high'];
-    const BERRIES = ['none', 'low', 'normal', 'high'];
-    const RELICS = ['0', '1-4', '5+'];
+    // terrain
     const HILLS = ['none', 'few', 'normal', 'many'];
     const CLIFFS = ['none', 'few', 'normal', 'many'];
+    const TERRAIN = ['grass', 'snow', 'mangroves', 'sand', 'mixed', 'random'];
+    const WALLABLE = ['easy', 'normal', 'hard', 'random'];
+
+    // ressources
+    const SHORE_FISH = ['none', 'low', 'normal', 'high', 'random'];
+    const DEEP_FISH = ['none', 'low', 'normal', 'high', 'random'];
+    const WOOD = ['none', 'low', 'normal', 'high', 'random'];
+    const GOLD = ['none', 'low', 'normal', 'high', 'random'];
+    const STONE = ['none', 'low', 'normal', 'high', 'random'];
+    const FOOD = ['none', 'low', 'normal', 'high', 'random'];
+    const HUNT = ['none', 'low', 'normal', 'high', 'random'];
+    const BERRIES = ['none', 'low', 'normal', 'high', 'random'];
+    const RELICS = ['none', 'low', 'normal', 'high', 'random'];
+
 
     /**
      * @ORM\Id
@@ -48,6 +55,13 @@ class MapDetail
      * @ORM\Column(type="string", nullable=true)
      * @Serializer\Groups({"list"})
      */
+    private $type;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
+     */
     private $start;
 
     /**
@@ -55,14 +69,14 @@ class MapDetail
      * @ORM\Column(type="string", nullable=true)
      * @Serializer\Groups({"list"})
      */
-    private $scout;
+    private $base;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
      * @Serializer\Groups({"list"})
      */
-    private $type;
+    private $scout;
 
     /**
      * @var string
@@ -104,6 +118,13 @@ class MapDetail
      * @ORM\Column(type="string", nullable=true)
      * @Serializer\Groups({"list"})
      */
+    private $food;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
+     */
     private $hunt;
 
     /**
@@ -133,6 +154,18 @@ class MapDetail
      * @Serializer\Groups({"list"})
      */
     private $cliffs;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
+     */
+    private $terrain;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Serializer\Groups({"list"})
+     */
+    private $wallable;
 
     /**
      * @var \DateTime
@@ -271,6 +304,22 @@ class MapDetail
     }
 
     /**
+     * @return string
+     */
+    public function getFood(): ?string
+    {
+        return $this->food;
+    }
+
+    /**
+     * @param string $food
+     */
+    public function setFood(string $food): void
+    {
+        $this->food = $food;
+    }
+
+    /**
      * @param string $stone
      */
     public function setStone(string $stone): void
@@ -364,5 +413,53 @@ class MapDetail
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBase(): ?string
+    {
+        return $this->base;
+    }
+
+    /**
+     * @param string $base
+     */
+    public function setBase(string $base): void
+    {
+        $this->base = $base;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTerrain()
+    {
+        return $this->terrain;
+    }
+
+    /**
+     * @param mixed $terrain
+     */
+    public function setTerrain($terrain): void
+    {
+        $this->terrain = $terrain;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWallable()
+    {
+        return $this->wallable;
+    }
+
+    /**
+     * @param mixed $wallable
+     */
+    public function setWallable($wallable): void
+    {
+        $this->wallable = $wallable;
     }
 }

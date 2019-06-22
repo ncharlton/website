@@ -7,11 +7,18 @@ main.main {
 .box {
   margin: 15px 0;
   width: auto;
-  background: #ffffff;
-  border-right: 1px solid #ced8eb;
-  border-bottom: 1px solid #ced8eb;
 
   .box-inner {
     padding: 15px;
   }
+}
+
+h1 {
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+
+.scale-loader {
+  color: #fff;
+
 }
