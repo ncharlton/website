@@ -1,10 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for clip in clips %}
-        <a href="{{ path('main_clip_view', {'slug' : clip.slug}) }}">
-            <img src="{{ clip.thumbnailUrl }}" title="{{ clip.title }}">
-        </a>
-        <br>
-    {% endfor %}
+    <div class="box">
+        <div class="box-inner">
+            <div class="box-head">
+                <div class="box-title">
+                    <h1>Clips</h1>
+                </div>
+                <div class="box-action">
+                    <a class="btn button-general" href="{{ path('main_clip_new') }}"><i class="fas fa-plus"></i>Add your clip of Memb</a>
+                </div>
+            </div>
+
+
+            <br>
+            <div class="clips">
+
+
+            {% for clip in clips %}
+                <div class="clip-preview">
+                    <div class="clip-preview-image">
+                        <img class="img-fluid" src="{{ clip.thumbnailUrl }}" title="{{ clip.title }}">
+                    </div>
+                    <div class="clip-preview-title">
+                        <a href="{{ path('main_clip_view', {'slug' : clip.slug}) }}">
+                            {{ clip.title }}
+                        </a>
+                    </div>
+                </div>
+
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    SIDEBAR
 {% endblock %}

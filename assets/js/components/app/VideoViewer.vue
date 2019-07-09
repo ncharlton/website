@@ -78,13 +78,13 @@
                 if(this.video) {
                     this.playlist = this.video.playlist
 
-                    if(this.playlist.event !== 'undefined') {
-                        this.event = this.playlist.event
-                    }
+                    // if(this.playlist.event !== 'undefined') {
+                    //     this.event = this.playlist.event
+                    // }
 
-                    if(this.playlist.event.game !== 'undefined') {
-                        this.game = this.playlist.event.game
-                    }
+                    // if(this.playlist.event.game !== 'undefined') {
+                    //     this.game = this.playlist.event.game
+                    // }
 
 
                     console.log(this.playlist)

@@ -5,6 +5,7 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\Game;
 use App\Entity\Tag;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -30,6 +31,12 @@ class AdminVideoType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'required' => true
+            ])
+            ->add('game', EntityType::class, [
+                'placeholder' => 'Game',
+                'class' => Game::class,
+                'required' => false,
+                'choice_label' => 'name'
             ])
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,

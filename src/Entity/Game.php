@@ -5,6 +5,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
@@ -88,6 +89,16 @@ class Game {
      * @ORM\OneToMany(targetEntity="App\Entity\Map", mappedBy="game")
      */
     private $maps;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="game")
+     */
+    private $videos;
+
+    public function __construct()
+    {
+        $this->videos = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -239,5 +250,50 @@ class Game {
     public function setGenre(string $genre)
     {
         $this->genre = $genre;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaps()
+    {
+        return $this->maps;
+    }
+
+    /**
+     * @param mixed $videos
+     */
+    public function setVideos($videos): void
+    {
+        $this->videos = $videos;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video)
+    {
+        if(!$this->videos->contains($video)) {
+            $this->videos->add($video);
+        }
+    }
+
+    public function removeVideo(Video $video) {
+        if($this->videos->contains($video)) {
+            $this->videos->remove($video);
+        }
     }
 }

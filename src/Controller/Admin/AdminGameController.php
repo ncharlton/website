@@ -22,16 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminGameController extends AbstractController
 {
-    /**
-     * @Route("/admin/game/{slug}", name="admin_game_view")
-     * @ParamConverter("game", options={"mapping":{"slug":"slug"}})
-     */
-    public function viewAction(Game $game)
-    {
-        return $this->render('admin/game/view.html.twig', [
-            'game' => $game
-        ]);
-    }
+
 
     /**
      * List all games
@@ -150,6 +141,17 @@ class AdminGameController extends AbstractController
 
         return $this->render('admin/game/delete.html.twig', [
             'form' => $form->createView(),
+            'game' => $game
+        ]);
+    }
+
+    /**
+     * @Route("/admin/game/{slug}", name="admin_game_view")
+     * @ParamConverter("game", options={"mapping":{"slug":"slug"}})
+     */
+    public function viewAction(Game $game)
+    {
+        return $this->render('admin/game/view.html.twig', [
             'game' => $game
         ]);
     }

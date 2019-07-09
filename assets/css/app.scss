@@ -69,12 +69,19 @@ body {
 }
 
 .fademaps-enter-active {
-  transition: all ease-out .7s;
+  transition: all ease-out .4s;
 }
 .fademaps-leave-active {
-  transition: all ease-out .3s;
+  transition: all ease-out .4s;
 }
 .fademaps-enter, .fademaps-leave-to  /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-  transform: translateY(100%);
+}
+.scale-loader {
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 40px;
+  text-align: center;
 }

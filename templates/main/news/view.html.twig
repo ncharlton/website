@@ -4,17 +4,15 @@
 <article class="news">
     <div class="box">
         <div class="news-cover">
-            <img src="{{ (asset('media/news/') ~ news.cover) | imagine_filter('news_cover') }}">
+            <img class="img-fluid" src="{{ (asset('media/news/') ~ news.cover) | imagine_filter('news_cover') }}">
         </div>
         <div class="box-inner">
             <h1>{{ news.title }}</h1>
-
             <p class="info">
                 <span class="published-at">
                     {{ news.publishedAt | date('d/m/Y') }}
                 </span>
             </p>
-
             <div class="tags">
                 {% for tag in news.tags %}
                     {% if tag.slug %}
@@ -25,28 +23,23 @@
 
                 {% endfor %}
             </div>
-
-            <hr class="break">
-
             <div class="content">
                 {{ news.content | raw }}
             </div>
-
-            <hr class="break">
         </div>
 
             {% if news.event %}
-            <div class="event-preview-small bg-grey-lightest">
+            <div class="event-preview-small">
                 <h3>Event</h3>
                 <h2><a href="{{ path('main_event_view', {slug : news.event.slug}) }}">{{ news.event.title }}</a></h2>
                 <div class="row">
                     <div class="col-sm-3">
                         <div class="event-cover">
-                            <img src="{{ (asset('media/events/') ~ news.event.image) | imagine_filter('event_thumb') }}">
+                            <img class="img-fluid" src="{{ (asset('media/events/') ~ news.event.image) | imagine_filter('event_thumb') }}">
                         </div>
                     </div>
                     <div class="col-sm-9">
-                        {{ news.event.snippet }}
+                        <p>{{ news.event.snippet }}</p>
                     </div>
                 </div>
                 <div class="row">

@@ -1,0 +1,39 @@
+.clips {
+  display: flex;
+  flex-wrap: wrap;
+
+  .clip-preview {
+    width: 30%;
+    background: $color-grey-soft;
+    opacity: 1;
+    margin: 1%;
+
+    @include border-radius(3px);
+    @extend %transition-link;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    .clip-preview-image {
+      img {
+        @include border-top-radius(3px);
+      }
+    }
+
+    .clip-preview-title {
+      text-align: center;
+      padding: 5px;
+
+      a {
+        color: #ffffff;
+        font-weight: bold;
+
+        &:hover {
+          color: #eeeeee;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

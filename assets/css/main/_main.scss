@@ -11,11 +11,25 @@ main.main {
   .box-inner {
     padding: 15px;
   }
+
+  .box-head {
+    clear: both;
+    margin-bottom: 15px;
+    height: 60px;
+
+    .box-title {
+      float: left;
+    }
+
+    .box-action {
+      float: right;
+    }
+  }
 }
 
 h1 {
   text-transform: uppercase;
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 .scale-loader {

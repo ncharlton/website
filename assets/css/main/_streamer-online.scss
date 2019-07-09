@@ -10,6 +10,8 @@ a.stream-link {
   margin-top: 9px;
   float: right;
 
+  @extend %transition-link;
+
   .streamer-online-image {
     float: left;
     width: 52px;
@@ -46,6 +48,10 @@ a.stream-link {
       font-weight: normal;
       font-size: 12px;
     }
+  }
 
+  @include media-breakpoint-down(lg) {
+    display: none;
+    transition: all ease 0.2s;
   }
 }

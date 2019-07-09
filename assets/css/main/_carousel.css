@@ -39,6 +39,9 @@
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    scrollbar-color: #4a4a4a #2d2d2d;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
 
 .carousel-videos::-webkit-scrollbar-track

@@ -1,0 +1,20 @@
+.button-general {
+  padding: 15px 20px;
+  color: white;
+  border: 0;
+  background: $color-orange-dark;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+
+  @include border-radius(3px);
+
+  &:hover {
+    background: $color-orange-darker;
+    color: #eee;
+  }
+
+  i {
+    margin-right: 20px;
+  }
+}

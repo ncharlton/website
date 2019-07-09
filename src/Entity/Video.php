@@ -66,6 +66,13 @@ class Video
     private $video;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="videos")
+     *
+     * @Serializer\Groups({"video"})
+     */
+    private $game;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\VideoPlaylist", inversedBy="videos")
      *
      * @Serializer\Groups({"video"})
@@ -228,6 +235,22 @@ class Video
         if($this->tags->contains($tag)) {
             $this->tags->remove($tag);
         }
+    }
+
+    /**
+     * @return Game
+     */
+    public function getGame()
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param Game $game
+     */
+    public function setGame(Game $game): void
+    {
+        $this->game = $game;
     }
 
     /**

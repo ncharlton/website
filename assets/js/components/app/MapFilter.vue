@@ -60,11 +60,13 @@
         <hr>
         <h4>{{ count }} results:</h4>
 
-        <transition name="fadeloader">
-            <div v-if="loading">
-                <scale-loader class="scale-loader" color="#fff"></scale-loader>
-            </div>
-        </transition>
+        <div class="scale-loader">
+            <transition name="fadeloader">
+                <div v-if="loading">
+                    <scale-loader color="#fff"></scale-loader>
+                </div>
+            </transition>
+        </div>
 
         <transition name="fademaps">
             <div v-if="!loading" class="map-wrapper">
