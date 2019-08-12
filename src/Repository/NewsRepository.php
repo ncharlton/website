@@ -14,6 +14,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class NewsRepository extends EntityRepository
 {
+    public function fetchHighlight()
+    {
+        /**
+         * @return News
+         */
+        return $this->createQueryBuilder('news')
+            ->where('news.highlight = true')
+            ->orderBy('news.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->execute();
+    }
+
     /**
      * @param bool $queryMode
      * @return \Doctrine\ORM\Query | News[]

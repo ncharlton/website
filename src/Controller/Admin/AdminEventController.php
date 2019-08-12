@@ -9,6 +9,7 @@ use App\Entity\Event;
 use App\Form\Admin\AdminConfirmType;
 use App\Service\Util\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
@@ -23,6 +24,7 @@ class AdminEventController extends AbstractController
 {
     /**
      * @Route("/admin/events", name="admin_event_list")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function listAction(Request $request, PaginatorInterface $paginator) {
         $query = $this->getDoctrine()->getRepository('App:Event')
@@ -41,6 +43,7 @@ class AdminEventController extends AbstractController
 
     /**
      * @Route("/admin/event/new", name="admin_event_new")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function newAction(Request $request, FileUploader $uploader) {
         $form = $this->createForm('App\Form\Admin\AdminEventType');
@@ -80,6 +83,7 @@ class AdminEventController extends AbstractController
     /**
      * @Route("/admin/event/{slug}", name="admin_event_view")
      * @ParamConverter("event", options={"mapping":{"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function viewAction(Event $event) {
         return $this->render('admin/event/view.html.twig', [
@@ -90,6 +94,7 @@ class AdminEventController extends AbstractController
     /**
      * @Route("/admin/event/{slug}/edit", name="admin_event_edit")
      * @ParamConverter("event", options={"mapping":{"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function editAction(Event $event, Request $request, FileUploader $uploader) {
         // store
@@ -143,6 +148,7 @@ class AdminEventController extends AbstractController
     /**
      * @Route("/admin/event/{slug}/delete", name="admin_event_delete")
      * @ParamConverter("event", options={"mapping":{"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function deleteAction(Event $event, Request $request) {
         $form = $this->createForm(AdminConfirmType::class);

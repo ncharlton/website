@@ -9,6 +9,7 @@ use App\Entity\Page;
 use App\Form\Admin\AdminConfirmType;
 use App\Form\Admin\AdminPageType;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -24,6 +25,7 @@ class AdminPageController extends AbstractController
 {
     /**
      * @Route("/admin/pages", name="admin_page_list")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @return Response
      */
@@ -44,8 +46,10 @@ class AdminPageController extends AbstractController
 
     /**
      * @Route("/admin/page/new", name="admin_page_new")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Request $request
+     * @throws \Exception
      * @return RedirectResponse | Response
      */
     public function newAction(Request $request) {
@@ -80,6 +84,7 @@ class AdminPageController extends AbstractController
     /**
      * @Route("/admin/page/{slug}", name="admin_page_view")
      * @ParamConverter("page", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Page $page
      * @return Response
@@ -93,6 +98,7 @@ class AdminPageController extends AbstractController
     /**
      * @Route("/admin/page/{slug}/edit", name="admin_page_edit")
      * @ParamConverter("page", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Page $page
      * @param Request $request
@@ -131,6 +137,7 @@ class AdminPageController extends AbstractController
     /**
      * @Route("/admin/page/{slug}/delete", name="admin_page_delete")
      * @ParamConverter("page", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Page $page
      * @param Request $request

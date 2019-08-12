@@ -8,10 +8,12 @@ namespace App\Controller\Admin;
 use App\Entity\News;
 use App\Service\Util\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,7 +23,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminNewsController extends AbstractController
 {
     /**
+     * @Route("/kike")
+     * @return Response
+     */
+    public function kike() {
+        return new Response("kike");
+    }
+
+    /**
      * @Route("/admin/news", name="admin_news_list")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function listAction(Request $request, PaginatorInterface $paginator) {
 
@@ -41,6 +52,7 @@ class AdminNewsController extends AbstractController
 
     /**
      * @Route("/admin/news/new", name="admin_news_new")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function newAction(Request $request, FileUploader $uploader) {
         $form = $this->createForm("App\Form\Admin\AdminNewsType");
@@ -87,6 +99,7 @@ class AdminNewsController extends AbstractController
     /**
      * @Route("/admin/news/{slug}", name="admin_news_view")
      * @ParamConverter("news", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function viewAction(News $news) {
 
@@ -98,6 +111,7 @@ class AdminNewsController extends AbstractController
     /**
      * @Route("/admin/news/{slug}/delete", name="admin_news_delete")
      * @ParamConverter("news", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function deleteAction(News $news, Request $request) {
         $form = $this->createForm("App\Form\Admin\AdminConfirmType");
@@ -125,6 +139,7 @@ class AdminNewsController extends AbstractController
     /**
      * @Route("/admin/news/{slug}/edit", name="admin_news_edit")
      * @ParamConverter("news", options={"mapping":{"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function editAction(News $news, Request $request, FileUploader $uploader) {
         // store cover

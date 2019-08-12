@@ -2,4 +2,8 @@
 
 {% block body %}
     Hello world baby boy
+
+    {% if newsHighlight %}
+        {{ newsHighlight.title }}
+    {% endif %}
 {% endblock %}

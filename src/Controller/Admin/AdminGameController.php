@@ -10,6 +10,7 @@ use App\Entity\SeoPage;
 use App\Form\Admin\AdminConfirmType;
 use App\Form\Admin\AdminGameType;
 use App\Form\Admin\AdminSeoType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,8 @@ class AdminGameController extends AbstractController
      * List all games
      *
      * @Route("/admin/games", name="admin_game_list")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
+     *
      * @return Response
      */
     public function listAction()
@@ -44,6 +47,7 @@ class AdminGameController extends AbstractController
      * Create new game
      *
      * @Route("/admin/game/new", name="admin_game_new")
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Request $request
      * @return Response
@@ -80,6 +84,7 @@ class AdminGameController extends AbstractController
      *
      * @Route("/admin/game/{slug}/edit", name="admin_game_edit")
      * @ParamConverter("game", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Game $game
      * @param Request $request
@@ -115,6 +120,7 @@ class AdminGameController extends AbstractController
      *
      * @Route("/admin/game/{slug}/delete", name="admin_game_delete")
      * @ParamConverter("game", options={"mapping": {"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      *
      * @param Game $game
      * @param Request $request
@@ -148,6 +154,7 @@ class AdminGameController extends AbstractController
     /**
      * @Route("/admin/game/{slug}", name="admin_game_view")
      * @ParamConverter("game", options={"mapping":{"slug":"slug"}})
+     * @IsGranted("ROLE_ADMIN", message="Admin only!")
      */
     public function viewAction(Game $game)
     {
