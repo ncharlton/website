@@ -12,7 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Class Clip
  * @package App\Entity
- * @ORM\Entity
+ *
+ * @ORM\Entity(repositoryClass="App\Repository\ClipRepository")
  * @ORM\Table(name="clip")
  *
  * @UniqueEntity("twitchId")

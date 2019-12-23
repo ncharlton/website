@@ -6,10 +6,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Clip;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -21,18 +21,24 @@ class AdminClipController extends AbstractController
     /**
      * @Route("/admin/clips", name="admin_clip_list")
      */
-    public function listAction() {
-        $clips = $this->getDoctrine()->getRepository('App:Clip')
-            ->findAll();
+    public function listAction(Request $request, PaginatorInterface $paginator) {
+        $query = $this->getDoctrine()->getRepository(Clip::class)
+            ->fetchNewest(true);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            20
+        );
 
         return $this->render("admin/clip/list.html.twig", [
-            'clips' => $clips
+            'pagination' => $pagination
         ]);
     }
 
     /**
      * @Route("/admin/clip/{slug}/edit", name="admin_clip_edit")
-     * @ParamConverter("clip", options={"mapping": {"slug": "slug"}})
+     * @ParamConverter("clip", class="App\Entity\Clip", options={"mapping": {"slug": "slug"}})
      */
     public function editAction(Clip $clip, Request $request) {
         $form = $this->createForm('App\Form\Admin\AdminClipType', $clip);

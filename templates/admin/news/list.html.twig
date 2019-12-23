@@ -25,22 +25,30 @@
                             <th>{{ knp_pagination_sortable(pagination, 'Created', 'news.createdAt') }}</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Updated', 'news.updatedAt') }}</th>
                             <th>{{ knp_pagination_sortable(pagination, 'Published on', 'news.publishedAt') }}</th>
-                            <th>Ations</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for news in pagination %}
                             <tr>
                                 <th scope="row">{{ news.id }}</th>
-                                <td>{{ news.published }}</td>
+                                <td>
+                                    {% if news.published %}
+                                        <span class="badge badge-success">Published</span>
+                                    {% else %}
+                                        <span class="badge badge-light">Unpublished</span>
+                                    {% endif %}
+                                </td>
                                 <td><a href="{{ path('admin_news_view', {'slug': news.slug}) }}">{{ news.title }}</a> </td>
                                 <td>{{ news.author.username }}</td>
                                 <td>{{ news.createdAt | date('Y-m-d') }}</td>
                                 <td>{{ news.updatedAt | date('Y-m-d') }}</td>
                                 <td>{% if news.published %}{{ news.publishedAt | date('Y-m-d') }}{% endif %}</td>
-                                <td><a href="{{ path('admin_news_delete', {'slug': news.slug}) }}">Delete</a></td>
-                                <td><a href="{{ path('admin_news_edit', {'slug': news.slug}) }}">Edit</a></td>
-                                <td><a href="{{ path('main_news_preview', {'slug': news.slug}) }}">Preview</a></td>
+                                <td>
+                                    <a href="{{ path('admin_news_delete', {'slug': news.slug}) }}"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{ path('admin_news_edit', {'slug': news.slug}) }}"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ path('main_news_preview', {'slug': news.slug}) }}">Preview</a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

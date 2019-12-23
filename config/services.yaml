@@ -70,7 +70,6 @@ services:
         tags:
             - { name: knp_menu.menu, alias: main }
 
-
     app.admin_user_form:
         class: App\Form\Admin\AdminUserType
         arguments: ['@security.token_storage']

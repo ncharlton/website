@@ -41,7 +41,6 @@ class MenuBuilder
         /** @var \Symfony\Component\Security\Core\User\User $user */
         $user = $this->token->getToken()->getUser();
 
-
         # Home
         $menu->addChild('Home', ['route' => 'main_home']);
 
